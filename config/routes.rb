@@ -4,19 +4,19 @@ Rails.application.routes.draw do
   resources :users
 
   resources :purchases, only: [:index, :show] do
-  	resources :purchase_item, only: [:index]
+  	resources :purchase_items, only: [:index]
   end
 
-  resources :cart, except: [:destroy, :index] do
-  	resources :cart_item, except: [:show]
+  resources :carts, except: [:destroy, :index] do
+  	resources :cart_items, except: [:show]
   end
-  resources :pro_genre, only: [:show] do
-  	resources :product, only: [:show]do
-  		resources :review,except: [:destroy, :index]
+  resources :pro_genres, only: [:show] do
+  	resources :products, only: [:show]do
+  		resources :reviews,except: [:destroy, :index]
   	end
   end
 
-  root 'pro_genre#index'
-  get  '/product/index' => 'product#index' #管理者用のindex
-  get '/pro_genre/research' => 'pro_genre#research'
+  root 'pro_genres#index'
+  get  '/products/index' => 'product#index' #管理者用のindex
+  get '/pro_genres/research' => 'pro_genre#research'
 end
