@@ -2,6 +2,42 @@
 
 <h2><%= @product.pro_title %></h2>
 
+<!-- 価格 -->
+price : <%= @product.pro_price %><br>
+
+
+<!-- ジャンル名 -->
+<% if @product.pro_genre_id == 1 %>
+genre : J-POP<br>
+
+<% elsif @product.pro_genre_id == 2 %>
+genre : K-POP<br>
+
+<% else %>
+genre : その他<br>
+
+<% end %>
+
+
+<!-- 登録日 -->
+date : <%= @product.pro_date %><br>
+
+
+<!-- レーベル名 -->
+<% if @product.pro_label_id == 1 %>
+label : エイベックス<br>
+
+<% elsif @product.pro_label_id == 2 %>
+label : ユニバーサル・ミュージック<br>
+
+<% else %>
+label : その他<br>
+
+<% end %>
+
+
+<!-- アーティスト名 -->
+artist : <%= @product.pro_artist %><br><br>
 
 
 <% if user_signed_in? %>
