@@ -1,1 +1,77 @@
-<h2>pro_genre index</h2>
+<h2>商品一覧ページ</h2>
+
+<div class="pro_genre-index clearfix">
+
+	<div class="pro_genre-index-sidebar">
+		<div class="pro_genre-index-sidebar-box">
+			<span><%= link_to "検索結果", pro_genres_research_path %></span><input type="text"><br>
+			<% @genres.each do |genre| %>
+			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
+			<% end %>
+		</div>
+	</div>
+	<div class="pro_genre-index-main">
+
+		<p> ■おすすめ</p>
+		<% @products.each do |product| %>
+		<%= link_to product.pro_title, pro_genre_product_path(@genres, product.id) %><br>
+		<% end %><br>
+
+		<p> ■J-POP</p>
+		<% @genres_jpop.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■K-POP</p>
+		<% @genres_kpop.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■童謡</p>
+		<% @genres_douyou.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■ROCK</p>
+		<% @genres_rock.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■EDM</p>
+		<% @genres_edm.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■DANCE</p>
+		<% @genres_dance.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■ALTERNATIVE</p>
+		<% @genres_alternative.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■RAP/HIP-HOP</p>
+		<% @genres_rap.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■アニソン</p>
+		<% @genres_anime.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■JAZZ</p>
+		<% @genres_jazz.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+		<p> ■その他</p>
+		<% @genres_otherwise.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
+	</div>
+
+</div>

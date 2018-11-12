@@ -1,0 +1,15 @@
+<h2> 商品詳細画面</h2><br>
+
+<h2><%= @product.pro_title %></h2>
+
+
+
+<% if user_signed_in? %>
+
+<%= link_to "カートへ入れる", cart_path(@cart) %>
+
+<% else %>
+
+<%= link_to "カートへ入れる", user_session_path %>
+
+<% end %>
