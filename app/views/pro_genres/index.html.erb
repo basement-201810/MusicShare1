@@ -4,7 +4,7 @@
 
 	<div class="pro_genre-index-sidebar">
 		<div class="pro_genre-index-sidebar-box">
-			<span><%= link_to "検索結果", pro_genres_research_path %></span><input type="text"><br>
+			<span><%= link_to "検索結果", pro_genres_research_path, method: :get %></span><input type="text"><br>
 			<% @genres.each do |genre| %>
 			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
 			<% end %>
@@ -27,12 +27,17 @@
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
 
+		<p> ■アイドル</p>
+		<% @genres_idle.each do |genre| %>
+		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
+		<% end %><br>
+
 		<p> ■童謡</p>
 		<% @genres_douyou.each do |genre| %>
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
 
-		<p> ■ROCK</p>
+		<p> ■Rock</p>
 		<% @genres_rock.each do |genre| %>
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
@@ -42,12 +47,12 @@
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
 
-		<p> ■DANCE</p>
+		<p> ■Dance</p>
 		<% @genres_dance.each do |genre| %>
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
 
-		<p> ■ALTERNATIVE</p>
+		<p> ■Alternative</p>
 		<% @genres_alternative.each do |genre| %>
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
@@ -62,7 +67,7 @@
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>
 
-		<p> ■JAZZ</p>
+		<p> ■Jazz</p>
 		<% @genres_jazz.each do |genre| %>
 		<%= link_to genre.pro_title, pro_genre_product_path(@genres, genre.id) %><br>
 		<% end %><br>

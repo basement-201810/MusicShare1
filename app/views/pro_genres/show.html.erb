@@ -1,1 +1,63 @@
-<h2>Show</h2>
+<h2><%= @genre.pro_genre_name %></h2>
+
+<% if @genre.pro_genre_name == "J-POP" %>
+<% @genres_jpop.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "K-POP" %>
+<% @genres_kpop.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "アイドル" %>
+<% @genres_idle.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "童謡" %>
+<% @genres_douyou.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "Rock" %>
+<% @genres_rock.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "EDM" %>
+<% @genres_edm.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "Dance" %>
+<% @genres_dance.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "Alternative" %>
+<% @genres_alternative.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "RAP/HIP-HOP" %>
+<% @genres_rap.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "アニソン" %>
+<% @genres_anime.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% elsif @genre.pro_genre_name == "Jazz" %>
+<% @genres_jazz.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% else %>
+<% @genres_otherwise.each do |genre| %>
+<%= genre.pro_title %><br>
+<% end %><br>
+
+<% end %>
