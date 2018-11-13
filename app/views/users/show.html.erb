@@ -1,0 +1,34 @@
+<h2>user info</h2>
+<div>
+	<p><%= @user.name %></p>
+	<p><%= @user.email %></p>
+	<p><%= @user.tell %></p>
+	<p><%= @user.post_code %></p>
+	<p><%= @user.address %></p>
+	<p><%= @user.point %></p>
+	<% if current_user.manager == false %>
+		<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
+		<%= link_to "退会", class: "btn btn-danger" %>
+</div>
+<div>
+	<h3>購入履歴一覧</h3>
+	<table class="table table-hover">
+		<thead>
+			<th>購入日時</th>
+			<th>購入金額</th>
+			<th>
+				<% if current_user.manager == false %>
+					-
+				<% else %>
+					ステータス
+				<% end %>
+			</th>
+			<th></th>
+		</thead>
+
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+<% end %>

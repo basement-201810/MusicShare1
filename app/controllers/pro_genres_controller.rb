@@ -1,6 +1,9 @@
 class ProGenresController < ApplicationController
 
 	def index
+		if user_signed_in?
+			@user = User.find(current_user.id)
+		end
 		@products = Product.all
 		@genres = ProGenre.all
 		@genres_jpop = Product.where(pro_genre_id:1)
