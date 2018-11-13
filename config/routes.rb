@@ -12,12 +12,14 @@ Rails.application.routes.draw do
   	resources :cart_items, except: [:show]
   end
   resources :pro_genres, only: [:show] do
-  	resources :products, only: [:show, :new, :update, :edit, :create]do
+  	resources :products, only: [:show, :update, :edit]do
   		resources :reviews, except: [:destroy, :index]
   	end
   end
 
+  resources :products, only: [:index, :new, :create]
+
   root 'pro_genres#index'
-  get  '/products/index' => 'products#index' #管理者用のindex
+  # get  '/products/index' => 'products#index' #管理者用のindex
   get '/pro_genres/research' => 'pro_genres#research'
 end

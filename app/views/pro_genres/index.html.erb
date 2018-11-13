@@ -4,13 +4,15 @@
 
 	<div class="pro_genre-index-sidebar">
 		<div class="pro_genre-index-sidebar-box">
-			<span><%= link_to "検索結果", pro_genres_research_path, method: :get %></span><input type="text"><br>
+			<span><%= link_to "検索結果", pro_genres_research_path,method: :get %></span><input type="text"><br>
 			<% @genres.each do |genre| %>
 			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
 			<% end %>
 		</div>
 	</div>
 	<div class="pro_genre-index-main">
+
+		<%= link_to "商品登録ベージ", new_product_path %>
 
 		<p> ■おすすめ</p>
 		<% @products.each do |product| %>
