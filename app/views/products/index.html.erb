@@ -1,0 +1,40 @@
+<h2> 登録商品一覧画面</h2>
+
+<%= link_to "商品登録画面", new_product_path %><br><br>
+
+<h4> ■登録商品一覧</h4>
+
+<h4>
+
+<% @products.each do |product| %>
+<%= link_to product.pro_title, edit_pro_genre_product_path(product.pro_genre_id, product.id) %>
+<% if product.pro_genre_id == 1 %>
+J-POP<br>
+<% elsif product.pro_genre_id == 2 %>
+K-POP<br>
+<% elsif product.pro_genre_id == 3 %>
+アイドル<br>
+<% elsif product.pro_genre_id == 4 %>
+童謡<br>
+<% elsif product.pro_genre_id == 5 %>
+Rock<br>
+<% elsif product.pro_genre_id == 6 %>
+EDM<br>
+<% elsif product.pro_genre_id == 7 %>
+Dance<br>
+<% elsif product.pro_genre_id == 8 %>
+Alternative<br>
+<% elsif product.pro_genre_id == 9 %>
+RAP/HIP-HOP<br>
+<% elsif product.pro_genre_id == 10 %>
+アニソン<br>
+<% elsif product.pro_genre_id == 11 %>
+Jazz<br>
+<% else %>
+その他<br>
+
+</h4>
+
+<% end %>
+
+<% end %><br>
