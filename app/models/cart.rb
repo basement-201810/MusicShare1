@@ -1,5 +1,9 @@
 class Cart < ApplicationRecord
-	belongs_to :product
+	# belongs_to :product
 	has_many :cart_items
 	belongs_to :user
+
+	def sub_total
+		cart_items.to_a.sum { |cart_item| cart_item.sub_total }
+	end
 end

@@ -1,5 +1,8 @@
 class CartsController < ApplicationController
+
 	def show
+		@cart = Cart.find(params[:id])
+		@cart_items = @cart.cart_items.all
 	end
 
 	def new
@@ -13,4 +16,5 @@ class CartsController < ApplicationController
 
 	def update
 	end
+
 end
