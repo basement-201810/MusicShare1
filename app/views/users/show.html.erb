@@ -8,7 +8,8 @@
 	<p><%= @user.point %></p>
 	<% if current_user.manager == false %>
 		<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
-		<%= link_to "退会", class: "btn btn-danger" %>
+		<%= link_to "退会", "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+	<% end %>
 </div>
 <div>
 	<h3>購入履歴一覧</h3>
@@ -27,8 +28,14 @@
 		</thead>
 
 		<tbody>
-			
+			<% @purchases.each do |purchse| %>
+				<tr>
+					<td><%= purchase.date %></td>
+					<td><%= purchase.pur_total %></td>
+					<td><p>ステータス表示</p></td>
+					<td><%= link_to "show", purchase_path, class: "btn btn-info" %></td>
+				</tr>
+			<% end %>
 		</tbody>
 	</table>
 </div>
-<% end %>
