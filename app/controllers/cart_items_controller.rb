@@ -39,11 +39,11 @@ class CartItemsController < ApplicationController
 		redirect_to cart_path(cart_item_id.cart)
 	end
 
-	def correct_user
-		@cart = CartItem.find(params[:id]).cart_id
-		@user = @cart.user_id
-		redirect_to user_session_path unless @user == current_user
-    end
+	# def correct_user
+	# 	@cart = CartItem.find(params[:id]).cart_id
+	# 	@user = @cart.user_id
+	# 	redirect_to user_session_path unless @user == current_user
+ #    end
 
 	private
 	def cart_item_params
