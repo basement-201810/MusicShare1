@@ -10,6 +10,37 @@
   </head>
 
   <body>
+    <header class="header">
+      <div class="container">
+          <div class="nav navbar-left">
+            <h2 class="btn btn-success btn-lg">
+              <%= link_to "Music Share1", root_path %>
+            </h2>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to @user.name, user_path(current_user), class: "btn" %>
+              </li>
+              <li>
+                <%= link_to "cart", new_cart_path, class: "glyphicon glyphicon-cart carts" %>
+              </li>
+              <li>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
+              </li>
+            <% else %>
+              <li>
+                <%= link_to "ゲストさん", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %>
+              </li>
+              <li>
+                <%= link_to "cart", new_cart_path, class: "glyphicon glyphicon-shopping-cart carts" %>
+              </li>
+            <% end %>
+          </ul>
+      </div>
+    </header>
+    <footer>
+    </footer>
     <%= yield %>
   </body>
 </html>
