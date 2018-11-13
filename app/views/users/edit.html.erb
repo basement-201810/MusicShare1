@@ -1,0 +1,106 @@
+<div class="container">
+	<div class="row">
+		<% if current_user.manager == false %>
+			<% if @user.errors.any? %>
+				<div id="error_explanation" class="alert alert-danger">
+					<% @user.errors.full_message.each do |massage| %>
+						<p><%= message %></p>
+					<% end %>
+				</div>
+			<% end %>
+			<h2>編集</h2>
+			<div class="edit_user">
+				<%= form_for(@user) do |f| %>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Name </label>
+						<%= f.text_field :name, autofocus: true, class: "name", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Name_kana </label>
+						<%= f.text_field :name_kana, autofocus: true, class: "name_kana", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Email </label>
+						<%= f.text_field :email, autofocus: true, class: "email", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Password </label>
+						<%= f.text_field :password, autofocus: true, class: "password", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Password_confirm </label>
+						<%= f.text_field :password_confirmation, autofocus: true, class: "password_confirm", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Post_code </label>
+						<%= f.text_field :post_code, autofocus: true, class: "post_code", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Address </label>
+						<%= f.text_area :address, autofocus: true, class: "address", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<div class="form_group has_icon">
+						<label for="inputEmail"> Tell </label>
+						<%= f.text_field :tell, autofocus: true, class: "tell", id: "inputEmail" %>
+						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					</div>
+					<%= f.submit "変更を保存", class: "btn btn-danger" %>
+				<% end %>
+				<% link_to "戻る", user_path, class: "btn btn-success" %>
+				<% link_to "password編集", user_passchange_path, class: "btn btn-info" %>
+			</div>
+		<% else %>
+			<h2> ユーザの強制編集</h2>
+			<div class="edit_user">
+				<table class="table">
+					<thead>
+						<th></th>
+						<th></th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>名前</td>
+							<td><%= @user.name %></td>
+						</tr>
+						<tr>
+							<td>名前（カナ）</td>
+							<td><%= @user.name_kana %></td>
+						</tr>
+						<tr>
+							<td>メールアドレス</td>
+							<td><%= @user.email %></td>
+						</tr>
+						<tr>
+							<td>電話番号</td>
+							<td><%= @user.tell %></td>
+						</tr>
+						<tr>
+							<td>住所</td>
+							<td><%= @user.address %></td>
+						</tr>
+						<%= form_for(@user) do |f| %>
+							<tr class="form_group">
+								<td><%= f.label :point, "保有ポイント" %></td>
+								<td><%= f.text_field :point, class: "point" %></td>
+							</tr>
+							<tr class="form_group">
+								<td><%= f.label :memo, "備考" %></td>
+								<td><%= f.text_area :memo, class: "memo" %></td>
+							</tr>
+							<div class="form_group">
+								<%= f.submit "編集保存", class: "btn btn-primary" %>
+							</div>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		<% end %>
+	</div>
+</div>
