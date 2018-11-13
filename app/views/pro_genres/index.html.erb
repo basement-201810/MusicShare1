@@ -4,7 +4,14 @@
 
 	<div class="pro_genre-index-sidebar">
 		<div class="pro_genre-index-sidebar-box">
-			<span><%= link_to "検索結果", pro_genres_research_path,method: :get %></span><input type="text"><br>
+
+			<nav class="navbar navbar-light bg-light">
+				<form class="form-inline">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</nav>
+
 			<% @genres.each do |genre| %>
 			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
 			<% end %>
@@ -12,11 +19,11 @@
 	</div>
 	<div class="pro_genre-index-main">
 
-		<%= link_to "商品登録ベージ", new_product_path %>
+		<h3><%= link_to "商品登録ページ", new_product_path %></h3>
 
 		<p> ■おすすめ</p>
 		<% @products.each do |product| %>
-		<%= link_to product.pro_title, pro_genre_product_path(@genres, product.id) %><br>
+		<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %><br>
 		<% end %><br>
 
 		<p> ■J-POP</p>

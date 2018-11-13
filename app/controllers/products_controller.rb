@@ -1,11 +1,12 @@
 class ProductsController < ApplicationController
 	def index
 		@products = Product.all
-		@pro_genre = ProGenre.all
+		@user = current_user
 	end
 
 	def new
 		@product = Product.new
+		@user = current_user
 	end
 
 	def create
@@ -19,19 +20,23 @@ class ProductsController < ApplicationController
 
 	def edit
 		@product = Product.find(params[:id])
-		@genre = ProGenre.find(params[:id])
-		@genres = ProGenre.all
+		@user = current_user
 	end
 
 	def update
 		@product = Product.find(parmas[:id])
-		@product.update(product_params)
-		redirect_to products_path
+		if @product.update(product_params)
+		   redirect_to pro_genre_product_path(@product.pro_genre)
+		else
+			render :index
+		end
+		   @user = current_user
 	end
 
 	def show
 		@product = Product.find(params[:id])
 		@cart = Cart.all
+		@user = current_user
 	end
 
 	def release

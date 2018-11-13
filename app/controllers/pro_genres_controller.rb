@@ -24,6 +24,7 @@ class ProGenresController < ApplicationController
 		@genre = ProGenre.find(params[:id])
 		@genres = ProGenre.all
 		@products = @genre.products.page(params[:page])
+		@user = current_user
 	end
 
 	def research

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   	resources :cart_items, except: [:show]
   end
   resources :pro_genres, only: [:show] do
-  	resources :products, only: [:show, :update, :edit]do
+  	resources :products, only: [:show, :edit, :update]do
   		resources :reviews, except: [:destroy, :index]
   	end
   end
