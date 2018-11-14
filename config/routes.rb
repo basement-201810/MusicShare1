@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   root 'pro_genres#index'
   # get  '/products/index' => 'products#index' #管理者用のindex
   get '/pro_genres/research' => 'pro_genres#research'
-  get '/user/passchange' => 'user#passchange'
+  get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
 end

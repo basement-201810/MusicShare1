@@ -28,14 +28,7 @@
 		</thead>
 
 		<tbody>
-			<% @purchases.each do |purchse| %>
-				<tr>
-					<td><%= purchase.date %></td>
-					<td><%= purchase.pur_total %></td>
-					<td><p>ステータス表示</p></td>
-					<td><%= link_to "show", purchase_path, class: "btn btn-info" %></td>
-				</tr>
-			<% end %>
+			
 		</tbody>
 	</table>
 </div>
