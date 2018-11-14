@@ -26,7 +26,7 @@
 				<td colspan="2">
 					単価 : ¥<%= cart_item.product.pro_price %>
 				</td>
-				<%= form_for [@cart,cart_item] do |f| %>
+				<%= form_for cart_item, url:cart_cart_item_path(@cart) do |f| %>
 				<td>
 					<!-- 注文数の制限を後でかける。在庫から減るような処理をする。 -->
 					注文数<%= f.number_field :amount,min:"1",max:"50" %>個

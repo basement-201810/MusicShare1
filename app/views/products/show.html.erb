@@ -42,7 +42,9 @@ artist : <%= @product.pro_artist %><br><br>
 
 <% if user_signed_in? %>
 
-<%= link_to "カートへ入れる", cart_path(@cart) %>
+<!-- 松下：cart_path(@cart)=>  cart_cart_item_path(cart) に変更 -->
+<!-- cart = current_user.carts.last -->
+<%= link_to "カートへ入れる", cart_cart_items_path(@cart) %>
 
 <% else %>
 

@@ -4,33 +4,30 @@ class CartItemsController < ApplicationController
 	# before_action :correct_user, only:[:create]
 
 
-	# newアクションは不要説あり
 	def new
 	end
 
-
-	# 商品詳細ページで"カートへ入れる"ボタンを押した時のアクション
-	# カート内一覧ページへリダイレクトさせる　pathの()内要確認
 	def create
-		cart = Cart.find(params[:cart_id])
-		cart_item = current_cart.cart_items.new(cart_item_params)
-		cart_item.product_id  = current_product
+		cart = current_user.carts.last
+		cart_item = cart.cart_items.new(cart_item_params)
+		cart_item.product_id  = params[:product_id]
 		cart_item.save
-		redirect_to cart_path(current_cart)
+		redirect_to cart_path(cart)
 	end
 
-	 # indexアクションは不要説あり
-	def index
-	end
+	# indexアクションは不要説あり
+	# def index
+	# end
 
-	# editアクションは不要説あり
+
 	def edit
 	end
 
 	def update
-		@cart_item_id = CartItem.find(params[:id])
-		@cart_item_id.update(cart_item_params)
-		redirect_to cart_path(@cart_item_id.cart)
+		cart = current_user.carts.last
+		cart_item = cart.cart_items
+		cart_item.update(cart_item_params)
+		redirect_to cart_path(cart)
 	end
 
 	def destroy
@@ -43,7 +40,7 @@ class CartItemsController < ApplicationController
 	# 	@cart = CartItem.find(params[:id]).cart_id
 	# 	@user = @cart.user_id
 	# 	redirect_to user_session_path unless @user == current_user
- #    end
+	#end
 
 	private
 	def cart_item_params
@@ -52,3 +49,9 @@ class CartItemsController < ApplicationController
 
 end
 
+
+
+# ticket = current_user.tickects.new
+# ticket.event_id = params[:event_id]
+# ticket.comment = params[:ticket][:comment]
+# ticket.save
