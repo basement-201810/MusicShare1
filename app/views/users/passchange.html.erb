@@ -1,0 +1,16 @@
+<h2>パスワード編集</h2>
+
+<%= form_for(@user) do |f| %>
+	<div class="form_group has_icon">
+		<label for="inputEmail"> Password </label>
+		<%= f.text_field :password, autofocus: :true, class: "password", id: "inputEmail" %>
+		<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+	</div>
+	<div class="form_group has_icon">
+		<label for="inputEmail"> Password_confirm </label>
+		<%= f.text_field :password_confirmation, autofocus: true, class: "password_confirm", id: "inputEmail" %>
+		<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+	</div>
+	<%= f.submit "変更を保存", class: "btn btn-danger" %>
+<% end %>
+<%= link_to 'back', edit_user_path, class: "btn btn-info" %>
