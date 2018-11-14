@@ -4,8 +4,12 @@ class ApplicationController < ActionController::Base
 
 
 	def after_sign_in_path_for(resource)
-		Cart.find_or_create_by(user_id: current_user.id)
-		root_path
+		if (current_user.manager == true)
+			products_path
+		else
+			Cart.find_or_create_by(user_id: current_user.id)
+			root_path
+		end
 	end
 
 	protected
