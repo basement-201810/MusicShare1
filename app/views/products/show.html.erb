@@ -43,14 +43,17 @@ label : その他<br>
 artist : <%= @product.pro_artist %><br><br>
 
 
-<% if user_signed_in? %>
 
-<!-- 松下：cart_path(@cart)=>  cart_cart_item_path(cart) に変更 -->
-<!-- cart = current_user.carts.last -->
-<%= link_to "カートへ入れる", cart_cart_items_path(@cart) %>
+<!-- --------------------------松下追記/編集-------------------------------------- -->
+
+<% if user_signed_in? %>
+    <%= form_for @cart_item,url:cart_cart_items_path(@cart) do |f| %>
+        <!--------- 注文数の制限を後でかける。在庫から減るような処理をする。 --------------->
+		<p>注文数<%= f.number_field :amount,min:"1",max:"50" %>個  / <%= f.submit "カートへ入れる" %> <p>
+    <% end %>
 
 <% else %>
 
-<%= link_to "カートへ入れる", user_session_path %>
+    <%= link_to "カートへ入れる", user_session_path %>
 
 <% end %>

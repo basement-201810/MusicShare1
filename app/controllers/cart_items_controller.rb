@@ -5,6 +5,8 @@ class CartItemsController < ApplicationController
 
 
 	def new
+		@cart = current_user.carts.last
+		@cart_item = cart.cart_items.new
 	end
 
 	def create
@@ -15,7 +17,7 @@ class CartItemsController < ApplicationController
 		redirect_to cart_path(cart)
 	end
 
-	# indexアクションは不要説あり
+	# indexアクションは不要
 	# def index
 	# end
 
@@ -24,10 +26,9 @@ class CartItemsController < ApplicationController
 	end
 
 	def update
-		cart = current_user.carts.last
-		cart_item = cart.cart_items
-		cart_item.update(cart_item_params)
-		redirect_to cart_path(cart)
+		cart_item_id = CartItem.find(params[:id])
+		cart_item_id.update(cart_item_params)
+		redirect_to cart_path(cart_item_id.cart)
 	end
 
 	def destroy
