@@ -19,8 +19,16 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :new, :create]
 
+  resources :pro_genres do
+    collection do
+      get :research
+    end
+  end
+
   root 'pro_genres#index'
   # get  '/products/index' => 'products#index' #管理者用のindex
-  get '/pro_genres/research' => 'pro_genres#research'
+
+  # get '/pro_genres/research' => 'pro_genres#research'
   get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
+
 end
