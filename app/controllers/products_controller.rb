@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 	end
 
 	def update
-		@product = Product.find(parmas[:id])
+		@product = Product.find(params[:id])
 		if @product.update(product_params)
 		   redirect_to pro_genre_product_path(@product.pro_genre)
 		else
