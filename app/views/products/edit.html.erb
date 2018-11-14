@@ -1,6 +1,6 @@
 <h2>商品編集画面</h2>
 
-<%= form_for [@product, @product.pro_genre_id] do |f| %>
+<%= form_for @product, url: pro_genre_product_path do |f| %>
 
 <h4>アーティスト名 : <%= f.text_field :pro_artist %></h4>
 

@@ -1,6 +1,6 @@
 <h2><%= @genre.pro_genre_name %></h2>
 
 <% @products.each do |product| %>
-	<%= link_to product.pro_title, pro_genre_product_path(@genres, product.id) %><br>
+	<%= link_to product.pro_title, pro_genre_product_path(@genre, product.id) %><br>
 	<% end %>
 
