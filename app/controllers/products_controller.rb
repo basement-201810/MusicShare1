@@ -36,10 +36,11 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-		# 松下が下記追記
-		# @cart = Cart.all
+# ----------------------松下追記--------------------------------
 		@cart = @user.carts.last
 		@cart_item = @cart.cart_items.new
+		@cart_item.product_id = @product
+# -------------------------------------------------------------
 	end
 
 	def release

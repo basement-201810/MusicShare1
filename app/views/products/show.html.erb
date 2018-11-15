@@ -44,12 +44,16 @@ artist : <%= @product.pro_artist %><br><br>
 
 
 
-<!-- --------------------------松下追記/編集-------------------------------------- -->
+<!-- --------------------------11/15 松下追記/編集したよ-------------------------------------- -->
 
 <% if user_signed_in? %>
-    <%= form_for @cart_item,url:cart_cart_items_path(@cart) do |f| %>
+    <%= form_for @cart_item ,url:product_cart_items_path(@product) do |f| %>
+
         <!--------- 注文数の制限を後でかける。在庫から減るような処理をする。 --------------->
-		<p>注文数<%= f.number_field :amount,min:"1",max:"50" %>個  / <%= f.submit "カートへ入れる" %> <p>
+		<p>
+			注文数<%= f.number_field :amount,min:"1",max:"50" %>個  / 
+			<%= f.submit "カートへ入れる" , class: "btn btn-warning btn-sm" %> 
+		</p>
     <% end %>
 
 <% else %>
