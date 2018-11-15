@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
-	before_action :correct_user
+	# before_action :correct_user
 
 
 	# Cartのuser_idが、ログインしたuserのidかを検索。
@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
 		# end
 	end
 
-	#管理者がログインした時のPAthを指定
-	def correct_user
-		if (current_user.manager == true)
-			products_path
-		end
-	end
+	# #管理者がログインした時のPAthを指定
+	# def correct_user
+	# 	if (current_user.manager == true)
+	# 		products_path
+	# 	end
+	# end
 
 	protected
 	def configure_permitted_parameters
