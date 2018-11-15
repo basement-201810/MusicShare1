@@ -70,7 +70,7 @@ gem 'kaminari'
 gem 'rails-i18n'
 gem 'ransack'
 gem 'rails4-autocomplete'
-
+gem 'pry-rails'
 
 
 

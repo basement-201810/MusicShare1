@@ -6,10 +6,11 @@
 	<p><%= @user.post_code %></p>
 	<p><%= @user.address %></p>
 	<p><%= @user.point %></p>
-	<% if current_user.manager == false %>
-		<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
-		<%= link_to "退会", "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+	<% if current_user.manager == true %>
+		<p><%= @user.memo %></p>
 	<% end %>
+	<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
+	<%= link_to "退会", "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
 </div>
 <div>
 	<h3>購入履歴一覧</h3>
