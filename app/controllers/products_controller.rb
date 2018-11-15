@@ -39,10 +39,20 @@ class ProductsController < ApplicationController
 		@user = current_user
 	end
 
+
 	def release
+		product = Product.find(params[:id])
+		product.release! unless product.release?
+		redirect_to products_path
 	end
 
 	def nonrelease
+		product = Product.find(params[:id])
+		product.nonrelease! unless product.nonrelease?
+		redirect_to products_path
+	end
+
+	def research
 	end
 
 

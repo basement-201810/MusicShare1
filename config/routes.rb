@@ -19,11 +19,12 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :new, :create]
 
-  resources :pro_genres do
+  resources :products do
     collection do
       get :research
     end
   end
+
 
   root 'pro_genres#index'
   # get  '/products/index' => 'products#index' #管理者用のindex
