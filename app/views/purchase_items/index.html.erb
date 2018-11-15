@@ -1,2 +1,21 @@
 <h1>PurchaseItems#index</h1>
-<p>Find me in app/views/purchase_items/index.html.erb</p>
+<p>購入履歴詳細画面</p>
+
+<h1>
+	<%= @purchase.date.year %> 年
+	<%= @purchase.date.month %> 月
+	<%= @purchase.date.day %> 日　購入分
+</h1>
+
+<% @purchase_items.each do |purchase_item| %>
+ 	<p>id = [<%= purchase_item.id %>]</p>
+ 	<p>purchase_id = [<%= purchase_item.purchase_id %>]</p>
+ 	<p>cart_item_id = [purchase_item.cart_item_id%>]</p>
+ 	<p>amount = [purchase_item.amount %>]</p>
+ 	<p>sub_total = [<%= purchase_item.sub_total %>]</p>
+
+ 	
+
+<% end %>
+
+<%= @product.title %>
