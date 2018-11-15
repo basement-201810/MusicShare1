@@ -8,16 +8,21 @@ Rails.application.routes.draw do
   	resources :purchase_items, only: [:index]
   end
 
+# cart_itemに[:create,:index,:action]追記
   resources :carts, except: [:destroy, :index] do
-  	resources :cart_items, except: [:show]
+  	resources :cart_items, except: [:show,:create,:index,:action]
   end
+
   resources :pro_genres, only: [:show] do
   	resources :products, only: [:show, :edit, :update]do
   		resources :reviews, except: [:destroy, :index]
   	end
   end
 
-  resources :products, only: [:index, :new, :create]
+# do以下を追記
+  resources :products, only: [:index, :new, :create] do
+    resources :cart_items, only: [:create]
+  end
 
   resources :products do
     collection do
