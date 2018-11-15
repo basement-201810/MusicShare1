@@ -1,7 +1,9 @@
 class CartsController < ApplicationController
 
+
 	# before_action :authenticater_user!
 	# before_action :correct_user
+
 
 	def show
 		@cart=current_user.carts.last
@@ -32,11 +34,10 @@ class CartsController < ApplicationController
     #    end
 
 
-end
-
 	# private
 	# def cart_params
 	# 	params.require(:cart).permit(:user_id)
 	# end
+end
 
 

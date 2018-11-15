@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-# ----------------------松下追記--------------------------------
+# ----------------------cart_item#createのための変数-------------
 		@cart = @user.carts.last
 		@cart_item = @cart.cart_items.new
 		@cart_item.product_id = @product

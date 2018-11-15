@@ -4,6 +4,15 @@
 	<h3 class="glyphicon glyphicon-shopping-cart">ショッピングカート</h3>
 
 
+	<!-- サクセスメッセージ -->
+	<p id="notice"><%= notice %></p>
+
+	<!-- ステータスメッセージ -->
+	<% if @cart_items.empty? %>
+	    <p>※ 現在カート内に商品はありません ※</p>
+	<% end %>
+
+
 	<!-- カート内の商品一覧 -->
 	<table class="table table-hover">
 
@@ -52,34 +61,47 @@
 	</table>
 
 
+    <!-- ーーーーーーーーーカート内が「empty」時ーーーーーーーー -->
+	<% if @cart_items.empty? %>
+	    <!-- 商品追加ボタン -->
+	    <div class="row">
+		    <span class="col-md-8"></span>
+		    <p class="col-md-4">
+			    <%= link_to "  商品を見る",root_path, class: "glyphicon glyphicon-search btn btn-info btn-block btn-sm" %>
+		    </p>
+		</div>
 
+
+    <!-- ーーーーーーーーーカート内が「not empty」時ーーーーーーーー -->
+	<%else%>
     <!-- カート内の合計金額 -->
-	<div class="row">
-		<span class="col-md-8"></span>
-		<p class="col-md-4">
-			/  注文合計金額:
-			<strong>
-				 <%= number_to_currency((@cart.sub_total).to_i , :unit => "￥",:precision => 0)  %>
-			</strong>
-		</p>
-	</div>
+	    <div class="row">
+	    	<span class="col-md-8"></span>
+	    	<p class="col-md-4">
+			    /  注文合計金額:
+			    <strong>
+			    	<%= number_to_currency((@cart.sub_total).to_i , :unit => "￥",:precision => 0)  %>
+			    </strong>
+			</p>
+		</div>
 
-	<!-- レジへ進むボタン -->
-	<div class="row">
-		<span class="col-md-8"></span>
-		<p class="col-md-4">
-			<%= link_to "  レジに進む　　",purchase_path(@cart) , class: "btn btn-warning btn-block btn-sm glyphicon glyphicon-ok "%>
-		</p>
-	</div>
-	<!-- 商品追加ボタン -->
-	<div class="row">
-		<span class="col-md-8"></span>
-		<p class="col-md-4">
-			<%= link_to "  他の商品も見る",root_path, class: "glyphicon glyphicon-search btn btn-info btn-block btn-sm" %>
-		</p>
-	</div>
+        <!-- レジへ進むボタン -->
+	    <div class="row">
+	    	<span class="col-md-8"></span>
+	    	<p class="col-md-4">
+	    		<%= link_to "  レジに進む",purchase_path(@cart) , class: "btn btn-warning btn-block btn-sm glyphicon glyphicon-ok "%>
+	    	</p>
+	    </div>
 
+	    <!-- 商品追加ボタン -->
+	    <div class="row">
+	    	<span class="col-md-8"></span>
+	    	<p class="col-md-4">
+	    		<%= link_to "  あとで買う",root_path, class: "glyphicon glyphicon-search btn btn-info btn-block btn-sm" %>
+	    	</p>
+	    </div>
 
+	<% end %>
 
 
 </div>
