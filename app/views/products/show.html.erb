@@ -43,16 +43,29 @@ label : その他<br>
 artist : <%= @product.pro_artist %><br><br>
 
 
-<% if user_signed_in? %>
 
-<%= link_to "カートへ入れる", cart_path(@cart) %><br>
 
-<% else %>
 
-<%= link_to "カートへ入れる", user_session_path %><br>
-
-<% end %>
 
 <%if user_signed_in? && current_user.manager == true %>
 <%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
 <% end %>
+
+<!-- --------------------------11/15 松下追記/編集したよ-------------------------------------- -->
+
+<% if user_signed_in?  %>
+    <%= form_for @cart_item ,url:product_cart_items_path(@product) do |f| %>
+
+        <!--------- 注文数の制限を後でかける。在庫から減るような処理をする。 --------------->
+		<p>
+			注文数<%= f.number_field :amount,min:"1",max:"50" %>個  / 
+			<%= f.submit "カートへ入れる" , class: "btn btn-warning btn-sm" %> 
+		</p>
+    <% end %>
+
+<% else %>
+
+    <%= link_to "ログインしてカートへ入れる", user_session_path %>
+
+<% end %>
+

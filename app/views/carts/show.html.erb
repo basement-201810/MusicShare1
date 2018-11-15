@@ -4,6 +4,15 @@
 	<h3 class="glyphicon glyphicon-shopping-cart">ショッピングカート</h3>
 
 
+	<!-- サクセスメッセージ -->
+	<p id="notice"><%= notice %></p>
+
+	<!-- ステータスメッセージ -->
+	<% if @cart_items.empty? %>
+	    <p>※ 現在カート内に商品はありません ※</p>
+	<% end %>
+
+
 	<!-- カート内の商品一覧 -->
 	<table class="table table-hover">
 
@@ -24,17 +33,21 @@
 			<!-- 小計関連　(注文数の変更/小計/カート商品の削除) -->
 			<tr>
 				<td colspan="2">
-					単価 : ¥<%= cart_item.product.pro_price %>
+					単価 :
+					<%= number_to_currency(cart_item.product.pro_price, :unit => "￥",:precision => 0)  %>
 				</td>
-				<%= form_for [@cart,cart_item] do |f| %>
+				<%= form_for cart_item, url:cart_cart_item_path(cart_item.cart,cart_item) do |f| %>
 				<td>
-					<!-- 注文数の制限を後でかける。在庫から減るような処理をする。 -->
+					<!-- 注文数の制限を後でかける。在庫から減るような処理をする。 ------>
 					注文数<%= f.number_field :amount,min:"1",max:"50" %>個
 					<%= f.submit "変更", class: "btn btn-default btn-xs"%>
 				</td>
 				<% end %>
 				<td colspan="4">
-					/  小計 : <strong>¥<%= (cart_item.sub_total).to_i %></strong>
+					/  小計 :
+					<strong>
+					<%= number_to_currency( (cart_item.sub_total).to_i , :unit => "￥",:precision => 0)  %>
+					</strong>
 				</td>
 				<td colspan="2">
 					<%= link_to "削除", cart_cart_item_path(cart_item.cart,cart_item),method: :delete,
@@ -48,31 +61,47 @@
 	</table>
 
 
+    <!-- ーーーーーーーーーカート内が「empty」時ーーーーーーーー -->
+	<% if @cart_items.empty? %>
+	    <!-- 商品追加ボタン -->
+	    <div class="row">
+		    <span class="col-md-8"></span>
+		    <p class="col-md-4">
+			    <%= link_to "  商品を見る",root_path, class: "glyphicon glyphicon-search btn btn-info btn-block btn-sm" %>
+		    </p>
+		</div>
 
+
+    <!-- ーーーーーーーーーカート内が「not empty」時ーーーーーーーー -->
+	<%else%>
     <!-- カート内の合計金額 -->
-	<div class="row">
-		<span class="col-md-8"></span>
-		<p class="col-md-4">
-			/  注文合計金額:  <strong>¥ <%= (@cart.sub_total).to_i %></strong>
-		</p>
-	</div>
+	    <div class="row">
+	    	<span class="col-md-8"></span>
+	    	<p class="col-md-4">
+			    /  注文合計金額:
+			    <strong>
+			    	<%= number_to_currency((@cart.sub_total).to_i , :unit => "￥",:precision => 0)  %>
+			    </strong>
+			</p>
+		</div>
 
-	<!-- レジへ進むボタン -->
-	<div class="row">
-		<span class="col-md-8"></span>
-		<p class="col-md-4">
-			<%= link_to "レジに進む",purchase_path(@cart) , class: "btn btn-warning btn-block btn-sm"%>
-		</p>
-	</div>
-	<!-- 商品追加ボタン -->
-	<div class="row">
-		<span class="col-md-8"></span>
-		<p class="col-md-4">
-			<%= link_to "他の商品も見る",root_path, class: "btn btn-info btn-block btn-sm" %>
-		</p>
-	</div>
+        <!-- レジへ進むボタン -->
+	    <div class="row">
+	    	<span class="col-md-8"></span>
+	    	<p class="col-md-4">
+	    		<%= link_to "  レジに進む",purchase_path(@cart) , class: "btn btn-warning btn-block btn-sm glyphicon glyphicon-ok "%>
+	    	</p>
+	    </div>
 
+	    <!-- 商品追加ボタン -->
+	    <div class="row">
+	    	<span class="col-md-8"></span>
+	    	<p class="col-md-4">
+	    		<%= link_to "  あとで買う",root_path, class: "glyphicon glyphicon-search btn btn-info btn-block btn-sm" %>
+	    	</p>
+	    </div>
 
+	<% end %>
 
 
 </div>
