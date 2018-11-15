@@ -44,6 +44,13 @@ artist : <%= @product.pro_artist %><br><br>
 
 
 
+
+
+
+<%if user_signed_in? && current_user.manager == true %>
+<%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
+<% end %>
+
 <!-- --------------------------11/15 松下追記/編集したよ-------------------------------------- -->
 
 <% if user_signed_in?  %>
@@ -61,3 +68,4 @@ artist : <%= @product.pro_artist %><br><br>
     <%= link_to "ログインしてカートへ入れる", user_session_path %>
 
 <% end %>
+

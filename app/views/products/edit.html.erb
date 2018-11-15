@@ -33,6 +33,12 @@
 
 <%= f.submit "編集" %><br><br>
 
+<% if @product.pro_status == "release" %>
+<%=link_to "非公開", pro_genre_product_path(@product.pro_genre_id, @product), method: :patch, class:"btn btn-danger btn-xs" %>
+<% end %>
+
+<br><br>
+
 <%= link_to "商品一覧画面", products_path %>
 
 <% end %>
