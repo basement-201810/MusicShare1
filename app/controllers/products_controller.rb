@@ -36,17 +36,27 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-# ----------------------松下追記--------------------------------
+# ----------------------cart_item#createのための変数-------------
 		@cart = @user.carts.last
 		@cart_item = @cart.cart_items.new
 		@cart_item.product_id = @product
 # -------------------------------------------------------------
 	end
 
+
 	def release
+		product = Product.find(params[:id])
+		product.release! unless product.release?
+		redirect_to products_path
 	end
 
 	def nonrelease
+		product = Product.find(params[:id])
+		product.nonrelease! unless product.nonrelease?
+		redirect_to products_path
+	end
+
+	def research
 	end
 
 

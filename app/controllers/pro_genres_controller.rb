@@ -18,13 +18,9 @@ class ProGenresController < ApplicationController
 		@genres_anime = Product.where(pro_genre_id:10)
 		@genres_jazz = Product.where(pro_genre_id:11)
 		@genres_otherwise = Product.where(pro_genre_id:12)
-		@prods = if params[:search]
-			Product.where(activated: true).paginate(page: params[:page]).where('name LIKE ?', "%#{params[:search]}%")
-		else
-			# @prods = Product.where(activated: true).paginate(page: params[:page]).search(params[:search])
-			# Product.where(activated: true).paginate(page: params[:page])
-		end
 
+		@q = Product.ransack(params[:q])
+		@products = @q.result(distinct: true)
 	end
 
 	def show
@@ -34,13 +30,15 @@ class ProGenresController < ApplicationController
 		@user = current_user
 	end
 
-	def research
+	def result
 	end
+
+	def search
+	end
+
 
 	def product_params
 		params.require(:product).permit(:pro_image_id, :pro_price, :pro_genre_id, :pro_date, :pro_amount, :pro_title, :pro_label_id, :pro_artist, :pro_status, :created_at, :updated_at)
 	end
 end
 
-
-["id", "pro_image_id", "pro_price", "pro_genre_id", "pro_date", "pro_amount", "pro_title", "pro_label_id", "pro_artist", "pro_status", "created_at", "updated_at"]

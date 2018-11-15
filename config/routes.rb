@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   	resources :purchase_items, only: [:index]
   end
 
-# cart_itemに:create追記
+# cart_itemに[:create,:index,:action]追記
   resources :carts, except: [:destroy, :index] do
-  	resources :cart_items, except: [:show,:create]
+  	resources :cart_items, except: [:show,:create,:index,:action]
   end
 
   resources :pro_genres, only: [:show] do
@@ -24,11 +24,12 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:create]
   end
 
-  resources :pro_genres do
+  resources :products do
     collection do
       get :research
     end
   end
+
 
   root 'pro_genres#index'
   # get  '/products/index' => 'products#index' #管理者用のindex

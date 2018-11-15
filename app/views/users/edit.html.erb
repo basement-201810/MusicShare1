@@ -3,7 +3,7 @@
 		<% if current_user.manager == false %>
 			<% if @user.errors.any? %>
 				<div id="error_explanation" class="alert alert-danger">
-					<% @user.errors.full_message.each do |massage| %>
+					<% @user.errors.full_messages.each do |message| %>
 						<p><%= message %></p>
 					<% end %>
 				</div>
@@ -46,7 +46,7 @@
 						<%= f.text_field :tell, autofocus: true, class: "tell", id: "inputEmail" %>
 						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
 					</div>
-					<%= f.submit "変更を保存", class: "btn btn-danger" %>
+					<%= f.submit "保存" %>
 				<% end %>
 			</div>
 		<% else %>
@@ -87,14 +87,12 @@
 								<td><%= f.label :memo, "備考" %></td>
 								<td><%= f.text_area :memo, class: "memo" %></td>
 							</tr>
-							<div class="form_group">
-								<%= f.submit "編集保存", class: "btn btn-primary" %>
-							</div>
 						<% end %>
 					</tbody>
 				</table>
 			</div>
+			<%= link_to '編集保存', user_path, method: :patch, class: "btn btn-danger" %>
+			<%= link_to 'back', user_path, class: "btn btn-info" %>
 		<% end %>
-		<%= link_to 'back', user_path(current_user), class: "btn btn-info" %>
 	</div>
 </div>
