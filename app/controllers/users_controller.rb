@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
 	def update
 		@user = User.find(params[:id])
+		binding.pry
 		if @user.update(user_params)
 			redirect_to user_path(@user.id), notice: 'Profile was successfully updated!!'
 		else
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(current_user.id)
+		@user = User.find(params[:id])
 	end
 
 	def release
@@ -44,5 +45,5 @@ end
 
 private
 def user_params
-	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager)
+	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo)
 end
