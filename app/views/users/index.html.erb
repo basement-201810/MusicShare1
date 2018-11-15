@@ -10,7 +10,7 @@
 			<tr>
 				<td><%= user.name %></td>
 				<td><%= user.reviews %></td>
-				<td></td>
+				<td><%= link_to "show", user, class: "btn btn-success" %></td>
 			</tr>
 		<% end %>
 	</tbody>
