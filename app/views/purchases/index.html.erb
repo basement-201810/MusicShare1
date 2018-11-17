@@ -1,0 +1,14 @@
+<h1>受注管理（一覧）ページ</h1>
+
+<p>会員数<%= @user_all -1 %>人！！！！！！     売り上げ<%= @pur_total_sum %>円！！！！！！！</p>
+
+<% @purchases.each do |purchase| %>
+	<div>
+		<p><%= purchase.user.name %></p>
+		<p><%= purchase.date.year %> 年
+			<%= purchase.date.month %> 月
+			<%= purchase.date.day %> 日　購入分
+		</p>
+		<p><%= purchase.status %></p>
+	</div>
+<% end %>

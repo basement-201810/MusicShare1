@@ -37,7 +37,8 @@
 						<%= purchase.date.day %> 日
 					</td>
 					<td><%= purchase.pur_total%></td>
-					<td>ステータス</td>
+					<td><%= purchase.status %></td>
+					<td><%= link_to "show",purchase_purchase_items_path(purchase.id),class: "btn btn-info" %></td>
 				<% end %>
 			</tr>
 		</tbody>
