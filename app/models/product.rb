@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-	attachment :image
+	attachment :pro_image
 	has_many :musics
 	# has_many :carts
 	has_many :reviews

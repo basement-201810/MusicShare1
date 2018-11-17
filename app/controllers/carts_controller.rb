@@ -21,11 +21,11 @@ class CartsController < ApplicationController
 	# 	redirect_to root_path
 	# end
 
-	def edit
-	end
+	# def edit
+	# end
 
-	def update
-	end
+	# def update
+	# end
 
 	# def correct_user
 	# 	@cart_id = Cart.find(params[:id]).user_id
