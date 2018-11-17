@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-	attachment :image
+	attachment :pro_image
 	has_many :musics
 	# has_many :carts
 	has_many :reviews
@@ -7,6 +7,8 @@ class Product < ApplicationRecord
 	belongs_to :pro_genre
 	has_many :cart_items
 	enum pro_status: {release: true, nonrelease: false}
+
+	accepts_nested_attributes_for :musics
 
 end
 

@@ -1,50 +1,53 @@
 <h2> 登録商品一覧画面</h2>
 
-<%= link_to "商品登録画面", new_product_path %><br><br>
+
+<%= link_to "商品登録画面", new_product_path, class:"btn btn-primary" %><br><br>
+
+
 
 <h4> ■登録商品一覧（公開商品）</h4>
 
 <h4>
 
-<% @products.each do |product| %>
-<% if product.pro_status == "release" %>
-<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
-<% if product.pro_genre_id == 1 %>
-J-POP
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 2 %>
-K-POP
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 3 %>
-アイドル
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 4 %>
-童謡
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 5 %>
-Rock
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 6 %>
-EDM
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 7 %>
-Dance
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 8 %>
-Alternative
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 9 %>
-RAP/HIP-HOP
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 10 %>
-アニソン
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 11 %>
-Jazz
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% else %>
-その他
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% @products.each do |product| %>
+	<% if product.pro_status == "release" %>
+	<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
+	<% if product.pro_genre_id == 1 %>
+	J-POP
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 2 %>
+	K-POP
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 3 %>
+	アイドル
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 4 %>
+	童謡
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 5 %>
+	Rock
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 6 %>
+	EDM
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 7 %>
+	Dance
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 8 %>
+	Alternative
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 9 %>
+	RAP/HIP-HOP
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 10 %>
+	アニソン
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 11 %>
+	Jazz
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% else %>
+	その他
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
 
 </h4>
 
@@ -63,45 +66,45 @@ Jazz
 
 <h4>
 
-<% @products.each do |product| %>
-<% if product.pro_status == "nonrelease" %>
-<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
-<% if product.pro_genre_id == 1 %>
-J-POP
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 2 %>
-K-POP
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 3 %>
-アイドル
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 4 %>
-童謡
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 5 %>
-Rock
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 6 %>
-EDM
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 7 %>
-Dance
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 8 %>
-Alternative
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 9 %>
-RAP/HIP-HOP
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 10 %>
-アニソン
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% elsif product.pro_genre_id == 11 %>
-Jazz
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
-<% else %>
-その他
-<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% @products.each do |product| %>
+	<% if product.pro_status == "nonrelease" %>
+	<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
+	<% if product.pro_genre_id == 1 %>
+	J-POP
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 2 %>
+	K-POP
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 3 %>
+	アイドル
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 4 %>
+	童謡
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 5 %>
+	Rock
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 6 %>
+	EDM
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 7 %>
+	Dance
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 8 %>
+	Alternative
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 9 %>
+	RAP/HIP-HOP
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 10 %>
+	アニソン
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% elsif product.pro_genre_id == 11 %>
+	Jazz
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
+	<% else %>
+	その他
+	<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %><br>
 
 </h4>
 

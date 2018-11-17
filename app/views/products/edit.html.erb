@@ -6,7 +6,8 @@
 
 <h4>シングル / アルバム名 : <%= f.text_field :pro_title %></h4>
 
-<h4>ジャケット画像 : ◯ ◯ ◯</h4>
+<h4>ジャケット画像</h4>
+<%= f.attachment_field :pro_image %>
 
 <h4>値段 : <%= f.text_field :pro_price %></h4>
 
@@ -31,11 +32,8 @@
 
 
 
-<%= f.submit "編集" %><br><br>
+<%= f.submit "編集", class:"btn btn-default btn-xs active" %><br><br>
 
-<% if @product.pro_status == "release" %>
-<%=link_to "非公開", pro_genre_product_path(@product.pro_genre_id, @product), method: :patch, class:"btn btn-danger btn-xs" %>
-<% end %>
 
 <br><br>
 

@@ -1,15 +1,19 @@
 <h2>商品登録画面</h2>
 
+
+
 <%= link_to "商品一覧画面", products_path %><br><br>
 
 
 
-<%= form_for(@product) do |f| %>
+
+<%= form_for @product do |f| %>
 <h4>アーティスト名 : <%= f.text_field :pro_artist %></h4>
 
 <h4>シングル / アルバム名 : <%= f.text_field :pro_title %></h4>
 
-<h4>ジャケット画像 : ◯ ◯ ◯</h4>
+<h4>ジャケット画像</h4>
+<h4><%= f.attachment_field :pro_image %></h4>
 
 <h4>値段 : <%= f.text_field :pro_price %></h4>
 
@@ -20,10 +24,6 @@
 <h4>ジャンル : <%= f.select :pro_genre_id, [["J-POP", "1"],["K-POP","2"],["アイドル","3"],["童謡","4"],["Rock","5"],["EDM","6"],["Dance","7"],["Alternative","8"],["RAP/HIP-HOP","9"],["アニソン","10"],["Jazz","11"],["その他","12"]] %></h4>
 
 
-<h4>ディスク : </h4>
-
-<h4>シングル / アルバム内の曲名 : </h4>
-
 <h4>登録日 : <%= f.datetime_select :pro_date %></h4>
 
 
@@ -32,7 +32,37 @@
 
 <h4>在庫数 : <%= f.text_field :pro_amount %></h4><br>
 
-<%= f.submit "商品登録ボタン" %><br><br>
 
+
+<%= f.fields_for :musics do |b| %>
+<h4>ディスクナンバー : <%= b.text_field :music_disk_number %></h4>
+<h4>シングル / アルバム内の曲名 : <%= b.text_field :music_name %></h4>
+<h4>ミュージックナンバー : <%= b.text_field :music_number %></h4>
+
+<br>
+
+
+<%= f.submit "商品登録ボタン",class:"btn btn-default active" %><br><br>
 <% end %>
+<% end %>
+
+
+
+
+<div id="piyo">
+</div>
+<div>
+<button onclick="add();">このボタンを押して追加！</button>
+</div>
+
+
+<script>
+function add(){
+    var div_element = document.createElement("div");
+    div_element.innerHTML = '<hr>ディスクナンバー: <input type="text" name="disk_number" rows="1" cols="30"><br>シングル/アルバム内の曲名: <input type="text" name="music_name" rows="1" cols="30"><br>ミュージックナンバー: <input type="text" name="music_number" rows="1" cols="30">';
+    var parent_object = document.getElementById("piyo");
+    parent_object.appendChild(div_element);
+}
+</script>
+
 

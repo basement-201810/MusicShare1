@@ -6,10 +6,12 @@ class ProductsController < ApplicationController
 
 	def new
 		@product = Product.new
+		@product.musics.build
 		@user = current_user
 	end
 
 	def create
+
 		@product = Product.new(product_params)
 		if @product.save
 			redirect_to products_path
@@ -36,33 +38,35 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
+
 # ----------------------cart_item#createのための変数-------------
-		@cart = @user.carts.last
+		@cart = Cart.find_or_create_by(user_id: @user)
 		@cart_item = @cart.cart_items.new
-		@cart_item.product_id = @product
 # -------------------------------------------------------------
 	end
 
 
 	def release
-		product = Product.find(params[:id])
-		product.release! unless product.release?
-		redirect_to products_path
 	end
 
 	def nonrelease
-		product = Product.find(params[:id])
-		product.nonrelease! unless product.nonrelease?
-		redirect_to products_path
 	end
 
 	def research
+		@genres = ProGenre.all
+		@search = Product.ransack(params[:q])
+		@products = @search.result
 	end
 
 
 	private
 	def product_params
-		params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status)
+			params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:music_name, :music_disk_number, :product_id, :music_number])
 	end
 
+
+
 end
+
+
+

@@ -19,8 +19,7 @@ class ProGenresController < ApplicationController
 		@genres_jazz = Product.where(pro_genre_id:11)
 		@genres_otherwise = Product.where(pro_genre_id:12)
 
-		@q = Product.ransack(params[:q])
-		@products = @q.result(distinct: true)
+		@search = Product.ransack(params[:q])
 	end
 
 	def show

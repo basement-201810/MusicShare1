@@ -1,26 +1,19 @@
-<h2>商品一覧ページ</h2>
+<h2 class="page-title">商品一覧ページ</h2>
 
 <div class="pro_genre-index clearfix">
 
 	<div class="pro_genre-index-sidebar">
 		<div class="pro_genre-index-sidebar-box">
 
+
 			<nav class="navbar navbar-light bg-light">
-				<form class="form-inline">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					<%= link_to "Search", research_products_path, class:"btn btn-outline-success my-2 my-sm-0" %>
-					<!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-				</form>
+				<div class="form-inline">
+					<%= search_form_for @search, url: research_products_path do |f| %>
+					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+					<% end %>
+				</div>
 			</nav>
-
-			<%= search_form_for @q  do |f| %>
-			<div class="form-group">
-				<%= f.label :pro_title_start, "Name" %>
-				<%= f.search_field :pro_title_start, class: "form-control  mr-sm-2" %>
-			</div>
-			<div class="actions"><%= f.submit "Search" %></div>
-			<% end %>
-
 
 
 
@@ -30,8 +23,6 @@
 		</div>
 	</div>
 	<div class="pro_genre-index-main">
-
-		<h3><%= link_to "商品登録ページ", new_product_path %></h3>
 
 
 		<p> ■おすすめ</p>
