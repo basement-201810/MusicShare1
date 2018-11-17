@@ -22,7 +22,7 @@
 			<!-- 商品情報 (画像/商品名/アーティスト名) -->
 			<tr>
 				<td rowspan="2">
-					<%= attachment_image_tag cart_item.product, :pro_image_id, size: "80x80", fallback: "no-image_rocket.png"%> <!-- no_image.jpg -->
+					<%= attachment_image_tag cart_item.product, :pro_image, size: "80x80", fallback: "no-image_rocket.png"%> <!-- no_image.jpg -->
 				</td>
 				<td colspan="10">
 					<strong><%= link_to cart_item.product.pro_title, pro_genre_product_path(cart_item.product.pro_genre,cart_item.product)%></strong>
@@ -36,7 +36,7 @@
 					単価 :
 					<%= number_to_currency(cart_item.product.pro_price, :unit => "￥",:precision => 0)  %>
 				</td>
-				<%= form_for cart_item, url:cart_cart_item_path(cart_item.cart,cart_item) do |f| %>
+				<%= form_for cart_item, url:product_cart_item_path(cart_item.product,cart_item) do |f| %>
 				<td>
 					<!-- 注文数の制限を後でかける。在庫から減るような処理をする。 ------>
 					注文数<%= f.number_field :amount,min:"1",max:"50" %>個
@@ -61,7 +61,7 @@
 	</table>
 
 
-    <!-- ーーーーーーーーーカート内が「empty」時ーーーーーーーー -->
+    <!-- - - - カート内が「empty」- - - -->
 	<% if @cart_items.empty? %>
 	    <!-- 商品追加ボタン -->
 	    <div class="row">
@@ -72,9 +72,9 @@
 		</div>
 
 
-    <!-- ーーーーーーーーーカート内が「not empty」時ーーーーーーーー -->
+    <!-- - - - カート内が「not empty」- - - -->
 	<%else%>
-    <!-- カート内の合計金額 -->
+        <!-- カート内の合計金額 -->
 	    <div class="row">
 	    	<span class="col-md-8"></span>
 	    	<p class="col-md-4">
