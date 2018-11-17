@@ -96,7 +96,34 @@
 	<div class="reviews">
 		<h3 class="glyphicon glyphicon-comment"> 商品レビュー</h3>
 	</div>
-
-
-
+<table class="table table-hover">
+	<thead>
+		<th></th>
+		<%if user_signed_in? && current_user.manager == true %>
+			<th></th>
+			<th></th>
+			<th></th>
+		<% end %>
+	</thead>
+	<tbody>
+		<tr>
+			<% @review.each do |review| %>
+				<td><%= review.review_star %><br><%= review.review_body %></td>
+				<% if user_signed_in? && current_user.manager == true %>
+					<td>
+						<% if review.review_status == true %>
+							<p>公開中</p>
+						<% else %>
+							<p>非公開中</p>
+						<% end %>
+					</td>
+					<%= form_for (@review) do |f| %>
+						<td><% f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
+					<% end %>
+					<td><% link_to '会員情報確認', user_path(review.user_id)%></td>
+				<% end %>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
 </div>
