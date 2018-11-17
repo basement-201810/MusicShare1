@@ -45,10 +45,6 @@ artist : <%= @product.pro_artist %><br><br>
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 <%if user_signed_in? && current_user.manager == true %>
 <%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
