@@ -40,9 +40,8 @@ class ProductsController < ApplicationController
 		@user = current_user
 
 # ----------------------cart_item#createのための変数-------------
-		@cart = @user.carts.last
+		@cart = Cart.find_or_create_by(user_id: @user)
 		@cart_item = @cart.cart_items.new
-		@cart_item.product_id = @product
 # -------------------------------------------------------------
 	end
 
@@ -68,3 +67,6 @@ class ProductsController < ApplicationController
 
 
 end
+
+
+

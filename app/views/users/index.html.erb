@@ -1,16 +1,18 @@
 <h1>User一覧</h1>
 <table class="table table-hover">
-	<thead>
-		<th></th>
-		<th></th>
-		<th></th>
-	</thead>
 	<tbody>
 		<% @users.each do |user| %>
 			<tr>
 				<td><%= user.name %></td>
-				<td><%= user.reviews %></td>
-				<td><%= link_to "show", user, class: "btn btn-success" %></td>
+				<td></td>
+				<td>
+					<% if user.user_status == "release" %>
+						<p>公開中</p>
+					<% else %>
+						<p>非公開中</p>
+					<% end %>
+				</td>
+				<td><%= link_to "会員詳細へ", user, class: "btn btn-success" %></td>
 			</tr>
 		<% end %>
 	</tbody>

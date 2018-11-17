@@ -1,70 +1,129 @@
-<h2> 商品詳細画面</h2><br>
+<div class="container">
+	<h3 class="glyphicon glyphicon-headphones"> 商品詳細情報</h3>
 
-<%= link_to "登録商品一覧画面", products_path %>
+	<div class="pro_info">
+		<h2>
+			<strong><%= @product.pro_title %></strong>
+			/  <%= @product.pro_artist %>
+		</h2>
 
+		<table class="table table-hover">
+			<tbody>
 
-<h2><%= @product.pro_title %></h2>
+				<!-- 価格 -->
+				<tr>
+					<td rowspan="7">
+						<%= attachment_image_tag @product.pro_image, :pro_image, size: "300x300", fallback: "no-image_rocket.png"%>
+					</td>
+					<th>価格 :</th>
+					<td colspan=" 3">
+						<%= number_to_currency(@product.pro_price, :unit => "￥",:precision => 0)  %>
+					</td>
+				</tr>
 
-<!-- 価格 -->
-price : <%= @product.pro_price %><br>
+				<!-- ジャンル名 -->
+				<tr>
+					<th>ジャンル :</th>
+					<td>
+						<% if @product.pro_genre_id == 1 %>
+						    J-POP
+						<% elsif @product.pro_genre_id == 2 %>
+						    K-POP
+						<% else %>
+						    その他
+						<% end %>
+					</td>
+				</tr>
+				<!-- レーベル名 -->
+				<tr>
+					<th>レーベル :</th>
+					<td>
+						<% if @product.pro_label_id == 1 %>
+						    エイベックス
+						<% elsif @product.pro_label_id == 2 %>
+						    ユニバーサル・ミュージック
+						<% else %>
+						    その他
+						<% end %>
 
+					</td>
+				</tr>
+				<!-- 登録日 -->
+				<tr>
+					<th>登録日 :</th>
+					<td><%= @product.pro_date %></td>
+				</tr>
 
-<!-- ジャンル名 -->
-<% if @product.pro_genre_id == 1 %>
-genre : J-POP<br>
+				<!-- 在庫状況 -->
+				<tr>
+					<th>在庫状況 :</th>
+					<td>ステータスで表示（未実装）</td>
+				</tr>
 
-<% elsif @product.pro_genre_id == 2 %>
-genre : K-POP<br>
+				<!-- レビュー数/レビュースター数 -->
+				<tr>
+					<th>レビュー :</th>
+					<td>レビュー数と星を表示（未処理）</td>
+				</tr>
+				<!-- リンクボタン -->
+				<tr>
+					<th></th>
+					<td colspan="3">
+						<!-- - - -  管理者 - - - -->
+						<%if user_signed_in? && current_user.manager == true %>
+						    <%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
+						    <%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info btn-xs"%>
+						<!-- - - - ログイン済会員 - - - -->
+						<% elsif user_signed_in? && current_user.manager == false %>
+						    <%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>
+						    <p>
+							    注文数<%= f.number_field :amount,min:"1",max:"50" %>個  :
+							    <%= f.submit "カートへ入れる" , class: "btn btn-warning btn-xs" %>    /
+							    <%= link_to "  他の商品を見る",root_path, class: "btn btn-info btn-xs" %>
+						    </p>
+						<% end %>
+						<!-- - - - 未ログイン会員 - - - -->
+						<% else %>
+						    <%= link_to "ログインしてカートへ入れる", user_session_path ,class: "btn btn-info btn-xs" %>
+						<% end %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-<% else %>
-genre : その他<br>
-
-<% end %>
-
-
-<!-- 登録日 -->
-date : <%= @product.pro_date %><br>
-
-
-<!-- レーベル名 -->
-<% if @product.pro_label_id == 1 %>
-label : エイベックス<br>
-
-<% elsif @product.pro_label_id == 2 %>
-label : ユニバーサル・ミュージック<br>
-
-<% else %>
-label : その他<br>
-
-<% end %>
-
-
-<!-- アーティスト名 -->
-artist : <%= @product.pro_artist %><br><br>
-
-
-
-
-
-<%if user_signed_in? && current_user.manager == true %>
-<%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
-<% end %>
-
-<!-- --------------------------11/15 松下追記/編集したよ-------------------------------------- -->
-
-<% if user_signed_in?  %>
-    <%= form_for @cart_item ,url:product_cart_items_path(@product) do |f| %>
-
-        <!--------- 注文数の制限を後でかける。在庫から減るような処理をする。 --------------->
-		<p>
-			注文数<%= f.number_field :amount,min:"1",max:"50" %>個  / 
-			<%= f.submit "カートへ入れる" , class: "btn btn-warning btn-sm" %> 
-		</p>
-    <% end %>
-
-<% else %>
-
-    <%= link_to "ログインしてカートへ入れる", user_session_path %>
-
-<% end %>
-
+	</div>
+<!-- - - - - - - -- -  - - - - - - - - - - - - 下記レビュー欄 - - - - - - - - - - - - - - - - - - - -->
+	<div class="reviews">
+		<h3 class="glyphicon glyphicon-comment"> 商品レビュー</h3>
+	</div>
+<table class="table table-hover">
+	<thead>
+		<th></th>
+		<%if user_signed_in? && current_user.manager == true %>
+			<th></th>
+			<th></th>
+			<th></th>
+		<% end %>
+	</thead>
+	<tbody>
+		<tr>
+			<% @review.each do |review| %>
+				<td><%= review.review_star %><br><%= review.review_body %></td>
+				<% if user_signed_in? && current_user.manager == true %>
+					<td>
+						<% if review.review_status == true %>
+							<p>公開中</p>
+						<% else %>
+							<p>非公開中</p>
+						<% end %>
+					</td>
+					<%= form_for (@review) do |f| %>
+						<td><% f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
+					<% end %>
+					<td><% link_to '会員情報確認', user_path(review.user_id)%></td>
+				<% end %>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+</div>

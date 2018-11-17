@@ -11,14 +11,9 @@ class UsersController < ApplicationController
 		@purchases = User.find(params[:id]).purchases.all
 	end
 
-	def create
-		@user = User.find(user_params)
-	end
-
 	def update
 		@user = User.find(params[:id])
-		binding.pry
-		if @user.update(user_params)
+		if @user.update!(user_params)
 			redirect_to user_path(@user.id), notice: 'Profile was successfully updated!!'
 		else
 			render :edit
@@ -30,13 +25,15 @@ class UsersController < ApplicationController
 	end
 
 	def release
-		user = User.new(user_status: :release)
-		user.release? # => releaseがfalse
+		user = User.find(params[:id])
+		user.release! unless user.release? # => releaseがfalse
+		redirect_to users_path
 	end
 
 	def nonrelease
-		user = User.new(user_status: :nonrelease)
-		user.release? # => nonreleaseがfalse
+		user = User.find(params[:id])
+		user.nonrelease! unless user.release? # => nonreleaseがfalse
+		redirect_to users_path
 	end
 
 	def passchange
