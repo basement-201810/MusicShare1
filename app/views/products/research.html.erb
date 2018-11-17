@@ -1,1 +1,39 @@
-<h2> Research </h2>
+<h2 class="page-title">検索結果一覧ページ</h2>
+
+<div class="pro_genre-index clearfix">
+
+	<div class="pro_genre-index-sidebar">
+		<div class="pro_genre-index-sidebar-box">
+
+
+			<nav class="navbar navbar-light bg-light">
+				<div class="form-inline">
+					<%= search_form_for @search, url: research_products_path do |f| %>
+					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+					<% end %>
+				</div>
+			</nav>
+
+
+
+			<% @genres.each do |genre| %>
+			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
+			<% end %>
+		</div>
+	</div>
+
+
+	<div class="pro_genre-index-main">
+
+
+		<h3>検索ワード</h3>
+		<h3>「<%= @search.pro_title_or_pro_artist_cont %>」</h3>
+
+		<% @products.each do |product| %>
+		<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %><%= product.pro_artist %><br>
+		<% end %>
+
+	</div>
+</div>
+

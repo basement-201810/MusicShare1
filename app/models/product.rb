@@ -8,5 +8,7 @@ class Product < ApplicationRecord
 	has_many :cart_items
 	enum pro_status: {release: true, nonrelease: false}
 
+	accepts_nested_attributes_for :musics
+
 end
 
