@@ -62,20 +62,22 @@
 					<th></th>
 				</thead>
 
-				<tbody>
-					<tr>
-						<% @purchases.each do |purchase| %>   <!--購入履歴一覧 -->
-							<td>
-								<%= purchase.date.year %> 年
-								<%= purchase.date.month %> 月
-								<%= purchase.date.day %> 日
-							</td>
-							<td><%= purchase.pur_total%></td>
-							<td>ステータス</td>
-						<% end %>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+
+		<tbody>
+			<tr>
+				<% @purchases.each do |purchase| %>   <!--購入履歴一覧 -->
+					<td>
+						<%= purchase.date.year %> 年
+						<%= purchase.date.month %> 月
+						<%= purchase.date.day %> 日
+					</td>
+					<td><%= purchase.pur_total%></td>
+					<td><%= purchase.status %></td>
+					<td><%= link_to "show",purchase_purchase_items_path(purchase.id),class: "btn btn-info" %></td>
+				<% end %>
+			</tr>
+		</tbody>
+	</table>
+  </div>
+ </div>
 </div>

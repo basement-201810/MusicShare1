@@ -1,5 +1,4 @@
-<h1>PurchaseItems#index</h1>
-<p>購入履歴詳細画面</p>
+<h1>購入履歴詳細画面</h1>
 
 <h1>
 	<%= @purchase.date.year %> 年
@@ -7,15 +6,41 @@
 	<%= @purchase.date.day %> 日　購入分
 </h1>
 
-<% @purchase_items.each do |purchase_item| %>
- 	<p>id = [<%= purchase_item.id %>]</p>
- 	<p>purchase_id = [<%= purchase_item.purchase_id %>]</p>
- 	<p>cart_item_id = [purchase_item.cart_item_id%>]</p>
- 	<p>amount = [purchase_item.amount %>]</p>
- 	<p>sub_total = [<%= purchase_item.sub_total %>]</p>
-
- 	
+<% @cart_items.each do |cart_item| %>
+	<p>ジャケ写</p>
+	<p><%= cart_item.product.pro_title %></p>
+	<p><%= cart_item.product.pro_artist %></p>
+	<p>数量 = <%= cart_item.amount %></p>
+	<p>単価 = <%= cart_item.sub_total / cart_item.amount %></p>
+	<p>合計 = <%= cart_item.sub_total %></p>
+	<p>---------------------------------</p>
 
 <% end %>
 
-<%= @product.title %>
+
+
+
+
+
+
+
+
+<!--  メモ
+<% @purchase_items.each do |purchase_item| %>
+ 	<p>数量 = [<%= purchase_item.amount %>]</p>
+ 	<p>単価 = [<%= purchase_item.sub_total / purchase_item.amount %>]</p>
+ 	<p>合計 = [<%= purchase_item.sub_total %>]</p>
+
+<% end %>  -->
+
+
+
+<!--  メモ
+<% @purchase_items.each do |purchase_item| %>
+ 	<p>id = [<%= purchase_item.id %>]</p>
+ 	<p>purchase_id = [<%= purchase_item.purchase_id %>]</p>
+ 	<p>cart_item_id = [<%= purchase_item.cart_item_id%>]</p>
+ 	<p>amount = [<%= purchase_item.amount %>]</p>
+ 	<p>sub_total = [<%= purchase_item.sub_total %>]</p>
+
+<% end %>  -->

@@ -37,4 +37,6 @@ Rails.application.routes.draw do
   # get '/pro_genres/research' => 'pro_genres#research'
   get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
 
+  get '/purchases/new/arigatou' =>'purchases#arigatou', as: 'arigatou'
+
 end
