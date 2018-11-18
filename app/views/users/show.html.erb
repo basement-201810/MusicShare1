@@ -2,7 +2,6 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
-			<p><%= flash.notice %></p>
 			<h2>user info</h2>
 			<table class="table tabel-hover">
 				<tbody>
@@ -35,11 +34,15 @@
 							<td>備考</td>
 							<td><%= @user.memo %></td>
 						</tr>
+						<tr>
+							<td>ステータス</td>
+							<td><%= @user.user_status %></td>
+						</tr>
 					<% end %>
 				</tbody>
 			</table>
 			<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
-			<%= link_to "退会", "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+			<%= link_to "退会", root_path, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
 		</div>
 	</div>
 </div>

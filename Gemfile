@@ -70,6 +70,7 @@ gem 'rails-i18n'
 gem 'ransack'
 gem 'rails4-autocomplete'
 gem 'pry-rails'
+gem 'nested_form_fields'
 
 
 
