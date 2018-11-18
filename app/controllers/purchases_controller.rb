@@ -1,6 +1,5 @@
 class PurchasesController < ApplicationController
 	def new
-		@cart = current_user.carts.last
 		@purchase = Purchase.new
 		@cart = current_user.carts.last
 		@cart_items = CartItem.where(cart_id: @cart.id)
