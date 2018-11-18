@@ -38,7 +38,9 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-		@review = Review.all
+		@reviews = Review.all
+		@review = Review.group(:product_id).average(:review_star)
+		@count_reviews = @product.reviews.count
 		@music = Music.where(product_id:@product.id)
 
 # ----------------------cart_item#createのための変数-------------
