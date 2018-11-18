@@ -9,7 +9,7 @@
 <h4>ジャケット画像</h4>
 <%= f.attachment_field :pro_image %>
 
-<h4>値段 : <%= f.text_field :pro_price %></h4>
+<h4>値段 : <%= f.text_field :pro_price %>円</h4>
 
 
 <h4>レーベル名 : <%= f.select :pro_label_id, [["エイベックス", "1"],["ユニバーサル・ミュージック","2"],["ワーナーミュージック・ジャパン","3"],["ソニー・ミュージックエンターテインメント","4"],["ウルトラ・ミュージック","5"],["アルマダ・ミュージック","6"],["モンスターキャット","7"],["flying DOG","8"],["SAKURA MUSIC","9"],["TOHO animation RECORD","10"],["ランティス","11"],["ANIMEX","12"],["バップ","13"],["その他","14"]] %></h4>
@@ -18,11 +18,7 @@
 <h4>ジャンル : <%= f.select :pro_genre_id, [["J-POP", "1"],["K-POP","2"],["アイドル","3"],["童謡","4"],["Rock","5"],["EDM","6"],["Dance","7"],["Alternative","8"],["RAP/HIP-HOP","9"],["アニソン","10"],["Jazz","11"],["その他","12"]] %></h4>
 
 
-<h4>ディスク : </h4>
-
-<h4>シングル / アルバム内の曲名 : </h4>
-
-<h4>登録日 : <%= f.datetime_select :pro_date %></h4>
+<h4>登録日 : <%= f.datetime_select :pro_date, :use_month_numbers => true, :discard_hour => true, :discard_minute => true %></h4>
 
 
 <h4>公開 / 非公開ステータス : <%= f.select :pro_status, [["公開", "release"],["非公開","nonrelease"]] %></h4>
@@ -32,11 +28,28 @@
 
 
 
-<%= f.submit "編集", class:"btn btn-default btn-xs active" %><br><br>
-
+<table class="table table-striped table-bordered table-hover table-condensed">
+	<tbody>
+		<tr>
+			<th class="col-xs-2">ディスクナンバー</th>
+			<th class="col-xs-2">ミュージックナンバー</th>
+			<th class="col-xs-7">曲名</th>
+			<th class="col-xs-1">アクション</th>
+		</tr>
+		<%= f.nested_fields_for :musics, wrapper_tag: :tr do |b| %>
+            <td><%= b.text_field :music_disk_number, class:"form-control", value:"1" %></td>
+            <td><%= b.text_field :music_number, class:"form-control" %></td>
+            <td><%= b.text_field :music_name, class:"form-control" %></td>
+            <td><%= b.remove_nested_fields_link "Delete", class:"btn btn-danger", role:"button" %></td>
+        <% end %>
+    </tbody>
+</table>
+<%= f.add_nested_fields_link :musics, "Add new", class:"btn btn-primary", role:"button" %>
 
 <br><br>
 
-<%= link_to "商品一覧画面", products_path %>
+<%= f.submit "編集", class:"btn btn-default active" %>
+
+<%= link_to "戻る", products_path, class:"btn btn-default active" %>
 
 <% end %>
