@@ -14,4 +14,5 @@ class User < ApplicationRecord
   validates :address, presence: :true
   validates :post_code, presence: :true, length: { maximum: 10 }
   validates :tell, presence: :true, uniqueness: true #電話番号は同じものは登録できません
+  paginates_per 5
 end

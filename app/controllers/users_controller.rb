@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.all
+		@users_k = User.order(:user_id).page(params[:page]) #userのkaminari gem 適応箇所
 		@user = User.find(current_user.id)
 	end
 

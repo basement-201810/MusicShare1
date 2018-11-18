@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
 	attachment :pro_image
-	has_many :musics
+	has_many :musics, dependent: :destroy
+	accepts_nested_attributes_for :musics, allow_destroy: true
 	# has_many :carts
 	has_many :reviews
 	belongs_to :pro_label

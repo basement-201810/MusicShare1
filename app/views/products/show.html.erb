@@ -27,11 +27,29 @@
 					<th>ジャンル :</th>
 					<td>
 						<% if @product.pro_genre_id == 1 %>
-						    J-POP
+						J-POP
 						<% elsif @product.pro_genre_id == 2 %>
-						    K-POP
+						K-POP
+						<% elsif @product.pro_genre_id == 3 %>
+						アイドル
+						<% elsif @product.pro_genre_id == 4 %>
+						童謡
+						<% elsif @product.pro_genre_id == 5 %>
+						Rock
+						<% elsif @product.pro_genre_id == 6 %>
+						EDM
+						<% elsif @product.pro_genre_id == 7 %>
+						Dance
+						<% elsif @product.pro_genre_id == 8 %>
+						Alternative
+						<% elsif @product.pro_genre_id == 9 %>
+						RAP/HIP-HOP
+						<% elsif @product.pro_genre_id == 10 %>
+						アニソン
+						<% elsif @product.pro_genre_id == 11 %>
+						Jazz
 						<% else %>
-						    その他
+						その他
 						<% end %>
 					</td>
 				</tr>
@@ -40,11 +58,33 @@
 					<th>レーベル :</th>
 					<td>
 						<% if @product.pro_label_id == 1 %>
-						    エイベックス
+						エイベックス
 						<% elsif @product.pro_label_id == 2 %>
-						    ユニバーサル・ミュージック
+						ユニバーサル・ミュージック
+						<% elsif @product.pro_label_id == 3 %>
+						ワーナーミュージック・ジャパン
+						<% elsif @product.pro_label_id == 4 %>
+						ソニー・ミュージックエンターテインメント
+						<% elsif @product.pro_label_id == 5 %>
+						ウルトラ・ミュージック
+						<% elsif @product.pro_label_id == 6 %>
+						アルマダ・ミュージック
+						<% elsif @product.pro_label_id == 7 %>
+						モンスターキャット
+						<% elsif @product.pro_label_id == 8 %>
+						flying DOG
+						<% elsif @product.pro_label_id == 9 %>
+						SAKURA MUSIC
+						<% elsif @product.pro_label_id == 10 %>
+						TOHO animation RECORD
+						<% elsif @product.pro_label_id == 11 %>
+						ランティス
+						<% elsif @product.pro_label_id == 12 %>
+						ANIMEX
+						<% elsif @product.pro_label_id == 13 %>
+						バップ
 						<% else %>
-						    その他
+						その他
 						<% end %>
 
 					</td>
@@ -72,16 +112,33 @@
 				<!-- レビュー数/レビュースター数 -->
 				<tr>
 					<th>レビュー :</th>
-					<td>レビュー数と星を表示（未処理）</td>
+					<td>
+						<p>平均 星<%= @review %>: レビュー数<%= @count_reviews %></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+					</td>
 				</tr>
+
+				<tr>
+					<th>曲リスト :</th>
+					<td>
+						<% @music.each do |f| %>
+						<%= f.music_number %>.<%= f.music_name %>
+						<% end %>
+					</td>
+				</tr>
+
 				<!-- リンクボタン -->
 				<tr>
 					<th></th>
 					<td colspan="3">
 						<!-- - - -  管理者 - - - -->
 						<%if user_signed_in? && current_user.manager == true %>
-						    <%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
-						    <%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info btn-xs"%>
+						<%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
+						<%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info btn-xs"%>
 						<!-- - - - ログイン済会員 - - - -->
 						<% elsif user_signed_in? && current_user.manager == false %>
 						    <%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>
@@ -93,7 +150,7 @@
 						<% end %>
 						<!-- - - - 未ログイン会員 - - - -->
 						<% else %>
-						    <%= link_to "ログインしてカートへ入れる", user_session_path ,class: "btn btn-info btn-xs" %>
+						<%= link_to "ログインしてカートへ入れる", user_session_path ,class: "btn btn-info btn-xs" %>
 						<% end %>
 					</td>
 				</tr>
@@ -101,38 +158,62 @@
 		</table>
 
 	</div>
-<!-- - - - - - - -- -  - - - - - - - - - - - - 下記レビュー欄 - - - - - - - - - - - - - - - - - - - -->
+	<!-- - - - - - - -- -  - - - - - - - - - - - - 下記レビュー欄 - - - - - - - - - - - - - - - - - - - -->
 	<div class="reviews">
 		<h3 class="glyphicon glyphicon-comment"> 商品レビュー</h3>
 	</div>
-<table class="table table-hover">
-	<thead>
-		<th></th>
-		<%if user_signed_in? && current_user.manager == true %>
+	<table class="table table-hover">
+		<thead>
+			<th></th>
+			<%if user_signed_in? && current_user.manager == true %>
 			<th></th>
 			<th></th>
 			<th></th>
-		<% end %>
-	</thead>
-	<tbody>
-		<tr>
-			<% @review.each do |review| %>
-				<td><%= review.review_star %><br><%= review.review_body %></td>
-				<% if user_signed_in? && current_user.manager == true %>
-					<td>
-						<% if review.review_status == true %>
-							<p>公開中</p>
-						<% else %>
-							<p>非公開中</p>
-						<% end %>
-					</td>
-					<%= form_for (@review) do |f| %>
-						<td><% f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
-					<% end %>
-					<td><% link_to '会員情報確認', user_path(review.user_id)%></td>
-				<% end %>
 			<% end %>
-		</tr>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			<tr>
+				<% @reviews.each do |review| %>
+				<td><% review_star.rating.to_i.times do %>
+						<span class="glyphicon glyphicon-star"></span>
+						<form>
+							<fieldset class="starability-growRotate">
+								<legend>Basic star rating:</legend>
+
+								<input type="radio" id="rate5" name="string" value="5" /><br>
+								<label for="rate5" title="Amazing">5 stars</label><br>
+
+								<input type="radio" id="rate4" name="string" value="4" /><br>
+								<label for="rate4" title="Very good">4 stars</label><br>
+
+								<input type="radio" id="rate3" name="string" value="3" /><br>
+								<label for ="rate3" title="Average">3 stars</label><br>
+
+								<input type="radio" id="rate2" name="string" value="2" /><br>
+								<label for="rate2" title="Not good">2 stars</label><br>
+
+								<input type="radio" id="rate1" name="string" value="1" /><br>
+								<label for="rate1" title="Terrible">1 stars</label><br>
+							</fieldset>
+						</form>
+					<% end %><br>
+					<%= review.review_body %>
+				</td>
+				<% if user_signed_in? && current_user.manager == true %>
+				<td>
+					<% if review.review_status == true %>
+					<p>公開中</p>
+					<% else %>
+					<p>非公開中</p>
+					<% end %>
+				</td>
+				<%= form_for (@review) do |f| %>
+				<td><% f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
+				<% end %>
+				<td><% link_to '会員情報確認', user_path(review.user_id)%></td>
+				<% end %>
+				<% end %>
+			</tr>
+		</tbody>
+	</table>
 </div>

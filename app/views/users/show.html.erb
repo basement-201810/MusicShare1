@@ -2,7 +2,6 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
-			<p><%= flash.notice %></p>
 			<h2>user info</h2>
 			<table class="table tabel-hover">
 				<tbody>
@@ -35,14 +34,21 @@
 							<td>備考</td>
 							<td><%= @user.memo %></td>
 						</tr>
+						<tr>
+							<td>ステータス</td>
+							<td><%= @user.user_status %></td>
+						</tr>
 					<% end %>
 				</tbody>
 			</table>
 			<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
-			<%= link_to "退会", "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+			<%= link_to "退会", root_path, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
 		</div>
 	</div>
 </div>
+
+<!--    購入履歴一覧    -->
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-1"></div>
@@ -53,9 +59,7 @@
 					<th>購入日時</th>
 					<th>購入金額</th>
 					<th>
-						<% if current_user.manager == false %>
-							-
-						<% else %>
+						<% if current_user.manager %>
 							ステータス
 						<% end %>
 					</th>
@@ -63,21 +67,25 @@
 				</thead>
 
 
-		<tbody>
-			<tr>
-				<% @purchases.each do |purchase| %>   <!--購入履歴一覧 -->
-					<td>
-						<%= purchase.date.year %> 年
-						<%= purchase.date.month %> 月
-						<%= purchase.date.day %> 日
-					</td>
-					<td><%= purchase.pur_total%></td>
-					<td><%= purchase.status %></td>
-					<td><%= link_to "show",purchase_purchase_items_path(purchase.id),class: "btn btn-info" %></td>
-				<% end %>
-			</tr>
-		</tbody>
-	</table>
-  </div>
- </div>
+				<tbody>
+					<% @purchases.each do |purchase| %>
+						 <tr>
+							<td>
+								<%= purchase.date.year %> 年
+								<%= purchase.date.month %> 月
+								<%= purchase.date.day %> 日
+							</td>
+							<td><%= purchase.pur_total%></td>
+							<td>
+								<% if current_user.manager %>
+									<%= purchase.status %>
+								<% end %>
+							</td>
+							<td><%= link_to "show",purchase_purchase_items_path(purchase.id),class: "btn btn-info" %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+  		</div>
+ 	</div>
 </div>

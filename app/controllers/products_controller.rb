@@ -47,8 +47,12 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-		@review = Review.all
-# ---------------------cart_item#createのための変数-------------
+		@reviews = Review.all
+		@review = Review.group(:product_id).average(:review_star)
+		@count_reviews = @product.reviews.count
+		@music = Music.where(product_id:@product.id)
+
+# ----------------------cart_item#createのための変数-------------
 		@cart = Cart.find_or_create_by(user_id: @user)
 		@cart_item = @cart.cart_items.new
 # -------------------------------------------------------------
@@ -70,7 +74,7 @@ class ProductsController < ApplicationController
 
 	private
 	def product_params
-			params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:music_name, :music_disk_number, :product_id, :music_number])
+			params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:id, :music_name, :music_disk_number, :product_id, :music_number, :_destroy])
 	end
 
 

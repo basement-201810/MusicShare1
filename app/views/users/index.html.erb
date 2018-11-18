@@ -1,19 +1,33 @@
-<h1>User一覧</h1>
-<table class="table table-hover">
-	<tbody>
-		<% @users.each do |user| %>
-			<tr>
-				<td><%= user.name %></td>
-				<td></td>
-				<td>
-					<% if user.user_status == "release" %>
-						<p>公開中</p>
-					<% else %>
-						<p>非公開中</p>
-					<% end %>
-				</td>
-				<td><%= link_to "会員詳細へ", user, class: "btn btn-success" %></td>
-			</tr>
-		<% end %>
-	</tbody>
-</table>
+<div class="container">
+	<div class="row">
+		<h1>User一覧</h1>
+		<table class="table table-hover">
+			<thead>
+				<th>user name</th>
+				<th></th>
+				<th>status</th>
+				<th>memo</th>
+				<th></th>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= user.name %></td>
+						<td></td>
+						<td>
+							<% if user.user_status == "release" %>
+								<p>公開中</p>
+							<% else %>
+								<p>非公開中</p>
+							<% end %>
+						</td>
+						<td><%= user.memo %></td>
+						<td><%= link_to "会員詳細へ", user, class: "btn btn-success" %></td>
+					</tr>
+				<% end %>
+				<hr />
+				<%= paginate @users_k %>
+			</tbody>
+		</table>
+	</div>
+</div>
