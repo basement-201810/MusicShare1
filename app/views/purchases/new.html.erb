@@ -4,22 +4,37 @@
 
 <%= form_for(@purchase) do |f| %>
 	<p>名前：<%= f.text_field :pur_name, :value => "#{current_user.name}" %></p>
-	<p>名前kana：<%= f.text_field :pur_name_kana, :value => "#{current_user.name_kana}" %></p>
 	<p>住所：<%= f.text_area :pur_address, :value => "#{current_user.address}" %></p>
 	<p>郵便番号：<%= f.text_field :pur_post_code, :value => "#{current_user.post_code}" %></p>
 	<p>電話番号：<%= f.text_field :pur_tell, :value => "#{current_user.tell}" %></p>
-	<p><%= f.text_field :date, :value => "#{current_user.created_at}" %></p>
-	<p><%= f.text_field :cart_id, :value => "#{@cart.id}" %></p>
-	<p><%= f.text_field :pur_total, :value => "55555" %></p>
-	<p><%= f.hidden_field :pur_email, :value => "#{current_user.email}" %></p>
+	<%= f.hidden_field :pur_name_kana, :value => "#{current_user.name_kana}" %>
+	<%= f.hidden_field :pur_email, :value => "#{current_user.email}" %>
+	<%= f.hidden_field :date, :value => "#{Time.now}" %>
+	<%= f.hidden_field :cart_id, :value => "#{@cart.id}" %>
+	<%= f.hidden_field :pur_total, :value => "#{@cart.sub_total}" %>
 
 
 	<p style="font-size: 25px;">支払い方法選択欄</p>
+
+
 	<p>注文商品合計価格：<%= @cart.sub_total %>円</p>
 	<p>ポイント使用：<%= f.text_field :pay_points, :size => "5", :type => "tel" ,:maxlength => "5", :value => "0" %>pt</p>
 	<p>(利用可能ポイント：<%= current_user.point %>pt)</p>
 	<p>お支払い合計金額</p>
 	<p>支払い方法：<%= f.text_field :pay %></p>
+
+
+	<%= @cart_items.each do |cart_item| %>
+
+		<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
+
+			<%= purchase_item.hidden_field :cart_item_id,:value  => "#{cart_item.id}" %>
+			<%= purchase_item.hidden_field :sub_total,:value  => "#{cart_item.sub_total}" %>
+			<%= purchase_item.hidden_field :amount,:value  => "#{cart_item.amount}" %>
+
+		<% end %>
+	
+	<% end %>
 
 
 	<%= f.submit "注文確定", class: "btn btn-primary"%>
