@@ -1,4 +1,5 @@
 <div class="container">
+
 	<h3 class="glyphicon glyphicon-headphones"> 商品詳細情報</h3>
 
 	<div class="pro_info">
@@ -90,14 +91,22 @@
 				</tr>
 				<!-- 登録日 -->
 				<tr>
-					<th>登録日 :</th>
-					<td><%= @product.pro_date %></td>
+					<th>情報更新日 :</th>
+					<td><%= @product.pro_date.strftime('%Y年%m月%d日') %></td>
 				</tr>
 
 				<!-- 在庫状況 -->
 				<tr>
 					<th>在庫状況 :</th>
-					<td>ステータスで表示（未実装）</td>
+					<td>
+						<% if @product.pro_amount >= 11 then%>
+					        <span class="pro_amount_atatus">在庫あり</span>
+					    <% elsif @product.pro_amount <= 10 && @product.pro_amount >= 1 then %>
+					        <span class="pro_amount_atatus">＊残りわずか＊</span>
+					    <% elsif @product.pro_amount = 0 then  %>
+					        <span class="pro_amount_atatus">＊＊SoldOut＊＊</span>
+					    <%end%>
+					</td>
 				</tr>
 
 				<!-- レビュー数/レビュースター数 -->
@@ -132,12 +141,12 @@
 						<%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info btn-xs"%>
 						<!-- - - - ログイン済会員 - - - -->
 						<% elsif user_signed_in? && current_user.manager == false %>
-						<%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>
-						<p>
-							注文数<%= f.number_field :amount,min:"1",max:"50" %>個  :
-							<%= f.submit "カートへ入れる" , class: "btn btn-warning btn-xs" %>    /
-							<%= link_to "  他の商品を見る",root_path, class: "btn btn-info btn-xs" %>
-						</p>
+						    <%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>
+						    <p>
+							    注文数<%= f.number_field :amount,min:"1",max:"100" %>個  :
+							    <%= f.submit "カートへ入れる" , class: "btn btn-warning btn-xs" %>    /
+							    <%= link_to "  他の商品を見る",root_path, class: "btn btn-info btn-xs" %>
+						    </p>
 						<% end %>
 						<!-- - - - 未ログイン会員 - - - -->
 						<% else %>

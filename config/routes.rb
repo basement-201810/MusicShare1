@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   	resources :purchase_items, only: [:index]
   end
 
-# cart_itemに[:create,:update,:index,:action]追記
-  resources :carts, except: [:destroy, :index] do
-  	resources :cart_items, except: [:show,:create,:update,:index,:action]
-  end
+# do以下コメントアウト
+ resources :carts, only:[:show]  #except: [:destroy, :index] do
+  # 	resources :cart_items, except: [:show,:create,:update,:index,:action]
+  # end
 
   resources :pro_genres, only: [:show] do
   	resources :products, only: [:show, :edit, :update]do
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
 # do以下を追記
   resources :products, only: [:index, :new, :create] do
-    resources :cart_items, only: [:create,:update]
+    resources :cart_items, only: [:create,:update,:destroy]
   end
 
   resources :products do
@@ -38,5 +38,6 @@ Rails.application.routes.draw do
   get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
 
   get '/purchases/new/arigatou' =>'purchases#arigatou', as: 'arigatou'
+
 
 end
