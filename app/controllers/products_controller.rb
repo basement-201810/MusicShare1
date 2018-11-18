@@ -38,7 +38,9 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-		@review = Review.all
+		@reviews = Review.all
+		@review = Review.group(:product_id).average(:review_star)
+		@count_reviews = @product.reviews.count
 
 # ----------------------cart_item#createのための変数-------------
 		@cart = Cart.find_or_create_by(user_id: @user)

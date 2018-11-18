@@ -20,10 +20,10 @@
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? && current_user.manager == false %>
               <li>
-                <%= link_to current_user.name, user_path(current_user), class: "btn" %> <!-- @user.name => current_user.name に変更　-->
+                <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %> <!-- @user.name => current_user.name に変更　-->
               </li>
               <li>
-                <%= link_to "cart", cart_path(current_user.carts), class: "glyphicon glyphicon-cart carts" %> <!-- new_cart_path =>  cart_path(current_user.carts)に変更　-->
+                <%= link_to "cart", cart_path(current_user.carts), class: "glyphicon glyphicon-shopping-cart carts" %> <!-- new_cart_path =>  cart_path(current_user.carts)に変更　-->
               </li>
               <li>
                 <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
