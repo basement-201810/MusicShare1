@@ -1,4 +1,13 @@
 class ProductsController < ApplicationController
+
+	# before_action :sum_amount
+	# def sum_amount
+	# 	cart_items = CartItem.where(product_id: product_id).select(:amount)
+	# 	product.pro_amount -= cart_items.sum {|cart_item| cart_item.amount}
+	# 	product.save
+	# end
+
+
 	def index
 		@products = Product.all
 		@user = current_user
@@ -39,8 +48,7 @@ class ProductsController < ApplicationController
 		@product = Product.find(params[:id])
 		@user = current_user
 		@review = Review.all
-
-# ----------------------cart_item#createのための変数-------------
+# ---------------------cart_item#createのための変数-------------
 		@cart = Cart.find_or_create_by(user_id: @user)
 		@cart_item = @cart.cart_items.new
 # -------------------------------------------------------------

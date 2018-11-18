@@ -7,6 +7,7 @@
 	<!-- サクセスメッセージ -->
 	<p id="notice"><%= notice %></p>
 
+
 	<!-- ステータスメッセージ -->
 	<% if @cart_items.empty? %>
 	    <p>※ 現在カート内に商品はありません ※</p>
@@ -39,7 +40,7 @@
 				<%= form_for cart_item, url:product_cart_item_path(cart_item.product,cart_item) do |f| %>
 				<td>
 					<!-- 注文数の制限を後でかける。在庫から減るような処理をする。 ------>
-					注文数<%= f.number_field :amount,min:"1",max:"50" %>個
+					注文数<%= f.number_field :amount, min:"1",max:"100" %>個
 					<%= f.submit "変更", class: "btn btn-default btn-xs"%>
 				</td>
 				<% end %>
@@ -50,7 +51,7 @@
 					</strong>
 				</td>
 				<td colspan="2">
-					<%= link_to "削除", cart_cart_item_path(cart_item.cart,cart_item),method: :delete,
+					<%= link_to "削除", product_cart_item_path(cart_item.product,cart_item),method: :delete,
 					"data-confirm" => "カート内から削除しますか？" , class: "btn btn-default btn-xs" %>
 				</td>
 			</tr>
@@ -80,7 +81,7 @@
 	    	<p class="col-md-4">
 			    /  注文合計金額:
 			    <strong>
-			    	<%= number_to_currency((@cart.sub_total).to_i , :unit => "￥",:precision => 0)  %>
+			    	<%= number_to_currency((@cart.total).to_i , :unit => "￥",:precision => 0)  %>
 			    </strong>
 			</p>
 		</div>
