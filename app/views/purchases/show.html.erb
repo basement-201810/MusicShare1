@@ -6,7 +6,7 @@
 			<h1>
 				<%= @purchase.date.year %> 年
 				<%= @purchase.date.month %> 月
-				<%= @purchase.date.day %> 日　購入分
+				<%= @purchase.date.day %> 日　購入分     ←@cart_itemから引っ張ったやつ　値下げが反映される
 			</h1>
 			<table class="table table-hover">
 				<thead>
@@ -23,7 +23,7 @@
 				<tbody>
 					<% @cart_items.each do |cart_item| %>
 						<tr>
-							<td>ジャケ写</td>
+							<td><%= attachment_image_tag cart_item.product, :pro_image, size: "50x50", fallback: "no-image_rocket.png"%></td>
 							<td><%= cart_item.product.pro_title %></td>
 							<td><%= cart_item.product.pro_artist %></td>
 							<td><%= cart_item.amount %></td>
@@ -45,7 +45,7 @@
 			<h1>
 				<%= @purchase.date.year %> 年
 				<%= @purchase.date.month %> 月
-				<%= @purchase.date.day %> 日　購入分
+				<%= @purchase.date.day %> 日　購入分　　　　←@purchase_itemから引っ張ってきたやつ　値下げは反映されない　商品名アーティスト名持ってこれない
 			</h1>
 			<table class="table table-hover">
 				<thead>
@@ -70,22 +70,17 @@
  	</div>
 </div>
 
-<%= form_for(@purchase) do |f| %>
-	<p>ステータス変更　<%= f.select :status, Purchase.statuses.keys.to_a, class:"form-control" %></p>
-<% end %>
+<%#
+<% if current_user.manager %>
+	<%= form_for @purchase, url: purchase_path do |f| %>
+		<p>ステータス　<%= f.select :status, Purchase.statuses.keys, class:"form-control" %></p>
+
+		<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
+	<% end %>
+<%# <% end %>
 
 
 
-
-<textarea id="mytext"></textarea>
-
-<select id="dropdown">
-    <option value="">None</option>
-    <option value="text1">text1</option>
-    <option value="text2">text2</option>
-    <option value="text3">text3</option>
-    <option value="text4">text4</option>
-</select>
 
 
 

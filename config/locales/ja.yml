@@ -1,0 +1,7 @@
+ja:
+  enums:
+    purchase:
+      status:
+        untreated: 男性
+        prepare: 女性
+        sent: あああ

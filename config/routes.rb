@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users, except: [:destroy, :new]
 
-  resources :purchases, only: [:new,:create,:index, :show] do
-  	resources :purchase_items, only: [:index]
+  resources :purchases, only: [:new,:create,:index, :show, :update] do
+#  	resources :purchase_items, only: [:index]
+    patch :untreat
+    patch :prepare
+    patch :sent
   end
 
 # do以下コメントアウト
@@ -30,14 +33,18 @@ Rails.application.routes.draw do
     end
   end
 
+  
+#    root 'purchases#index'
+#    root 'pro_genres#index'
 
-  root 'pro_genres#index'
+  get '/' => 'purchases#index', :constraints => ManagerChecker, as: 'admin_root'
+  get '/' => 'pro_genres#index', as: 'root'
+
   # get  '/products/index' => 'products#index' #管理者用のindex
 
   # get '/pro_genres/research' => 'pro_genres#research'
   get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
 
   get '/purchases/new/arigatou' =>'purchases#arigatou', as: 'arigatou'
-
 
 end
