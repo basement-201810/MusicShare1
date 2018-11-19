@@ -11,16 +11,19 @@
 	<%= f.hidden_field :pur_email, :value => "#{current_user.email}" %>
 	<%= f.hidden_field :date, :value => "#{Time.now}" %>
 	<%= f.hidden_field :cart_id, :value => "#{@cart.id}" %>
-	<%= f.hidden_field :pur_total, :value => "#{@cart.sub_total}" %>
+	<%= f.hidden_field :pur_total, :value => "#{@cart.total}" %>
+	<%= f.hidden_field :get_points, :value => "#{(@cart.total * 0.1).floor}" %>
+
 
 
 	<p style="font-size: 25px;">支払い方法選択欄</p>
 
 
-	<p>注文商品合計価格：<%= @cart.sub_total %>円</p>
+	<p>注文商品合計価格：<%= @cart.total %>円</p>
 	<p>ポイント使用：<%= f.text_field :pay_points, :size => "5", :type => "tel" ,:maxlength => "5", :value => "0" %>pt</p>
 	<p>(利用可能ポイント：<%= current_user.point %>pt)</p>
 	<p>お支払い合計金額</p>
+	<p>この購入での獲得ポイント：<%= (@cart.total * 0.1).floor %>pt</p>
 	<p>支払い方法：<%= f.text_field :pay %></p>
 
 
@@ -42,11 +45,3 @@
 
 <% end %>
 
-
-
-
-<!--
-def index
-		@purchase = Purchase.new
-		@cart = current_user.carts.last
-	end   -->

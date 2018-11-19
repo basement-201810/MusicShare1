@@ -1,6 +1,13 @@
 class PurchaseItemsController < ApplicationController
-  def create
-  end
+#  def new
+#  	@purchase_item = PurchaseItem.new
+#  end
+#
+#  def create
+#  	@cart = current_user.cart.last
+#  	@purchase_items = PurchaseItem.new(purchase_item_params)
+#
+#  end
 
   def index
   	@purchase = Purchase.find(params[:purchase_id])
