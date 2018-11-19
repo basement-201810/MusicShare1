@@ -1,5 +1,5 @@
 class CartItemsController < ApplicationController
-	before_action :hoge
+	# before_action :hoge
 
 	def create
 		product = Product.find(params[:product_id])
@@ -76,9 +76,15 @@ class CartItemsController < ApplicationController
 		end
 	end
 
-	def hoge
-		CartItem.where("created_at<?",Time.now-(12.hours)).delete_all
-	end
+	# def hoge
+	# 	cart_items = CartItem.where("created_at<?",Time.now-(12.hours))
+	# 	cart_items.each do |cart_item|
+	# 		cart_item.product.pro_amount += cart_item.amount.to_i
+	# 		cart_item.product.save
+	# 		cart_item.destroy
+	# 	end
+	# 	# CartItem.where("created_at<?",Time.now-(12.hours)).delete_all
+	# end
 
 	private
 	def cart_item_params
