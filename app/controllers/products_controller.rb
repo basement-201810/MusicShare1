@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
 	def research
 		@genres = ProGenre.all
 		@search = Product.ransack(params[:q])
-		@products = @search.result
+		@products = @search.result.order(:pro_date).reverse_order
 	end
 
 

@@ -1,6 +1,82 @@
-<h2><%= @genre.pro_genre_name %></h2>
+<h2 class="page-title"><%= @genre.pro_genre_name %></h2>
+<!-- - - - - - - - - - - - - - -テンプレート候補1-3/3 - - - - - - - - - - - -  -->
 
-<% @products.each do |product| %>
-	<%= link_to product.pro_title, pro_genre_product_path(@genre, product.id) %><br>
-	<% end %>
+<div class="pro_genre-index clearfix">
+
+	<div class="pro_genre-index-sidebar">
+		<div class="pro_genre-index-sidebar-box">
+
+
+			<nav class="navbar navbar-light bg-light">
+				<div class="form-inline">
+					<%= search_form_for @search, url: research_products_path do |f| %>
+					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+					<% end %>
+				</div>
+			</nav>
+
+
+
+			<% @genres.each do |genre| %>
+			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
+			<% end %>
+		</div>
+	</div>
+	<div class="pro_genre-index-main">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+
+
+
+		<% @products.each do |product| %>
+		<div class="card img-thumbnail">
+			<% if product.pro_date >Time.now-(7.days) %>
+			    <div class="newsign">
+				    <span class="ribbon">NEW</span>
+			    </div>
+			<% end %>
+			<div class="card-body">
+				<div class="card-img-top text-center">
+				<%= attachment_image_tag product, :pro_image, size: "165x165", fallback: "no-image_rocket.png"%>
+			</div>
+				<h5 class="card-title">
+					<strong>
+						<%= link_to product.pro_title, pro_genre_product_path(@genre, product.id) %>
+					</strong>
+				</h5>
+				<h6 class="card-subtitle mb-2 text-muted">
+					<span class="glyphicon glyphicon-user">  </span>
+					<strong><%= product.pro_artist %></strong>
+				</h6>
+				<p class="card-text">
+					<strong>
+						<%= number_to_currency(product.pro_price, :unit => "￥",:precision => 0)  %>
+					</strong>|
+					<% if product.pro_amount >= 11 then%>
+					<span class="pro_amount_atatus">在庫あり</span>
+					<% elsif product.pro_amount <= 10 && product.pro_amount >= 1 then %>
+					<span class="pro_amount_atatus">※ 残りわずか ※</span>
+					<% elsif product.pro_amount = 0 then  %>
+					<span class="pro_amount_atatus">※※ SoldOut ※※</span>
+					<%end%>
+				</p>
+				<p class="card-text">
+					⭐️⭐️⭐️⭐️⭐️  <i class="far fa-comments"> 77</i>
+				</p>
+			</div>
+		</div>
+		<% end %>
+
+
+<!-- - - - リンクボタン- - - -->
+　　<div class="row">
+		<span class="col-md-11"></span>
+		<p class="col-md-1">
+			<%= link_to "  戻る",root_path, class: " btn-info  btn-sm" %>
+		</p>
+	</div>
+
+
+
 
