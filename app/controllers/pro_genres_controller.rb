@@ -25,8 +25,9 @@ class ProGenresController < ApplicationController
 	def show
 		@genre = ProGenre.find(params[:id])
 		@genres = ProGenre.all
-		@products = @genre.products.page(params[:page])
+		@products = @genre.products.page(params[:page]).order(:pro_date).reverse_order
 		@user = current_user
+		@search = Product.ransack(params[:q])
 	end
 
 	def result
