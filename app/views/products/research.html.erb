@@ -1,5 +1,7 @@
 <h2 class="page-title">検索結果一覧ページ</h2>
 
+<!-- - - - - - - - - - - - - - -テンプレート候補1-2/3 - - - - - - - - - - - -  -->
+
 <div class="pro_genre-index clearfix">
 
 	<div class="pro_genre-index-sidebar">
@@ -25,14 +27,55 @@
 
 
 	<div class="pro_genre-index-main">
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
 
 
 		<h3>検索ワード</h3>
 		<h3>「<%= @search.pro_title_or_pro_artist_cont %>」</h3>
 
+<!-- - - - - - - - - - - 下記追記- - - - - - - - - - - - - - -  -->
 		<% @products.each do |product| %>
-		<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %><%= product.pro_artist %><br>
+		<div class="card img-thumbnail">
+			<% if product.pro_date >Time.now-(7.days) %>
+			    <div class="newsign">
+				    <span class="ribbon">NEW</span>
+			    </div>
+			<% end %>
+			<div class="card-body">
+				<div class="card-img-top text-center">
+				<%= attachment_image_tag product, :pro_image, size: "165x165", fallback: "no-image_rocket.png"%>
+			</div>
+				<h5 class="card-title">
+					<strong>
+						<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
+					</strong>
+				</h5>
+				<h6 class="card-subtitle mb-2 text-muted">
+					<span class="glyphicon glyphicon-user">  </span>
+					<strong><%= product.pro_artist %></strong>
+				</h6>
+				<p class="card-text">
+					<strong>
+						<%= number_to_currency(product.pro_price, :unit => "￥",:precision => 0)  %>
+					</strong>|
+					<% if product.pro_amount >= 11 then%>
+					<span class="pro_amount_atatus">在庫あり</span>
+					<% elsif product.pro_amount <= 10 && product.pro_amount >= 1 then %>
+					<span class="pro_amount_atatus">※ 残りわずか ※</span>
+					<% elsif product.pro_amount = 0 then  %>
+					<span class="pro_amount_atatus">※※ SoldOut ※※</span>
+					<%end%>
+				</p>
+				<p class="card-text">
+					⭐️⭐️⭐️⭐️⭐️  <i class="far fa-comments"> 77</i>
+				</p>
+			</div>
+		</div>
 		<% end %>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+
+
 
 	</div>
 </div>

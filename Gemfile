@@ -71,7 +71,11 @@ gem 'ransack'
 gem 'rails4-autocomplete'
 gem 'pry-rails'
 gem 'nested_form_fields'
+
 gem 'enum_help'
+
+gem 'bxslider-rails'
+
 
 
 
