@@ -114,11 +114,37 @@
 					<th>レビュー :</th>
 					<td>
 						<p>平均 星<%= @review %>: レビュー数<%= @count_reviews %></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
+						<% if @reveiws.to_i >= 0 && @reveiws.to_i <= 1 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @reveiws.to_i > 1 && @reveiws.to_i <= 2 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @reveiws.to_i > 2 && @reveiws.to_i <= 3 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @reveiws.to_i > 3 && @reveiws.to_i <= 4 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @reveiws.to_i > 4 && @reveiws.to_i <= 5 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+						<% end %>
 					</td>
 				</tr>
 
@@ -176,26 +202,7 @@
 				<% @reviews.each do |review| %>
 				<td><% review_star.rating.to_i.times do %>
 						<span class="glyphicon glyphicon-star"></span>
-						<form>
-							<fieldset class="starability-growRotate">
-								<legend>Basic star rating:</legend>
-
-								<input type="radio" id="rate5" name="string" value="5" /><br>
-								<label for="rate5" title="Amazing">5 stars</label><br>
-
-								<input type="radio" id="rate4" name="string" value="4" /><br>
-								<label for="rate4" title="Very good">4 stars</label><br>
-
-								<input type="radio" id="rate3" name="string" value="3" /><br>
-								<label for ="rate3" title="Average">3 stars</label><br>
-
-								<input type="radio" id="rate2" name="string" value="2" /><br>
-								<label for="rate2" title="Not good">2 stars</label><br>
-
-								<input type="radio" id="rate1" name="string" value="1" /><br>
-								<label for="rate1" title="Terrible">1 stars</label><br>
-							</fieldset>
-						</form>
+						
 					<% end %><br>
 					<%= review.review_body %>
 				</td>
@@ -217,3 +224,23 @@
 		</tbody>
 	</table>
 </div>
+<form>
+							<fieldset class="starability-growRotate">
+								<legend>Basic star rating:</legend>
+
+								<input type="radio" id="rate5" name="string" value="5" /><br>
+								<label for="rate5" title="Amazing">5 stars</label><br>
+
+								<input type="radio" id="rate4" name="string" value="4" /><br>
+								<label for="rate4" title="Very good">4 stars</label><br>
+
+								<input type="radio" id="rate3" name="string" value="3" /><br>
+								<label for ="rate3" title="Average">3 stars</label><br>
+
+								<input type="radio" id="rate2" name="string" value="2" /><br>
+								<label for="rate2" title="Not good">2 stars</label><br>
+
+								<input type="radio" id="rate1" name="string" value="1" /><br>
+								<label for="rate1" title="Terrible">1 stars</label><br>
+							</fieldset>
+						</form>
