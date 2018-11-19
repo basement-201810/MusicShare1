@@ -9,8 +9,13 @@ class ProductsController < ApplicationController
 
 
 	def index
-		@products = Product.all
+		@products = Product.order('pro_amount')
 		@user = current_user
+		@genres = ProGenre.all
+		@search = Product.ransack(params[:q])
+		@result = @search.result.order('pro_amount')
+		@product_cnt = Product.all.count
+		@result_cnt = @result.count
 	end
 
 	def new
@@ -68,7 +73,7 @@ class ProductsController < ApplicationController
 	def research
 		@genres = ProGenre.all
 		@search = Product.ransack(params[:q])
-		@products = @search.result
+		@products = @search.result.order(:pro_date).reverse_order
 	end
 
 

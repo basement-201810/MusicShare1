@@ -3,38 +3,92 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing:  border-box;
+margin: 0;
+    padding: 0;
+    box-sizing:  border-box;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .page-title {
-	width: 100%;
-	height: 50px;
-	padding-left: 40px;
+    width: 100%;
+    height: 50px;
+    padding-left: 40px;
 }
 
 .pro_genre-index-sidebar {
-	width: 20%;
-	float: left;
+    width: 20%;
+    float: left;
 }
 
 .pro_genre-index-sidebar-box {
-	width: 90%;
-	margin-left: 10%;
+    width: 90%;
+    margin-left: 10%;
 }
 
 .pro_genre-index-main {
-	width: 80%;
-	float: left;
+    width: 80%;
+    float: left;
 }
+
+//- - - - - 下記追記 - - - - -
+
+.card {
+    position: relative;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+//- - - - - NEWのリボン - - - - -
+
+.newsign {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 89px;
+    height: 91px;
+    overflow: hidden;
+}
+
+.ribbon {
+    display: inline-block;
+    position: absolute;
+    padding: 7px 0;
+    left: -23px;
+    top: 22px;
+    width: 156px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 12px;
+    background: orangered;
+    color: #fff;
+    letter-spacing: 0.07em;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ribbon:before,.ribbon14:after{
+    position: absolute;
+    content: "";
+    border-top: 4px solid #b2751b;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    bottom: -4px;
+}
+
+.ribbon:before{
+    left: 14px;
+}
+
+.ribbon:after{
+    right: 18px;
+}
+

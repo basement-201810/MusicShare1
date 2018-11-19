@@ -40,7 +40,7 @@
             <td><%= b.text_field :music_disk_number, class:"form-control", value:"1" %></td>
             <td><%= b.text_field :music_number, class:"form-control" %></td>
             <td><%= b.text_field :music_name, class:"form-control" %></td>
-            <td><%= b.remove_nested_fields_link "Delete", class:"btn btn-danger", role:"button" %></td>
+            <td><%= b.remove_nested_fields_link "Delete", method: :delete, class:"btn btn-danger", role:"button" %></td>
         <% end %>
     </tbody>
 </table>

@@ -41,3 +41,53 @@ a {
 }
 
 
+
+.card {
+    position: relative;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+
+.newsign {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 89px;
+    height: 91px;
+    overflow: hidden;
+}
+
+.ribbon {
+    display: inline-block;
+    position: absolute;
+    padding: 7px 0;
+    left: -23px;
+    top: 22px;
+    width: 156px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 12px;
+    background: orangered;
+    color: #fff;
+    letter-spacing: 0.07em;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ribbon:before,.ribbon14:after{
+    position: absolute;
+    content: "";
+    border-top: 4px solid #b2751b;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    bottom: -4px;
+}
+
+.ribbon:before{
+    left: 14px;
+}
+
+.ribbon:after{
+    right: 18px;
+}
