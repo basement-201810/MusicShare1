@@ -19,6 +19,9 @@
             </h2>
           </div>
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <p><%= flash.notice %></p>
+            </li>
             <% if user_signed_in? && current_user.manager == false %>
               <li>
                 <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %> <!-- @user.name => current_user.name に変更　-->
