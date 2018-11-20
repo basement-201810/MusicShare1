@@ -40,9 +40,46 @@ a {
 	float: left;
 }
 
+
+
+/*product index*/
+
+.product-index-title {
+    width: 100%;
+}
+
+.product-index-title-left {
+    width: 50%;
+    float: left;
+}
+
+.product-index-title-right {
+    width: 50%;
+    float: left;
+}
+
+
+
+.product-index-title-right-box1 {
+    float: left;
+    margin: 20px 5px 0 0;
+}
+
+
+/*product new,edit*/
+
+.new-title-text {
+    float: left
+}
+
+.new-title-link {
+    float: right;
+    padding: 20px 20px 0 0;
+}
+
 /*- - - - - - 11/20 追記- - - - - - -- */
 .cd-image {
-	margin-bottom: 2px;
+    margin-bottom: 2px;
     position: relative;
     background: #000000;
     text-align: center;
@@ -69,7 +106,7 @@ a {
     opacity: 1;
 }
 .cd-image-overlay:hover {
-	background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
 }
 .cd-image img {
     opacity: 1;
@@ -97,8 +134,8 @@ a {
     margin-bottom: 40px;
 }
 .review-amount {
-	text-decoration: none;
-	padding: 3px;
+    text-decoration: none;
+    padding: 3px;
     bottom: 10px;
     right: 10px;
     position: absolute;
@@ -112,3 +149,4 @@ a {
 .cd-image-overlay h4:hover {
     color: white;
 }
+
