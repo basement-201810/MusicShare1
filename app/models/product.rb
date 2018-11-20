@@ -11,5 +11,10 @@ class Product < ApplicationRecord
 
 	accepts_nested_attributes_for :musics
 
+    validates :pro_artist, presence: true
+    validates :pro_title, presence: true
+	validates :pro_price, presence: true, numericality: true
+	validates :pro_amount, presence: true, numericality: true
+
 end
 
