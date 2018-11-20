@@ -1,3 +1,17 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.total-price {
+	font-weight: bold;
+	font-size: 15px;
+	border-top: double 5px #FB7D79;
+	border-bottom: double 5px #FB7D79;
+	margin-bottom: 20px;
+}
+
+.total-price span {
+	font-weight: bold;
+	font-size: 20px;
+}
