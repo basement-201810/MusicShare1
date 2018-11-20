@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
 	def update
 		@product = Product.find(params[:id])
 		if @product.update(product_params)
-		   redirect_to pro_genre_product_path(@product.pro_genre)
+		   redirect_to products_path
 		else
 			render :edit
 		end
@@ -73,7 +73,7 @@ class ProductsController < ApplicationController
 	def research
 		@genres = ProGenre.all
 		@search = Product.ransack(params[:q])
-		@products = @search.result.order(:pro_date).reverse_order
+		@products = @search.result.order("pro_date DESC")
 	end
 
 

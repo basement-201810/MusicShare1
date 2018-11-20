@@ -34,7 +34,7 @@
 			<strong>「<%= @search.pro_title_or_pro_artist_cont %>」</strong>
 		</h3>
 		<% @products.each do |product| %>
-
+		<% if product.pro_status == "release" %>
 		<div class="col-md-3">
 
 			<div class="cd-image">
@@ -87,6 +87,7 @@
 				</p>
 			</div>
 		</section> -->
+		<% end %>
 		<% end %>
 	</section>
 
