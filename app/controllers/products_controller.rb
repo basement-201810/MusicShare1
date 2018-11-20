@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 		if @product.save
 			redirect_to products_path
 		else
-			render :index
+			render :new
 		end
 	end
 
@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
 		if @product.update(product_params)
 		   redirect_to pro_genre_product_path(@product.pro_genre)
 		else
-			render :index
+			render :edit
 		end
 		   @user = current_user
 	end
