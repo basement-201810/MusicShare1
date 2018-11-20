@@ -1,119 +1,124 @@
+<div class="main-visual">
+	<div class="main-visual-content">
+      <h1 class="main-visual-text">
+        Music Share
+      </h1>
+  </div>
+</div>
+
+
+<div class="container">
+
 <p><%= flash.notice %></p>
 
-<h2 class="page-title">商品一覧ページ</h2>
+<h2>商品一覧ページ</h2>
 
-<!-- - - - - - - - - - - - - - -テンプレート候補1-1/3 - - - - - - - - - - - -  -->
+<div class="row">
 
-<div class="pro_genre-index clearfix">
-
-	<div class="pro_genre-index-sidebar">
-		<div class="pro_genre-index-sidebar-box">
-
-
-			<nav class="navbar navbar-light bg-light">
-				<div class="form-inline">
-					<%= search_form_for @search, url: research_products_path do |f| %>
-					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
-					<% end %>
-				</div>
-			</nav>
-
-
-
+	<!-- - - - サイドバー(テンプレ？？) - - - -->
+	<div class="side-ber col-md-2">
+		<section class="form-inline">
+			<%= search_form_for @search, url: research_products_path do |f| %>
+			    <%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+			    <%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+			<% end %>
+		</section>
+		<div class="genre-list">
 			<% @genres.each do |genre| %>
-			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
+			    <p><%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %>
+			    </p>
 			<% end %>
 		</div>
 	</div>
-	<div class="pro_genre-index-main">
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
 
-		<p> ■おすすめ</p>
+    <!-- - - - メインー - - - -->
+    <div class="main col-md-10 clearfix">
+
+		<h4 class="new-info"> ■おすすめ</h4>
 		<% @products.each do |product| %>
 		<% if product.pro_status == "release" %>
 		<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■J-POP</p>
+		<h4 class="genre-title"> ■J-POP</h4>
 		<% @genres_jpop.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■K-POP</p>
+		<h4 class="genre-title"> ■K-POP</h4>
 		<% @genres_kpop.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■アイドル</p>
+		<h4 class="genre-title"> ■アイドル</h4>
 		<% @genres_idle.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■童謡</p>
+		<h4 class="genre-title"> ■童謡</h4>
 		<% @genres_douyou.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■Rock</p>
+		<h4 class="genre-title"> ■Rock</h4>
 		<% @genres_rock.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■EDM</p>
+		<h4 class="genre-title"> ■EDM</h4>
 		<% @genres_edm.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■Dance</p>
+		<h4 class="genre-title"> ■Dance</h4>
 		<% @genres_dance.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■Alternative</p>
+		<h4 class="genre-title"> ■Alternative</h4>
 		<% @genres_alternative.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■RAP/HIP-HOP</p>
+		<h4 class="genre-title"> ■RAP/HIP-HOP</h4>
 		<% @genres_rap.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■アニソン</p>
+		<h4 class="genre-title"> ■アニソン</h4>
 		<% @genres_anime.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■Jazz</p>
+		<h4 class="genre-title"> ■Jazz</h4>
 		<% @genres_jazz.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
 		<% end %>
 		<% end %><br>
 
-		<p> ■その他</p>
+		<h4 class="genre-title"> ■その他</h4>
 		<% @genres_otherwise.each do |genre| %>
 		<% if genre.pro_status == "release" %>
 		<%= link_to genre.pro_title, pro_genre_product_path(genre.pro_genre_id, genre.id) %><br>
@@ -122,4 +127,5 @@
 
 	</div>
 
+</div>
 </div>
