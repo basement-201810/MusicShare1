@@ -12,9 +12,14 @@ class PurchasesController < ApplicationController
 			@cart = Cart.new
 			@cart.user_id = current_user.id
 			@cart.save
+			@user = current_user
+			@user.point += (@purchase.get_points - @purchase.pay_points )
+			@user.save
+
 			redirect_to arigatou_path
 		else
-			redirect_to root_path
+			flash[:alert] = "failed to order."
+			redirect_to new_purchase_path
 		end
 	end
 
@@ -63,7 +68,7 @@ class PurchasesController < ApplicationController
 	def purchase_params
 		params.require(:purchase).permit(:user_id, :get_points, :pay_points, :cart_id, :pur_total, :pay, :status,:date, :pur_name,
 			:pur_name_kana, :pur_email, :pur_address, :pur_post_code, :pur_tell,
-			purchase_items_attributes: [:purchase_id, :cart_item_id, :sub_total, :amount])
+			purchase_items_attributes: [:purchase_id, :cart_item_id, :sub_total, :amount, :title, :artist, :image_id, :product_id])
 	end
 
 end
