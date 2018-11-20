@@ -8,12 +8,8 @@
 
 <div class="container">
 
-<h2>
-	検索結果ページ
-</h2>
-
-
-<div class="row">
+    <h2>検索結果ページ</h2>
+    <div class="row">
 
 	<!-- - - - サイドバー (テンプレ？？) - - - -->
 	<div class="side-ber col-md-2">
@@ -32,13 +28,35 @@
 	</div>
 
 	<!-- - - - メインー - - - -->
-	<div class="main col-md-10 clearfix">
-		<h3 class="genre-title">
+	<section class="main col-md-10 clearfix">
+		<h3 class="genre-title row">
 			 ◇ 検索ワード
 			<strong>「<%= @search.pro_title_or_pro_artist_cont %>」</strong>
 		</h3>
 		<% @products.each do |product| %>
-		<section class="card">
+
+		<div class="col-md-3">
+
+			<div class="cd-image">
+				<%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
+				<div class="cd-image-overlay">
+					<% if product.pro_date >Time.now-(7.days) %>
+			            <div class="newsign">
+				        <span class="ribbon">NEW</span>
+			            </div>
+			        <% end %>
+					<h5><%= product.pro_artist %></h5>
+					<h4><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></h4>
+					<p>★★★★★</p>
+					<%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!-- <section class="card">
 			<% if product.pro_date >Time.now-(7.days) %>
 			    <div class="newsign">
 				    <span class="ribbon">NEW</span>
@@ -68,11 +86,11 @@
 					<span class="far fa-comments review-amount"> 77</span>
 				</p>
 			</div>
-		</section>
+		</section> -->
 		<% end %>
-	</div>
+	</section>
 
-</div>
+    </div>
 
 <!-- - - - リンクボタン- - - -->
 　　<div class="row">
