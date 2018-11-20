@@ -6,7 +6,7 @@
 			<h1>
 				<%= @purchase.date.year %> 年
 				<%= @purchase.date.month %> 月
-				<%= @purchase.date.day %> 日　購入分     ←@cart_itemから引っ張ったやつ　値下げが反映される
+				<%= @purchase.date.day %> 日　購入分
 			</h1>
 			<table class="table table-hover">
 				<thead>
@@ -21,63 +21,34 @@
 
 
 				<tbody>
-					<% @cart_items.each do |cart_item| %>
-						<tr>
-							<td><%= attachment_image_tag cart_item.product, :pro_image, size: "50x50", fallback: "no-image_rocket.png"%></td>
-							<td><%= cart_item.product.pro_title %></td>
-							<td><%= cart_item.product.pro_artist %></td>
-							<td><%= cart_item.amount %></td>
-							<td><%= cart_item.sub_total / cart_item.amount %></td>
-							<td><%= cart_item.sub_total %></td>
-							<td><%= link_to "show",product_path(cart_item.product_id), class: "btn btn-primary" %></td>
-						</tr>
-					<% end %>
-				</tbody>
-			</table>
-  		</div>
- 	</div>
-</div>
-
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-10">
-			<h1>
-				<%= @purchase.date.year %> 年
-				<%= @purchase.date.month %> 月
-				<%= @purchase.date.day %> 日　購入分　　　　←@purchase_itemから引っ張ってきたやつ　値下げは反映されない　商品名アーティスト名持ってこれない
-			</h1>
-			<table class="table table-hover">
-				<thead>
-					<th>数量</th>
-					<th>単価</th>
-					<th>小計</th>
-					<th></th>
-				</thead>
-
-
-				<tbody>
 					<% @purchase_items.each do |purchase_item| %>
 						<tr>
+							<td><%= attachment_image_tag purchase_item, :image, size: "70x70", fallback: "no-image_rocket.png" %></td>
+							<td><%= purchase_item.title %></td>
+							<td><%= purchase_item.artist %></td>
 							<td><%= purchase_item.amount %></td>
 							<td><%= purchase_item.sub_total / purchase_item.amount %></td>
 							<td><%= purchase_item.sub_total %></td>
+							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary" %></td>
 						</tr>
 					<% end %>
 				</tbody>
 			</table>
+			<div align="right">
+				<% if current_user.manager %>
+						<%= form_for @purchase, url: purchase_path do |f| %>
+
+							<p>ステータス　<%= f.select :status, Purchase.statuses.keys, class:"form-control" %></p>
+
+						<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
+					<% end %>
+				<% end %>
+			</div>
   		</div>
  	</div>
 </div>
 
-<%#
-<% if current_user.manager %>
-	<%= form_for @purchase, url: purchase_path do |f| %>
-		<p>ステータス　<%= f.select :status, Purchase.statuses.keys, class:"form-control" %></p>
 
-		<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
-	<% end %>
-<%# <% end %>
 
 
 
