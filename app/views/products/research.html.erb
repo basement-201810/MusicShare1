@@ -1,82 +1,84 @@
-<h2 class="page-title">検索結果一覧ページ</h2>
+<div class="main-visual">
+	<div class="main-visual-content">
+      <h1 class="main-visual-text">
+        Music Share
+      </h1>
+  </div>
+</div>
 
-<!-- - - - - - - - - - - - - - -テンプレート候補1-2/3 - - - - - - - - - - - -  -->
+<div class="container">
 
-<div class="pro_genre-index clearfix">
-
-	<div class="pro_genre-index-sidebar">
-		<div class="pro_genre-index-sidebar-box">
-
-
-			<nav class="navbar navbar-light bg-light">
-				<div class="form-inline">
-					<%= search_form_for @search, url: research_products_path do |f| %>
-					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
-					<% end %>
-				</div>
-			</nav>
+<h2>
+	検索結果ページ
+</h2>
 
 
+<div class="row">
 
+	<!-- - - - サイドバー (テンプレ？？) - - - -->
+	<div class="side-ber col-md-2">
+		<section class="form-inline">
+			<%= search_form_for @search, url: research_products_path do |f| %>
+			    <%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+			    <%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+			<% end %>
+		</section>
+		<div class="genre-list">
 			<% @genres.each do |genre| %>
-			<%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %><br>
+			    <p><%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %>
+			    </p>
 			<% end %>
 		</div>
 	</div>
 
-
-	<div class="pro_genre-index-main">
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
-
-
-		<h3>検索ワード</h3>
-		<h3>「<%= @search.pro_title_or_pro_artist_cont %>」</h3>
-
-<!-- - - - - - - - - - - 下記追記- - - - - - - - - - - - - - -  -->
+	<!-- - - - メインー - - - -->
+	<div class="main col-md-10 clearfix">
+		<h3 class="genre-title">
+			 ◇ 検索ワード
+			<strong>「<%= @search.pro_title_or_pro_artist_cont %>」</strong>
+		</h3>
 		<% @products.each do |product| %>
-		<div class="card img-thumbnail">
+		<section class="card">
 			<% if product.pro_date >Time.now-(7.days) %>
 			    <div class="newsign">
 				    <span class="ribbon">NEW</span>
 			    </div>
 			<% end %>
-			<div class="card-body">
-				<div class="card-img-top text-center">
-				<%= attachment_image_tag product, :pro_image, size: "165x165", fallback: "no-image_rocket.png"%>
+			<div class="card-img text-center">
+				<%= attachment_image_tag product, :pro_image, size: "170x170", fallback: "no-image_rocket.png"%>
 			</div>
-				<h5 class="card-title">
-					<strong>
-						<%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
-					</strong>
-				</h5>
-				<h6 class="card-subtitle mb-2 text-muted">
-					<span class="glyphicon glyphicon-user">  </span>
-					<strong><%= product.pro_artist %></strong>
+			<div class="card-content">
+				<h5 class="card-title"><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></h5>
+				<h6 class="card-subtitle text-muted">
+					<span class="glyphicon glyphicon-user"> </span>
+					<%= product.pro_artist %>
 				</h6>
-				<p class="card-text">
-					<strong>
-						<%= number_to_currency(product.pro_price, :unit => "￥",:precision => 0)  %>
-					</strong>|
-					<% if product.pro_amount >= 11 then%>
-					<span class="pro_amount_atatus">在庫あり</span>
-					<% elsif product.pro_amount <= 10 && product.pro_amount >= 1 then %>
-					<span class="pro_amount_atatus">※ 残りわずか ※</span>
-					<% elsif product.pro_amount = 0 then  %>
-					<span class="pro_amount_atatus">※※ SoldOut ※※</span>
-					<%end%>
-				</p>
-				<p class="card-text">
-					⭐️⭐️⭐️⭐️⭐️  <i class="far fa-comments"> 77</i>
+				<p class="card-text price">
+					<%= number_to_currency(product.pro_price, :unit => "￥",:precision => 0)  %>
+					<span>
+						<% if product.pro_amount >= 11 then%>
+						| 在庫あり
+						<% elsif product.pro_amount <= 10 && product.pro_amount >= 1 then %>
+					    | ※ 残りわずか ※
+					    <% elsif product.pro_amount = 0 then  %>
+					    | ※※ SoldOut ※※
+					    <%end%>
+					</span><br>
+					★★★★★
+					<span class="far fa-comments review-amount"> 77</span>
 				</p>
 			</div>
-		</div>
+		</section>
 		<% end %>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
-
-
-
-
 	</div>
+
 </div>
 
+<!-- - - - リンクボタン- - - -->
+　　<div class="row">
+		<span class="col-md-11"></span>
+		<p class="col-md-1">
+			<%= link_to "  戻る",root_path, class: " btn-info  btn-sm" %>
+		</p>
+	</div>
+</div>
