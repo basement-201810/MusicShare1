@@ -4,8 +4,9 @@ class ReviewsController < ApplicationController
 	end
 
 	def create
-		@review = Review.find(params[:id])
-		if @review.new(review_params)
+		@review = Review.new(review_params)
+		@review.user_id = current_user.id
+		if @review.save
 			redirect_to purchase_path(@purchase.id), notice: 'Review was successfully created!'
 		else
 			render :show

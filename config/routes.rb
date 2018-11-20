@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     patch :untreat
     patch :prepare
     patch :sent
+    resources :review, except: [:show]
   end
 
 # do以下コメントアウト
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :pro_genres, only: [:show] do
   	resources :products, only: [:show, :edit, :update]do
-  		resources :reviews, except: [:destroy, :index]
+  		resources :reviews, only: [:show]
   	end
   end
 

@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@purchases = User.find(params[:id]).purchases.all.order('created_at DESC')
+		@reviews = @user.reviews
+		@review = Review.new
 	end
 
 	def update
