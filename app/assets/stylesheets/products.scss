@@ -39,3 +39,76 @@ a {
 	width: 80%;
 	float: left;
 }
+
+/*- - - - - - 11/20 追記- - - - - - -- */
+.cd-image {
+	margin-bottom: 2px;
+    position: relative;
+    background: #000000;
+    text-align: center;
+    overflow: hidden;
+}
+.cd-image:hover img {
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);
+     transform:scale(1.05);
+}
+.cd-image-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.0);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    bottom: 0;
+    top: 0;
+    left:0;
+    right: 0;
+    opacity: 1;
+}
+.cd-image-overlay:hover {
+	background: rgba(0, 0, 0, 0.7);
+}
+.cd-image img {
+    opacity: 1;
+    max-width: 100%;
+    height: auto;
+}
+
+.cd-image-overlay a, .cd-image-overlay h4 {
+    text-decoration: none;
+    color:white;
+}
+
+
+.cd-image-overlay h5,p {
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.9);
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+.cd-image-overlay h4 {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+.review-amount {
+	text-decoration: none;
+	padding: 3px;
+    bottom: 10px;
+    right: 10px;
+    position: absolute;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    font-size: 5px;
+    color: white;
+}
+.cd-image-overlay span:hover,
+.cd-image-overlay a:hover,
+.cd-image-overlay h4:hover {
+    color: white;
+}
