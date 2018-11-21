@@ -49,6 +49,11 @@ class ProductsController < ApplicationController
 		   @user = current_user
 	end
 
+	def destroy
+		music = Music.find(params[:id])
+		music.destroy
+	end
+
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
@@ -77,9 +82,10 @@ class ProductsController < ApplicationController
 	end
 
 
+
 	private
 	def product_params
-			params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:id, :music_name, :music_disk_number, :product_id, :music_number, :_destroy])
+		params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:id, :music_name, :music_disk_number, :product_id, :music_number, :_destroy])
 	end
 
 	def review_params

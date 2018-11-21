@@ -34,7 +34,6 @@
     <section class="main col-md-10 clearfix">
 		<h3 class="genre-title"> ◇ <%= @genre.pro_genre_name %></h3>
 		<% @products.each do |product| %>
-		<% if product.pro_status == "release" %>
 
 		<div class="col-md-3">
 
@@ -54,7 +53,6 @@
 				</div>
 			</div>
 		</div>
-		<% end %>
 		<% end %>
 	</section>
 
