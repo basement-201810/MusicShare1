@@ -41,11 +41,21 @@
 					<% end %>
 				</tbody>
 			</table>
-			<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
-			<%= link_to "退会", root_path, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
+			<%= link_to "編集", edit_user_path, class: "btn btn-success" %><br><br>
+
+
+			<%= form_for @user do |f| %>
+			<%= f.submit "退会しちゃう？", class:"btn btn-danger" %>
+			<%= f.select :user_status, [["やめないっしょ！", "release"],["やめまーーす！", "nonrelease"]], {}, {class:"btn btn-default btn-lg"} %>
+			<% end %>
+
+
+
 		</div>
 	</div>
 </div>
+
+<br>
 
 <!--    購入履歴一覧    -->
 

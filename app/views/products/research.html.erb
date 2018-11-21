@@ -34,6 +34,9 @@
 			<strong>「<%= @search.pro_title_or_pro_artist_cont %>」</strong>
 		</h3>
 		<% @products.each do |product| %>
+
+		<% if product.pro_status == "release" %>
+
 		<div class="col-md-3">
 			<% if product.pro_date >Time.now-(7.days) %>
 			    <div class="newsign">
@@ -51,6 +54,7 @@
 				</div>
 			</div>
 		</div>
+		<% end %>
 		<% end %>
 	</section>
 
