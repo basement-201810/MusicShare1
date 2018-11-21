@@ -12,7 +12,7 @@
 					<th></th>
 				</thead>
 
-
+				<% if @switch == 0 %>
 				<tbody>
 					<% @purchases.each do |purchase| %>
 
@@ -23,11 +23,20 @@
 									<%= purchase.date.month %> 月
 									<%= purchase.date.day %> 日
 								</td>
-								<td><%= purchase.status_i18n %></td>
+								<td>
+									<% if purchase.status == 0 %>
+										未処理
+									<% elsif purchase.status == 1 %>
+										準備中
+									<% elsif purchase.status == 2 %>
+										発送済み
+									<% end %>
+								</td>
 								<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
 							</tr>
 					<% end %>
 				</tbody>
+				<% end %>
 
 			</table>
 			<%= link_to "未処理",purchase_untreat_path(0), method: :patch %>

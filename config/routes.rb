@@ -6,10 +6,9 @@ Rails.application.routes.draw do
 
   resources :purchases, only: [:new,:create,:index, :show, :update] do
 #  	resources :purchase_items, only: [:index]
-    patch :untreat
-    patch :prepare
-    patch :sent
+
   end
+
 
 # do以下コメントアウト
  resources :carts, only:[:show]  #except: [:destroy, :index] do
