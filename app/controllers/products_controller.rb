@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 		if @product.save
 			redirect_to products_path
 		else
-			render :index
+			render :new
 		end
 	end
 
@@ -42,11 +42,16 @@ class ProductsController < ApplicationController
 	def update
 		@product = Product.find(params[:id])
 		if @product.update(product_params)
-		   redirect_to pro_genre_product_path(@product.pro_genre)
+		   redirect_to products_path
 		else
-			render :index
+			render :edit
 		end
 		   @user = current_user
+	end
+
+	def destroy
+		music = Music.find(params[:id])
+		music.destroy
 	end
 
 	def show
@@ -73,13 +78,14 @@ class ProductsController < ApplicationController
 	def research
 		@genres = ProGenre.all
 		@search = Product.ransack(params[:q])
-		@products = @search.result.order(:pro_date).reverse_order
+		@products = @search.result.order("pro_date DESC")
 	end
+
 
 
 	private
 	def product_params
-			params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:id, :music_name, :music_disk_number, :product_id, :music_number, :_destroy])
+		params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:id, :music_name, :music_disk_number, :product_id, :music_number, :_destroy])
 	end
 
 	def review_params

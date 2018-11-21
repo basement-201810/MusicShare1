@@ -30,14 +30,21 @@
 }
 
 .header {
-    background-color: #AE9890;
+    background-color: white;
     height: 50px;
 }
 
 .music-share {
-	color: white;
 	margin-top: 10px;
-	border-top: solid 3px #ddd;
-	border-bottom: solid 3px #ddd;
+	border-top: solid 3px #AE9890;
+	border-bottom: solid 3px #AE9890;
+    font-family: Chalkduster, "Bradley Hand", Courier, "Segoe Print", sans-serif;
 }
-
+a {
+    color: navy;
+    text-decoration: none;
+}
+a:hover{
+    color: orangered;
+    transition: 0.3s ;
+}
