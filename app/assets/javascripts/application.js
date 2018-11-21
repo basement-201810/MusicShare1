@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
-//= require_tree .
+// require_tree .                    ←徳本変更
 //= require nested_form_fields
 //= require jquery_ujs
 

@@ -1,4 +1,10 @@
 class PurchasesController < ApplicationController
+	before_action :hoge
+
+	def hoge
+		@switch = 0
+	end
+
 	def new
 		@purchase = Purchase.new
 		@cart = current_user.carts.last
@@ -28,6 +34,7 @@ class PurchasesController < ApplicationController
 		@pur_total_sum = Purchase.sum(:pur_total)
 		@purchases = Purchase.order(:status)
 	end
+	
 	#------     purchase_item#index から移動↓    ------------>
 	def show
 	  	@purchase = Purchase.find(params[:id])
@@ -47,18 +54,18 @@ class PurchasesController < ApplicationController
 	end
 
 	def untreat                          #----は?????????????????????????????????------
-		switch = 0
-		redirect_to action: 'index'
+		@switch = 0
+		render :index
 	end
 
 	def prepare
-		switch = 1
-		redirect_to action: 'index'
+		@switch = 1
+		render :index
 	end
 
 	def sent
-		switch = 2
-		redirect_to action: 'index'
+		@switch = 2
+		render :index
 	end
 
 	def arigatou

@@ -14,7 +14,7 @@ module MusicShare1
     config.autoload_paths += %W(#{config.root}/lib)
 
     # config.i18n.default_locale = :ja
-    # ↑↑↑    enum が日本語化される　　　ただしflash に変なエラーが出る（？）
+    # ↑↑↑    enum が日本語化される　　　ただしログイン/アウトの時flash に変なエラーが出る（？）
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
