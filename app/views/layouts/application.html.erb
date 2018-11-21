@@ -16,49 +16,50 @@
   <body>
     <header class="header">
       <div class="container">
-          <div class="nav navbar-left">
-            <p class="music-share">
-              <%= link_to "Music Share1", root_path %>
-            <p>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <!-- <li>
-              <p><%= flash.notice %></p>
-            </li> -->
-            <% if user_signed_in? && current_user.manager == false %>
-              <li>
-                <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %>
-              </li>
-              <li>
-                <%= link_to "cart", cart_path(current_user.carts), class: "glyphicon glyphicon-shopping-cart carts" %>
-              </li>
-              <li>
-                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
-              </li>
-            <% elsif user_signed_in? && current_user.manager == true %>
-              <li>
-                <%= link_to "受注管理", purchases_path, class: "glyphicon" %>
-              </li>
-              <li>
-                <%= link_to "商品管理", products_path, class: "glyphicon" %>
-              </li>
-              <li>
-                <%= link_to "会員管理", users_path, class: "glyphicon" %>
-              </li>
-              <li>
-                <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
-              </li>
-            <% else %>
-              <li>
-                <%= link_to "ゲストさん", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %>
-              </li>
-              <li>
-                <%= link_to "cart", new_user_session_path, class: "glyphicon glyphicon-shopping-cart carts" %>
-              </li>
-            <% end %>
-          </ul>
+        <div class="nav navbar-left">
+          <p class="music-share">
+            <%= link_to "Music Share1", root_path %>
+          </p>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+
+          <% if user_signed_in? && current_user.manager == false %>
+            <li>
+            <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %>
+            </li>
+            <li>
+            <%= link_to "cart", cart_path(current_user.carts.last), class: "glyphicon glyphicon-shopping-cart carts" %>
+            </li>
+            <li>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
+            </li>
+
+          <% elsif user_signed_in? && current_user.manager == true %>
+          <li>
+            <%= link_to "受注管理", purchases_path, class: "glyphicon" %>
+          </li>
+          <li>
+            <%= link_to "商品管理", products_path, class: "glyphicon" %>
+          </li>
+          <li>
+            <%= link_to "会員管理", users_path, class: "glyphicon" %>
+          </li>
+          <li>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
+          </li>
+
+          <% else %>
+          <li>
+            <%= link_to "ゲストさん", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %>
+          </li>
+          <li>
+            <%= link_to "cart", new_user_session_path, class: "glyphicon glyphicon-shopping-cart carts" %>
+          </li>
+          <% end %>
+        </ul>
       </div>
-    </header>
+    </div>
+  </header>
       <%= yield %>
     </div>
     <footer>

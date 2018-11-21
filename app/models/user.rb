@@ -8,11 +8,12 @@ class User < ApplicationRecord
   has_many :reviews
   has_many :carts
   enum user_status: {release: true, nonrelease: false}
+
   validates :name, presence: :true
   validates :name_kana, presence: :true
-  validates :email, presence: true
+  validates :email, presence: true,uniqueness: true
   validates :address, presence: :true
-  validates :post_code, presence: :true, length: { maximum: 10 }
-  validates :tell, presence: :true, uniqueness: true #電話番号は同じものは登録できません
+  validates :post_code, presence: :true, numericality: { only_integer: true },length: { maximum: 10 }
+  validates :tell, presence: :true, numericality: { only_integer: true },uniqueness: true #電話番号は同じものは登録できません
   paginates_per 5
 end

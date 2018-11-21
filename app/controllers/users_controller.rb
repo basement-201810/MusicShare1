@@ -27,17 +27,17 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def release
-		user = User.find(params[:id])
-		user.release! unless user.release? # => releaseがfalse
-		redirect_to users_path
-	end
+	# def release
+	# 	user = User.find(params[:id])
+	# 	user.release! unless user.release? # => releaseがfalse
+	# 	redirect_to users_path
+	# end
 
-	def nonrelease
-		user = User.find(params[:id])
-		user.nonrelease! unless user.release? # => nonreleaseがfalse
-		redirect_to users_path
-	end
+	# def nonrelease
+	# 	user = User.find(params[:id])
+	# 	user.nonrelease! unless user.release? # => nonreleaseがfalse
+	# 	redirect_to users_path
+	# end
 
 
 	def passchange
