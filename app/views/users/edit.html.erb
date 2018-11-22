@@ -87,15 +87,13 @@
 								<td><%= f.label :user_status, "ユーザ公開非公開" %></td>
 								<td><%= f.select :user_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
 							</tr>
-							<tr class="form_group">
-								<td><%= f.submit "編集保存", class: "btn btn-success" %></td>
-								<td></td>
-							</tr>
-						<% end %>
 					</tbody>
 				</table>
+						<%= f.submit "編集保存", class: "btn btn-success" %>&emsp;&emsp;
+						<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger" %><br><br>
+						<% end %>
+
 			</div>
-			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger" %><br><br>
 			<%= link_to 'back', user_path, class: "btn btn-info" %>
 		<% end %>
 	</div>
