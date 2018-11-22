@@ -47,24 +47,23 @@
 				<h4 class="new-info"> ■おすすめ</h4>
 				<% @products.each do |product| %>
 
-				<div class="col-md-3">
-
-					<div class="cd-image">
-						<%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
-						<div class="cd-image-overlay">
-							<% if product.pro_date >Time.now-(7.days) %>
+				    <div class="col-md-3">
+					    <% if product.pro_date >Time.now-(7.days) %>
 							<div class="newsign">
 								<span class="ribbon">NEW</span>
 							</div>
-							<% end %>
-							<h5><%= product.pro_artist %></h5>
-							<h4><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
-							</h4>
-							<p>★★★★★</p>
-							<%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %>
-						</div>
-					</div>
-				</div>
+					    <% end %>
+					    <div class="cd-image">
+						    <%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
+						    <div class="cd-image-overlay">
+					            <p>★★★★★
+							    <%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %></p>
+							    <p><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id),class: "cd_title" %>
+							    </p>
+							    <p><%= product.pro_artist %></p>
+						    </div>
+					    </div>
+				    </div>
 				<% end %>
 			</div>
 
@@ -72,24 +71,23 @@
 				<h4 class="genre-title"> ■J-POP</h4>
 				<% @genres_jpop.each do |product| %>
 
-				<div class="col-md-3">
-
-					<div class="cd-image">
-						<%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
-						<div class="cd-image-overlay">
-							<% if product.pro_date >Time.now-(7.days) %>
+				    <div class="col-md-3">
+				    	<% if product.pro_date >Time.now-(7.days) %>
 							<div class="newsign">
 								<span class="ribbon">NEW</span>
 							</div>
-							<% end %>
-							<h5><%= product.pro_artist %></h5>
-							<h4><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
-							</h4>
-							<p>★★★★★</p>
-							<%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %>
-						</div>
-					</div>
-				</div>
+					    <% end %>
+					    <div class="cd-image">
+						    <%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
+						    <div class="cd-image-overlay">
+							    <p>★★★★★
+							    <%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %></p>
+							    <p><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %>
+							    </p>
+							    <p><%= product.pro_artist %></p>
+						    </div>
+					    </div>
+				    </div>
 				<% end %>
 			</div>
 

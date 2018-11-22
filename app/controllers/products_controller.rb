@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
 
+	before_action :authenticate_user!
+	before_action :correct_user, except: [:show]
+
 	# before_action :sum_amount
 	# def sum_amount
 	# 	cart_items = CartItem.where(product_id: product_id).select(:amount)
@@ -80,6 +83,11 @@ class ProductsController < ApplicationController
 		@search = Product.ransack(params[:q])
 		@products = @search.result.order("pro_date DESC")
 	end
+
+	def correct_user
+        @user = current_user
+        redirect_to root_path unless @user.manager == true
+    end
 
 
 
