@@ -11,17 +11,20 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require activestorage
-//= require turbolinks
+
 //= require jquery
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require autocomplete-rails
+//= require activestorage
+//= require turbolinks
+
 //= require bootstrap-sprockets
-// require_tree .                    ←徳本変更
 //= require nested_form_fields
 
-
 //= require bxslider
+// require_tree .
+
 
 
 $('.glyphicon-star').on('click', function(){
@@ -35,3 +38,4 @@ $('.glyphicon-star').on('click', function(){
     	dataType: 'script',
 	});
 });
+

@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
-	before_action :authenticate_user!
-	before_action :correct_user, except: [:show]
+	before_action :authenticate_user!,except: [:show,:research]
+	before_action :correct_user, except: [:show,:research]
 
 	# before_action :sum_amount
 	# def sum_amount

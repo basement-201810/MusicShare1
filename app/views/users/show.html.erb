@@ -30,23 +30,28 @@
 						<td><%= @user.point %></td>
 					</tr>
 					<% if current_user.manager == true %>
-						<tr>
-							<td>備考</td>
-							<td><%= @user.memo %></td>
-						</tr>
-						<tr>
-							<td>ステータス</td>
-							<td><%= @user.user_status %></td>
-						</tr>
+					<tr>
+						<td>備考</td>
+						<td><%= @user.memo %></td>
+					</tr>
+					<tr>
+						<td>ステータス</td>
+						<td>
+							<% if @user.deleted_at.blank? %>
+							<p> 公開中</p>
+							<% else %>
+							<p> 非公開（退会済み）</p>
+							<% end %>
+						</td>
+					</tr>
 					<% end %>
 				</tbody>
 			</table>
 			<%= link_to "編集", edit_user_path, class: "btn btn-success" %><br><br>
 
-            <% if @user.deleted_at.blank? %>
+			<% if current_user.manager == false %>
 			<%= link_to "退会", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger" %>
 			<% else %>
-			<h4> 退会済みです！</h4>
 			<% end %>
 
 
@@ -70,7 +75,7 @@
 					<th>購入金額</th>
 					<th>
 						<% if current_user.manager %>
-							ステータス
+						ステータス
 						<% end %>
 					</th>
 					<th></th>
@@ -107,6 +112,6 @@
 					
 				</tbody>
 			</table>
-  		</div>
- 	</div>
+		</div>
+	</div>
 </div>
