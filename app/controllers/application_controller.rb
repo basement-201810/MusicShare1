@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
-	# after_action :user_status_nonrelease?
 
 
 	# Cartのuser_idが、ログインしたuserのidかを検索。
@@ -14,12 +13,6 @@ class ApplicationController < ActionController::Base
 			root_path
 		# end
 	end
-
-	# def user_status_nonrelease?
-	# 	if current_user.user_status == "nonrelease"
-	# 	　　redirect_to new_user_session_path,notice: 'このメールアドレスではログインできません'
-	#     end
-	# end
 
 	protected
 	def configure_permitted_parameters

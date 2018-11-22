@@ -15,10 +15,10 @@
 						<td><%= user.name %></td>
 						<td><%= user.point %></td>
 						<td>
-							<% if user.user_status == "release" %>
+							<% if user.deleted_at.blank? %>
 								<p>公開中</p>
 							<% else %>
-								<p>非公開中</p>
+								<p>非公開</p>
 							<% end %>
 						</td>
 						<td><%= user.memo %></td>

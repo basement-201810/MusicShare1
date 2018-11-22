@@ -17,6 +17,8 @@
 					<th>単価</th>
 					<th>小計</th>
 					<th></th>
+					<th></th>
+					<th></th>
 				</thead>
 
 
@@ -30,6 +32,35 @@
 							<td><%= purchase_item.sub_total / purchase_item.amount %></td>
 							<td><%= purchase_item.sub_total %></td>
 							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary" %></td>
+							<td>
+								<% if current_user.manager == false %>
+									<%= form_for @review, url: purchase_review_path(purchase_item), method: :patch, remote: true do |f| %>
+										<div class="form_group has_icon">
+											<label for="inputEmail">評価</label>
+											<div class="rating">
+											    <span id="5" class="glyphicon glyphicon-star"></span>
+											    <span id="4" class="glyphicon glyphicon-star"></span>
+											    <span id="3" class="glyphicon glyphicon-star"></span>
+											    <span id="2" class="glyphicon glyphicon-star"></span>
+											    <span id="1" class="glyphicon glyphicon-star"></span>
+											</div>
+										</div>
+										<div class="form_group has-icon">
+											<label for="inputEmail">レビュー</label>
+											<%= f.text_area :review_body, autofocus: true, class: "review_body", id: "inputEmail" %>
+										</div>
+										<div class="form_group has-icon">
+											<%= f.submit "投稿", class: "btn btn-warning btn-xs" %>
+										</div>
+									<% end %>
+								<% else %>
+									<%= @review_star %>
+									<%= @review_body %>
+									<%= form_for @review, url: purchase_review_path(purchase_item) do |f| %>
+										<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
+									<% end %>
+								<% end %>
+							</td>
 						</tr>
 					<% end %>
 				</tbody>

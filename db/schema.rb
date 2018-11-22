@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_073705) do
+
+ActiveRecord::Schema.define(version: 2018_11_22_033438) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "amount", null: false
@@ -97,9 +98,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_073705) do
     t.text "review_body"
     t.integer "user_id", null: false
     t.integer "product_id", null: false
+    t.integer "purchase_item_id", null: false
     t.integer "review_star"
     t.boolean "review_status", null: false
-    t.integer "review_points", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -124,8 +125,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_073705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "memo"
-    t.boolean "user_status", default: true
+    t.boolean "user_status", default: true, null: false
     t.boolean "manager", default: false, null: false
+    t.datetime "deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

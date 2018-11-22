@@ -11,13 +11,31 @@
 // about supported directives.
 //
 //= require rails-ujs
+
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require autocomplete-rails
 //= require activestorage
 //= require turbolinks
+
 //= require bootstrap-sprockets
 //= require nested_form_fields
+
 //= require bxslider
-// require_tree .                    ←徳本変更
+// require_tree .
+
+
+
+$('.glyphicon-star').on('click', function(){
+	id = $(this).find('span').attr('id');
+	$.ajax({
+		url: '/purchases/:purchase_id/review/'+id,
+		type: 'PATCH',
+		data: {
+			id: id
+		},
+    	dataType: 'script',
+	});
+});
+
