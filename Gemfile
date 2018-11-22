@@ -75,6 +75,7 @@ gem 'nested_form_fields'
 gem 'enum_help'
 
 gem 'bxslider-rails'
+gem 'paranoia'
 
 
 

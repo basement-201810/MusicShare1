@@ -45,5 +45,6 @@ Rails.application.routes.draw do
   get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
 
   get '/purchases/new/arigatou' =>'purchases#arigatou', as: 'arigatou'
+  patch '/nonrelease/users/:id' => 'users#nonrelease'
 
 end

@@ -43,10 +43,10 @@
 			</table>
 			<%= link_to "編集", edit_user_path, class: "btn btn-success" %><br><br>
 
-
-			<%= form_for @user do |f| %>
-			<%= f.submit "退会しちゃう？", class:"btn btn-danger" %>
-			<%= f.select :user_status, [["やめないっしょ！", "release"],["やめまーーす！", "nonrelease"]], {}, {class:"btn btn-default btn-lg"} %>
+            <% if @user.deleted_at.blank? %>
+			<%= link_to "退会", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger" %>
+			<% else %>
+			<h4> 退会済みです！</h4>
 			<% end %>
 
 
