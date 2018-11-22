@@ -11,14 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require activestorage
-//= require autocomplete-rails
-//= require turbolinks
 //= require jquery
-//= require bootstrap-sprockets
-// require_tree .                    ←徳本変更
-//= require nested_form_fields
 //= require jquery_ujs
-
-
+//= require jquery.turbolinks
+//= require autocomplete-rails
+//= require activestorage
+//= require turbolinks
+//= require bootstrap-sprockets
+//= require nested_form_fields
 //= require bxslider
+// require_tree .                    ←徳本変更
