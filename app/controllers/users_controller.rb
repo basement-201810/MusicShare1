@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
 
 	def edit
-		@user = User.find(params[:id])
+		@user = User.with_deleted.find(params[:id])
 	end
 
 	def destroy
