@@ -74,12 +74,14 @@
 						<% end %>
 					</th>
 					<th></th>
+					<th></th>
 				</thead>
 
 
 				<tbody>
-					<% @purchases.each do |purchase| %>
+					
 						 <tr>
+						 	<% @purchases.each do |purchase| %>
 							<td>
 								<%= purchase.date.year %> 年
 								<%= purchase.date.month %> 月
@@ -98,8 +100,11 @@
 								<% end %>
 							</td>
 							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
+							<% end %>
+							<td><%= @reviews %></td>
 						</tr>
-					<% end %>
+					
+					
 				</tbody>
 			</table>
   		</div>

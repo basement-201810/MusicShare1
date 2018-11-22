@@ -4,11 +4,33 @@ class ReviewsController < ApplicationController
 	end
 
 	def create
-		@review = Review.find(params[:id])
-		if @review.new(review_params)
-			redirect_to purchase_path(@purchase.id), notice: 'Review was successfully created!'
+		@reviews = current_user.reviews
+		@review = Review.new(review_params)
+		@review.product_id = params[:id].purchase_items.product_id
+		@review.user_id = current_user.id
+
+		x = 0
+		@reviews.each do |review|
+			if review.product_id == @review.product_id
+				x = review.id
+			end
+		end
+
+		if x = 0
+			if @review.save!
+				redirect_to user_path(current_user), notice: 'Review was successfully created!'
+			else
+				redirect_to request.referrer
+			end
 		else
-			render :show
+			@review = Review.find(x)
+			@review.review_body = params[:@review][:review_body]
+			@review.review_star = parmas[:@review][:review_star]
+			if @review.save
+				redirect_to user_path(current_user), notice: 'Review was successfully updated.'
+			else
+				redirect_to request.referrer
+			end
 		end
 	end
 
@@ -18,10 +40,12 @@ class ReviewsController < ApplicationController
 
 	def update
 		@review = Review.find(params[:id])
+		@review.product_id = params[:product_id]
+		@review.user_id = current_user.id
 		if @review.update(review_params)
-			redirect_to purchase_path(@purchase.id), notice: 'Review was successfully updated.'
+			redirect_to user_path(current_user), notice: 'Review was successfully updated.'
 		else
-			render :show
+			redirect_to request.referrer
 		end
 	end
 
