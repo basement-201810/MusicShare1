@@ -2,14 +2,14 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@users = User.all
+		@users = User.with_deleted
 		@users_k = User.order(:user_id).page(params[:page]) #userのkaminari gem 適応箇所
 		@user = User.find(current_user.id)
 	end
 
 	def show
-		@user = User.find(params[:id])
-		@purchases = User.find(params[:id]).purchases.all.order('created_at DESC')
+		@user = User.with_deleted.find(params[:id])
+		@purchases = User.with_deleted.find(params[:id]).purchases.all.order('created_at DESC')
 
 	end
 
@@ -25,6 +25,12 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
+	end
+
+	def destroy
+		user = User.find(params[:id])
+		user.destroy
+		redirect_to root_path
 	end
 
 	# def release
