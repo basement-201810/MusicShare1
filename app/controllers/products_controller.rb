@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
-	before_action :authenticate_user!
-	before_action :correct_user, except: [:show]
+	before_action :authenticate_user!,except: [:show,:research]
+	before_action :correct_user, except: [:show,:research]
 
 	# before_action :sum_amount
 	# def sum_amount
@@ -94,10 +94,6 @@ class ProductsController < ApplicationController
 	private
 	def product_params
 		params.require(:product).permit(:pro_title, :pro_artist, :pro_genre_id, :pro_price, :pro_date, :pro_amount, :pro_label_id, :pro_status, :pro_image, musics_attributes: [:id, :music_name, :music_disk_number, :product_id, :music_number, :_destroy])
-	end
-
-	def review_params
-		params.require(:review).permit(:review_body, :review_star, :review_status)
 	end
 
 

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :purchases, only: [:new,:create,:index, :show, :update] do
 #  	resources :purchase_items, only: [:index]
+    patch :untreat
+    patch :prepare
+    patch :sent
+    resources :review, except: [:show]
 
   end
 
@@ -17,13 +21,14 @@ Rails.application.routes.draw do
 
   resources :pro_genres, only: [:show] do
   	resources :products, only: [:show, :edit, :update]do
-  		resources :reviews, except: [:destroy, :index]
+  		resources :reviews, only: [:show]
   	end
   end
 
 # do以下を追記
   resources :products, only: [:index, :new, :create] do
-    resources :cart_items, only: [:create,:update,:destroy]
+    resources :cart_items, only: [:create,:update,:destroy]do
+    end
   end
 
   resources :products do

@@ -12,13 +12,26 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require autocomplete-rails
 //= require turbolinks
 //= require jquery
+//= require jquery_ujs
+//= require autocomplete-rails
 //= require bootstrap-sprockets
 // require_tree .                    ←徳本変更
 //= require nested_form_fields
-//= require jquery_ujs
 
 
 //= require bxslider
+
+
+$('.glyphicon-star').on('click', function(){
+	id = $(this).find('span').attr('id');
+	$.ajax({
+		url: '/purchases/:purchase_id/review/'+id,
+		type: 'PATCH',
+		data: {
+			id: id
+		},
+    	dataType: 'script',
+	});
+});
