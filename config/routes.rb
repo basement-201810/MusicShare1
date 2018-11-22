@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     patch :untreat
     patch :prepare
     patch :sent
-    resources :review, except: [:show]
 
   end
+      resources :reviews, except: [:show]
 
 
 # do以下コメントアウト
