@@ -1,4 +1,5 @@
 class CartItemsController < ApplicationController
+	before_action :authenticate_user!
 	# before_action :hoge
 
 	def create
