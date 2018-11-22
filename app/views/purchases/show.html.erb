@@ -18,7 +18,6 @@
 					<th>小計</th>
 					<th></th>
 					<th></th>
-					<th></th>
 				</thead>
 
 
@@ -34,7 +33,7 @@
 							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary" %></td>
 							<td>
 								<% if current_user.manager == false %>
-									<%= form_for @review, url: purchase_review_path(purchase_item), method: :patch, remote: true do |f| %>
+									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id), remote: true do |f| %>
 										<div class="form_group has_icon">
 											<label for="inputEmail">評価</label>
 											<div class="rating">
@@ -56,7 +55,7 @@
 								<% else %>
 									<%= @review_star %>
 									<%= @review_body %>
-									<%= form_for @review, url: purchase_review_path(purchase_item) do |f| %>
+									<%= form_for @review, url: purchase_item_review_path(purchase_item.id, @review) do |f| %>
 										<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
 									<% end %>
 								<% end %>

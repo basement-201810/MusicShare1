@@ -1,48 +1,49 @@
 class ReviewsController < ApplicationController
-	def new
-		@review = Review.new
-	end
+	# def new
+	# 	@review = Review.new
+	# end
 
-	def create
-		@reviews = current_user.reviews
-		@review = Review.new(review_params)
-		@review.product_id = params[:id].purchase_items.product_id
-		@review.user_id = current_user.id
+	# def create
+	# 	@reviews = current_user.reviews
+	# 	@review = Review.new(review_params)
+	# 	@review.product_id = params[:id].purchase_items.product_id
+	# 	@review.user_id = current_user.id
 
-		x = 0
-		@reviews.each do |review|
-			if review.product_id == @review.product_id
-				x = review.id
-			end
-		end
+	# 	x = 0
+	# 	@reviews.each do |review|
+	# 		if review.product_id == @review.product_id
+	# 			x = review.id
+	# 		end
+	# 	end
 
-		if x = 0
-			if @review.save!
-				redirect_to user_path(current_user), notice: 'Review was successfully created!'
-			else
-				redirect_to request.referrer
-			end
-		else
-			@review = Review.find(x)
-			@review.review_body = params[:@review][:review_body]
-			@review.review_star = parmas[:@review][:review_star]
-			if @review.save
-				redirect_to user_path(current_user), notice: 'Review was successfully updated.'
-			else
-				redirect_to request.referrer
-			end
-		end
-	end
+	# 	if x = 0
+	# 		if @review.save!
+	# 			redirect_to user_path(current_user), notice: 'Review was successfully created!'
+	# 		else
+	# 			redirect_to request.referrer
+	# 		end
+	# 	else
+	# 		@review = Review.find(x)
+	# 		@review.review_body = params[:@review][:review_body]
+	# 		@review.review_star = parmas[:@review][:review_star]
+	# 		if @review.save
+	# 			redirect_to user_path(current_user), notice: 'Review was successfully updated.'
+	# 		else
+	# 			redirect_to request.referrer
+	# 		end
+	# 	end
+	# end
 
 	def edit
 		@review = Review.find(params[:id])
 	end
 
 	def update
-		@review = Review.find(params[:id])
-		@review.product_id = params[:product_id]
-		@review.user_id = current_user.id
-		if @review.update(review_params)
+		@review = Review.find_or_create_by(purchase_item_id: params[:id])
+		# @review.product_id = params[:product_id]
+		# @review.user_id = current_user.id
+		# @review.purchase_item_id = params[:purchase_item_id]
+		if @review.update!(review_params)
 			redirect_to user_path(current_user), notice: 'Review was successfully updated.'
 		else
 			redirect_to request.referrer
