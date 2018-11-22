@@ -25,7 +25,8 @@ Rails.application.routes.draw do
 
 # do以下を追記
   resources :products, only: [:index, :new, :create] do
-    resources :cart_items, only: [:create,:update,:destroy]
+    resources :cart_items, only: [:create,:update,:destroy]do
+    end
   end
 
   resources :products do

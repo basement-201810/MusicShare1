@@ -35,6 +35,10 @@ class PurchasesController < ApplicationController
 	  	@purchase_items = PurchaseItem.where(purchase_id: params[:id])
 	  	@cart_items = CartItem.where(cart_id: @purchase.cart_id)
 	  	@review = Review.new
+	  	respond_to do |format|
+	      format.html
+	      format.js
+	    end
 	  	if params[:rating]
 			@review = Review.find(reivew_params)
 			@review.save(:rating => params[:rating])
