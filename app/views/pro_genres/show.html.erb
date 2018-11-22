@@ -30,50 +30,36 @@
 	</div>
 
     <!-- - - - メインー - - - -->
-	<div class="main col-md-10 clearfix">
+
+    <section class="main col-md-10 clearfix">
 		<h3 class="genre-title"> ◇ <%= @genre.pro_genre_name %></h3>
 		<% @products.each do |product| %>
-		<section class="card">
+
+		<div class="col-md-3">
 			<% if product.pro_date >Time.now-(7.days) %>
 			    <div class="newsign">
-				    <span class="ribbon">NEW</span>
+				<span class="ribbon">NEW</span>
 			    </div>
 			<% end %>
-			<div class="card-img text-center">
-				<%= attachment_image_tag product, :pro_image, size: "170x170", fallback: "no-image_rocket.png"%>
+			<div class="cd-image">
+				<%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
+				<div class="cd-image-overlay">
+					<p>★★★★★
+					<%= link_to "77", pro_genre_product_path(@genre, product.id),class: "far fa-comments review-amount" %></p>
+					<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
+					</p>
+					<p><%= product.pro_artist %></p>
+				</div>
 			</div>
-			<div class="card-content">
-				<h5 class="card-title"><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id) %></h5>
-				<h6 class="card-subtitle text-muted">
-					<span class="glyphicon glyphicon-user"> </span>
-					<%= product.pro_artist %>
-				</h6>
-				<p class="card-text price">
-					<%= number_to_currency(product.pro_price, :unit => "￥",:precision => 0)  %>
-					<span>
-						<% if product.pro_amount >= 11 then%>
-						| 在庫あり
-						<% elsif product.pro_amount <= 10 && product.pro_amount >= 1 then %>
-					    | ※ 残りわずか ※
-					    <% elsif product.pro_amount = 0 then  %>
-					    | ※※ SoldOut ※※
-					    <%end%>
-					</span><br>
-					★★★★★
-					<span class="far fa-comments review-amount"> 77</span>
-				</p>
-			</div>
-		</section>
+		</div>
 		<% end %>
-	</div>
-
-</div>
+	</section>
 
 <!-- - - - リンクボタン- - - -->
 　　<div class="row">
 		<span class="col-md-11"></span>
 		<p class="col-md-1">
-			<%= link_to "  戻る",root_path, class: " btn-info  btn-sm" %>
+			<%= link_to "  BACK",root_path, class: " btn-info btn-block btn-sm text-center" %>
 		</p>
 	</div>
 </div>

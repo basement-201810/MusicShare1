@@ -162,8 +162,8 @@
 					<td colspan="3">
 						<!-- - - -  管理者 - - - -->
 						<%if user_signed_in? && current_user.manager == true %>
-						<%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success btn-xs" %>
-						<%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info btn-xs"%>
+						<%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success" %>
+						<%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info"%>
 						<!-- - - - ログイン済会員 - - - -->
 						<% elsif user_signed_in? && current_user.manager == false %>
 						<%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>

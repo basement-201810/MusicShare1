@@ -17,7 +17,7 @@
 //= require jquery_ujs
 //= require autocomplete-rails
 //= require bootstrap-sprockets
-//= require_tree .
+// require_tree .                    ←徳本変更
 //= require nested_form_fields
 
 

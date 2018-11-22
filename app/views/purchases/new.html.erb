@@ -13,7 +13,7 @@
 	<%= f.hidden_field :pur_email, :value => "#{current_user.email}" %>
 	<%= f.hidden_field :date, :value => "#{Time.now}" %>
 	<%= f.hidden_field :cart_id, :value => "#{@cart.id}" %>
-	<%= f.hidden_field :pur_total, :value => "#{@cart.total}" %>
+	<%= f.hidden_field :pur_total, :class => "pay_points_field", :value => "#{@cart.total}" %>
 	<%= f.hidden_field :get_points, :value => "#{(@cart.total * 0.01).floor}" %>
 
 
@@ -22,14 +22,14 @@
 
 
 	<p>注文商品合計価格：<%= @cart.total %>円</p>
-	<p>ポイント使用：<%= f.number_field :pay_points, :size => "3", :maxlength => "6", :value => "0", :max => "#{current_user.point}" %>pt</p>
+	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field" ,:size => "3", :maxlength => "6", :value => "0", :max => "#{current_user.point}" %>pt</p>
 	<p>(利用可能ポイント：<%= current_user.point %>pt)</p>
-	<p>お支払い合計金額</p>
+	<p>お支払い合計金額：<input type="text" class="pay_points_field"></p>
 	<p>この購入での獲得ポイント：<%= (@cart.total * 0.01).floor %>pt</p>
 	<p>支払い方法：<%= f.text_field :pay %></p>
+	
 
-
-	<%= @cart_items.each do |cart_item| %>
+	<% @cart_items.each do |cart_item| %>
 
 		<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
 
@@ -46,8 +46,10 @@
 	<% end %>
 
 
-	<%= f.submit "注文確定", class: "btn btn-primary"%>
+<%= f.submit "注文確定", class: "btn btn-primary"%>
 
 
 <% end %>
 
+<script src="jquery-4.3.3.min.js"></script>
+<script src="purchase_pay_points.js"></script>

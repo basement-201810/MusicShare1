@@ -2,14 +2,14 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@users = User.all
+		@users = User.with_deleted
 		@users_k = User.order(:user_id).page(params[:page]) #userのkaminari gem 適応箇所
 		@user = User.find(current_user.id)
 	end
 
 	def show
-		@user = User.find(params[:id])
-		@purchases = User.find(params[:id]).purchases.all.order('created_at DESC')
+		@user = User.with_deleted.find(params[:id])
+		@purchases = User.with_deleted.find(params[:id]).purchases.all.order('created_at DESC')
 		@reviews = @user.reviews
 		@review = Review.new
 	end
@@ -17,31 +17,41 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update!(user_params)
-			redirect_to user_path(@user.id), notice: 'Profile was successfully updated!!'
+			redirect_to user_path, notice: 'Profile was successfully updated!!'
 		else
 			render :edit
 		end
 	end
 
+
 	def edit
 		@user = User.find(params[:id])
 	end
 
-	def release
+	def destroy
 		user = User.find(params[:id])
-		user.release! unless user.release? # => releaseがfalse
-		redirect_to users_path
+		user.destroy
+		redirect_to root_path
 	end
 
-	def nonrelease
-		user = User.find(params[:id])
-		user.nonrelease! unless user.release? # => nonreleaseがfalse
-		redirect_to users_path
-	end
+	# def release
+	# 	user = User.find(params[:id])
+	# 	user.release! unless user.release? # => releaseがfalse
+	# 	redirect_to users_path
+	# end
+
+	# def nonrelease
+	# 	user = User.find(params[:id])
+	# 	user.nonrelease! unless user.release? # => nonreleaseがfalse
+	# 	redirect_to users_path
+	# end
+
 
 	def passchange
 		@user = User.find(params[:id])
 	end
+
+
 end
 
 private

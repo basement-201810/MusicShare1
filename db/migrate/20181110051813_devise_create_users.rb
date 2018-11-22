@@ -42,7 +42,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.datetime :created_at, null: false
       t.datetime :updated_at, null: false
       t.text :memo
-      t.boolean :user_status, default: true
+      t.boolean :user_status, default: true, null: false
       t.boolean :manager, null: false, default: false
 
 

@@ -41,11 +41,21 @@
 					<% end %>
 				</tbody>
 			</table>
-			<%= link_to "編集", edit_user_path, class: "btn btn-success" %>
-			<%= link_to "退会", root_path, data: { confirm: "本当に退会しますか？" }, class: "btn btn-danger" %>
+			<%= link_to "編集", edit_user_path, class: "btn btn-success" %><br><br>
+
+            <% if @user.deleted_at.blank? %>
+			<%= link_to "退会", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger" %>
+			<% else %>
+			<h4> 退会済みです！</h4>
+			<% end %>
+
+
+
 		</div>
 	</div>
 </div>
+
+<br>
 
 <!--    購入履歴一覧    -->
 
@@ -80,7 +90,13 @@
 							<td><%= purchase.pur_total%></td>
 							<td>
 								<% if current_user.manager %>
-									<%= purchase.status %>
+									<% if purchase.status == 0 %>
+										未処理
+									<% elsif purchase.status == 1 %>
+										準備中
+									<% elsif purchase.status == 2 %>
+										発送済み
+									<% end %>
 								<% end %>
 							</td>
 							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>

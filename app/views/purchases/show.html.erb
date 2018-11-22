@@ -69,7 +69,7 @@
 				<% if current_user.manager %>
 						<%= form_for @purchase, url: purchase_path do |f| %>
 
-							<p>ステータス　<%= f.select :status, Purchase.statuses.keys, class:"form-control" %></p>
+							<p>ステータス　<%= f.select :status, [["未処理","0"],["準備中","1"], ["発送済み","2"]] %></p>
 
 						<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
 					<% end %>

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     patch :prepare
     patch :sent
     resources :review, except: [:show]
+
   end
+
 
 # do以下コメントアウト
  resources :carts, only:[:show]  #except: [:destroy, :index] do
@@ -48,5 +50,6 @@ Rails.application.routes.draw do
   get '/user/:id/passchange' => 'users#passchange', as: 'passchange'
 
   get '/purchases/new/arigatou' =>'purchases#arigatou', as: 'arigatou'
+  patch '/nonrelease/users/:id' => 'users#nonrelease'
 
 end

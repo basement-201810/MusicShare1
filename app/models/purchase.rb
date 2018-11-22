@@ -4,7 +4,7 @@ class Purchase < ApplicationRecord
 
 	accepts_nested_attributes_for :purchase_items
 
-	enum status: {untreated: 0, prepare: 1, sent: 2}
+	# enum status: {untreated: 0, prepare: 1, sent: 2}
 
 	validates :pur_name, presence: true
 	validates :pur_address, presence: true
