@@ -1,45 +1,207 @@
-<h1>受注管理（一覧）ページ</h1>
-
 <div class="container">
+
+	<!------ 会員数・売上高報告 ------>
 	<div class="row">
-		<div class="col-md-10">
-			<h1>会員数<%= @user_all -1 %>人！！！！！！     売り上げ<%= @pur_total_sum %>円！！！！！！！</h1>
-			<table class="table table-hover">
-				<thead>
+		<div class="col-md-6">
+			<p class="report">MEMBERS : <%= @user_all -1 %> </p>
+		</div>
+		<div class="col-md-6">
+			<p class="report">SALES : 
+				<%= number_to_currency(@pur_total_sum.to_i , :unit => "¥",:precision => 0)  %></p>
+		</div>
+	</div>
+
+    <!------ purchase_status別ボタン ------>
+	<div class="row">
+		<div class="col-md-9">
+			<h2>受注一覧表</h2>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+	    <div class="col-md-8"></div>
+	    <div id="tab-menu" class="col-md-4 clearfix" >
+	        <a href="#tab-all" class="active btn btn-default">ALL</a>
+	        <a href="#tab-0" class="btn btn-danger">未処理</a>
+	        <a href="#tab-1" class="btn btn-warning">準備中</a>
+	        <a href="#tab-2" class="btn btn-info">発送済</a>
+        </div>
+    </div>
+
+	<div id="tab-contents">
+		<!------ 受注一覧表 (all)------>
+		<table id="tab-all" class="table tab">
+			<thead>
+				<tr>
 					<th>購入者</th>
+					<th>注文合計金額</th>
 					<th>購入日時</th>
 					<th>ステータス</th>
 					<th></th>
-				</thead>
+				</tr>
 
-				<% if @switch == 0 %>
-				<tbody>
-					<% @purchases.each do |purchase| %>
-
-							<tr>
-								<td><%= purchase.pur_name %></td>
-								<td>
-									<%= purchase.date.year %> 年
-									<%= purchase.date.month %> 月
-									<%= purchase.date.day %> 日
-								</td>
-								<td>
-									<% if purchase.status == 0 %>
-										未処理
-									<% elsif purchase.status == 1 %>
-										準備中
-									<% elsif purchase.status == 2 %>
-										発送済み
-									<% end %>
-								</td>
-								<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
-							</tr>
-					<% end %>
-				</tbody>
+			</thead>
+			<% @purchases.each do |purchase| %>
+		    <% if purchase.status == 0 %>
+		        <tbody style="background-color:orangered;">
+			<% elsif purchase.status == 1 %>
+		        <tbody style="background-color:yellow;">
+		    <% elsif purchase.status == 2 %>
+		        <tbody style="background-color:aliceblue;" >
+		    <%end%>
+				<tr>
+					<td><%= purchase.pur_name %></td>
+					<td>
+						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+					</td>
+					<td>
+						<%= purchase.date.year %> 年
+						<%= purchase.date.month %> 月
+						<%= purchase.date.day %> 日
+					</td>
+					<td>
+						<% if purchase.status == 0 %>
+						未処理
+						<% elsif purchase.status == 1 %>
+						準備中
+						<% elsif purchase.status == 2 %>
+						発送済
+						<% end %>
+					</td>
+					<td>
+						<%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+				</tr>
 				<% end %>
+			</tbody>
+		</table>
 
-			</table>
+		<!------ 受注一覧表 (未処理)------>
+		<table id="tab-0" class="table table-hover tab">
+			<thead>
+				<tr>
+					<th>購入者</th>
+					<th>注文合計金額</th>
+					<th>購入日時</th>
+					<th>ステータス</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody style="background-color:orangered;">
+				<% @purchases_0.each do |purchase| %>
+				<tr>
+					<td><%= purchase.pur_name %></td>
+					<td>
+						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+					</td>
+					<td>
+						<%= purchase.date.year %> 年
+						<%= purchase.date.month %> 月
+						<%= purchase.date.day %> 日
+					</td>
+					<td>
+						<% if purchase.status == 0 %>
+						未処理
+						<% elsif purchase.status == 1 %>
+						準備中
+						<% elsif purchase.status == 2 %>
+						発送済
+						<% end %>
+					</td>
+					<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 
-  		</div>
- 	</div>
+		<!------ 受注一覧表 (準備中)------>
+		<table id="tab-1" class="table table-hover tab">
+			<thead>
+				<tr>
+					<th>購入者</th>
+					<th>注文合計金額</th>
+					<th>購入日時</th>
+					<th>ステータス</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody style="background-color:yellow;">
+				<% @purchases_1.each do |purchase| %>
+				<tr>
+					<td><%= purchase.pur_name %></td>
+					<td>
+						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+					</td>
+					<td>
+						<%= purchase.date.year %> 年
+						<%= purchase.date.month %> 月
+						<%= purchase.date.day %> 日
+					</td>
+					<td>
+						<% if purchase.status == 0 %>
+						未処理
+						<% elsif purchase.status == 1 %>
+						準備中
+						<% elsif purchase.status == 2 %>
+						発送済
+						<% end %>
+					</td>
+					<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<!------ 受注一覧表 (配送済)------>
+		<table id="tab-2" class="table table-hover tab">
+			<thead>
+				<tr>
+					<th>購入者</th>
+					<th>注文合計金額</th>
+					<th>購入日時</th>
+					<th>ステータス</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody style="background-color:aliceblue;" >
+				<% @purchases_2.each do |purchase| %>
+				<tr>
+					<td><%= purchase.pur_name %></td>
+					<td>
+						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+					</td>
+					<td>
+						<%= purchase.date.year %> 年
+						<%= purchase.date.month %> 月
+						<%= purchase.date.day %> 日
+					</td>
+					<td>
+						<% if purchase.status == 0 %>
+						未処理
+						<% elsif purchase.status == 1 %>
+						準備中
+						<% elsif purchase.status == 2 %>
+						発送済
+						<% end %>
+					</td>
+					<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+	</div>
 </div>
+
+<script>
+	$(function(){
+		$('#tab-contents .tab[id != "tab-all"]').hide();
+
+		$('#tab-menu a').on('click', function() {
+			$("#tab-contents .tab").hide();
+			$("#tab-menu .active").removeClass("active");
+			$(this).addClass("active");
+			$($(this).attr("href")).show();
+			return false;
+		});
+	});
+</script>
