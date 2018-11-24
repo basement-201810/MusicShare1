@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	before_action :authenticate_user!
-	before_action :correct_user, only:[:show,:edit,]
+	before_action :correct_user, only:[:show,:edit]
 
 	def index
 		@users = User.with_deleted

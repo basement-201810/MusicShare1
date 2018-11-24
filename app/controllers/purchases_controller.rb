@@ -91,7 +91,7 @@ class PurchasesController < ApplicationController
 	# def correct_user
 	# 	@user = current_user
 	# 	@purchase = Purchase.find(params[:id])
-	# 	redirect_to root_path unless @user == current_user || @user.manager == ture
+	# 	redirect_to root_path unless @user == current_user || @user.manager == true
  #    end
 
 	private
