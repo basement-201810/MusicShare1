@@ -8,8 +8,8 @@ class Purchase < ApplicationRecord
 
 	validates :pur_name, presence: true
 	validates :pur_address, presence: true
-	validates :pur_post_code, presence: true
-	validates :pur_tell, presence: true
+	validates :pur_post_code, presence: true,numericality: { only_integer: true },length: { maximum: 10 }
+	validates :pur_tell, presence: true,numericality: { only_integer: true }
 
 
 #	default_scope -> {order (status: :desc)}
