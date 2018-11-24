@@ -22,6 +22,14 @@ class PurchasesController < ApplicationController
 			@user.point += (@purchase.get_points - @purchase.pay_points )
 			@user.save
 
+			# @purchase_items = @purchase.purchase_items.all
+			# @purchase_items.each do |purchase_item|
+			# 	@review = Review.new
+			# 	@review.id = @purchase_item.id
+			# 	@review.user_id = current_user.id
+			# 	@review.save
+			# end
+
 			redirect_to arigatou_path
 		else
 			flash[:alert] = "failed to order."

@@ -16,5 +16,9 @@ class Product < ApplicationRecord
 	validates :pro_price, presence: true, numericality: true
 	validates :pro_amount, presence: true, numericality: true
 
+	# def star_average
+	# 	reviews.to_a.sum { |review| review.review_star }  / reviews.all.count
+	# end
+
 end
 
