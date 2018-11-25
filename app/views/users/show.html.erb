@@ -82,6 +82,7 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
+			<p><%= flash.notice %></p>
 			<h3>購入履歴一覧</h3>
 			<table class="table table-hover">
 				<thead>
@@ -93,36 +94,32 @@
 						<% end %>
 					</th>
 					<th></th>
-					<th></th>
 				</thead>
 
 
 				<tbody>
-
-					<tr>
-						<% @purchases.each do |purchase| %>
-						<td>
-							<%= purchase.date.year %> 年
-							<%= purchase.date.month %> 月
-							<%= purchase.date.day %> 日
-						</td>
-						<td><%= purchase.pur_total%></td>
-						<td>
-							<% if current_user.manager %>
-							<% if purchase.status == 0 %>
-							未処理
-							<% elsif purchase.status == 1 %>
-							準備中
-							<% elsif purchase.status == 2 %>
-							発送済み
-							<% end %>
-							<% end %>
-						</td>
-						<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
-						<% end %>
-						<td><%= @reviews %></td>
-					</tr>
-
+					<% @purchases.each do |purchase| %>
+						 <tr>
+							<td>
+								<%= purchase.date.year %> 年
+								<%= purchase.date.month %> 月
+								<%= purchase.date.day %> 日
+							</td>
+							<td><%= purchase.pur_total%></td>
+							<td>
+								<% if current_user.manager %>
+									<% if purchase.status == 0 %>
+										未処理
+									<% elsif purchase.status == 1 %>
+										準備中
+									<% elsif purchase.status == 2 %>
+										発送済み
+									<% end %>
+								<% end %>
+							</td>
+							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
+						</tr>
+					<% end %>
 				</tbody>
 			</table>
 		</div>
