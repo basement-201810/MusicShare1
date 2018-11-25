@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # coding: utf-8
 
-User.create!(:name => '管理者', :name_kana => 'カンリシャ', :email => 'Music@Share', :password => 'mmmsss', :address => '管理者１丁目', :post_code => '000-0000', :tell => '000-0000-0000', :manager => 'true')
+User.create!(:name => '管理者', :name_kana => 'カンリシャ', :email => 'Music@Share', :password => 'mmmsss', :address => '管理者１丁目', :post_code => '0000000', :tell => '00000000000', :manager => 'true')
 
 ProGenre.create(:pro_genre_name => 'J-POP')
 ProGenre.create(:pro_genre_name => 'K-POP')
