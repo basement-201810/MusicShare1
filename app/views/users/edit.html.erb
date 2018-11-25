@@ -2,7 +2,9 @@
 	<div class="row">
 		<% if current_user.manager == false %>
 
+
 		    <!-- エラーメッセージ -->
+
 			<% if @user.errors.any? %>
 			<h4>
 				<%= @user.errors.count %> error prohibited this obj from being saved:
@@ -14,7 +16,9 @@
 			</div>
 			<% end %>
 
+
 			<!-- ユーザー用の表示 --->
+
 			<h2>編集</h2>
 			<div class="edit_user">
 				<%= form_for(@user) do |f| %>
@@ -65,7 +69,9 @@
 				<% end %>
 			</div>
 
+
 		<!-- 管理者用の表示 -->
+
 		<% else %>
 			<h2> ユーザの強制編集</h2>
 
