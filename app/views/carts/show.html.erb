@@ -36,7 +36,7 @@
 					<%= number_to_currency(cart_item.product.pro_price, :unit => "￥",:precision => 0)  %>
 				</td>
 				<td>
-					注文数<%= f.number_field :amount, min:"1",max:"100" %>個
+						注文数<%= f.number_field :amount, min:"1",max:"#{cart_item.product.pro_amount}" %>個
 					<%= f.submit "変更", class: "btn btn-default btn-xs"%>
 				</td>
 
