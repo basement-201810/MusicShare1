@@ -31,8 +31,12 @@
 						<td><%= @user.tell %></td>
 					</tr>
 					<tr>
+						<td>郵便番号</td>
+						<td><%= @user.post_code %></td>
+					</tr>
+					<tr>
 						<td>住所</td>
-						<td><%= @user.post_code %><br><%= @user.address %></td>
+						<td><%= @user.address %></td>
 					</tr>
 					<tr>
 						<td>ポイント</td>
@@ -60,7 +64,7 @@
 			<%= link_to "User一覧へ戻る", users_path, class: "btn btn-primary user-button" %>
 
 			<% if current_user.manager == false %>
-			<%= link_to "退会する", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger" %>
+			<%= link_to "退会する", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger user-button" %>
 			<% else %>
 			<% end %>
 
