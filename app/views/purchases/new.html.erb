@@ -1,19 +1,32 @@
-<h1>注文情報入力ページ</h1>
+<h2>注文情報入力ページ</h2>
 
 <p style="font-size: 25px;">お客様情報確認欄</p>
 
+<!----- エラーメッセージ ----->
 <p id = "alert"><%= alert %></p>
+<% if @purchase.errors.any? %>
+    <h4>
+	    <%= @purchase.errors.count %> error prohibited this obj from being saved:
+    </h4>
+    <div id="error_explanation" class="alert alert-danger">
+	    <% @purchase.errors.full_messages.each do |message| %>
+	    <p><%= message %></p>
+	    <% end %>
+    </div>
+<% end %>
+
 
 <%= form_for(@purchase) do |f| %>
-	<p>名前：<%= f.text_field :pur_name, :value => "#{current_user.name}" %></p>
-	<p>住所：<%= f.text_area :pur_address, :value => "#{current_user.address}" %></p>
-	<p>郵便番号：<%= f.text_field :pur_post_code, :value => "#{current_user.post_code}" %></p>
-	<p>電話番号：<%= f.text_field :pur_tell, :value => "#{current_user.tell}" %></p>
+	<p>名前：<%= f.text_field :pur_name,:required => "required", :value => "#{current_user.name}", placeholder:"山田太郎"%></p>
+	<p>住所：<%= f.text_area :pur_address,:required => "required", :value => "#{current_user.address}",placeholder:"東京都xx区xxx0丁目000-00 xxxxxxx00号" %></p>
+	<p>郵便番号：<%= f.text_field :pur_post_code,:required => "required", :value => "#{current_user.post_code}",placeholder:"0000000 ※ハイフン無しで入力" %></p>
+	<p>電話番号：<%= f.text_field :pur_tell,:required => "required", :value => "#{current_user.tell}",placeholder:"00000000000 ※ハイフン無しで入力" %></p>
+
 	<%= f.hidden_field :pur_name_kana, :value => "#{current_user.name_kana}" %>
 	<%= f.hidden_field :pur_email, :value => "#{current_user.email}" %>
 	<%= f.hidden_field :date, :value => "#{Time.now}" %>
 	<%= f.hidden_field :cart_id, :value => "#{@cart.id}" %>
-	<%= f.hidden_field :pur_total, :class => "pay_points_field", :value => "#{@cart.total}" %>
+	<%= f.hidden_field :pur_total, :class => "pay_points_field_0", :value => "#{@cart.total}" %>
 	<%= f.hidden_field :get_points, :value => "#{(@cart.total * 0.01).floor}" %>
 
 
@@ -22,14 +35,37 @@
 
 
 	<p>注文商品合計価格：<%= @cart.total %>円</p>
-	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field" ,:size => "3", :maxlength => "6", :value => "0", :max => "#{current_user.point}" %>pt</p>
+	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field_1" ,:size => "3", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>pt</p>
+
 	<p>(利用可能ポイント：<%= current_user.point %>pt)</p>
-	<p class="aaa">お支払い合計金額</p>
+	<div>
+		<span>お支払い合計金額：</span>
+		<span class="pay_points_field_2"><%= @cart.total %> </span>
+		<span>円</span>
+	</div>
 	<p>この購入での獲得ポイント：<%= (@cart.total * 0.01).floor %>pt</p>
 	<p>支払い方法：<%= f.select :pay, [["銀行振込","0"],["クレジットカード","1"],["代金引換","2"]] %></p>
 	
 
+<!-- 	<% @cart_items.each do |cart_item| %>
 
+		<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
+
+			<%= purchase_item.hidden_field :cart_item_id,:value  => "#{cart_item.id}" %>
+			<%= purchase_item.hidden_field :sub_total,:value  => "#{cart_item.sub_total}" %>
+			<%= purchase_item.hidden_field :amount,:value  => "#{cart_item.amount}" %>
+			<%= purchase_item.hidden_field :title,:value  => "#{cart_item.product.pro_title}" %>
+			<%= purchase_item.hidden_field :artist,:value  => "#{cart_item.product.pro_artist}" %>
+			<%= purchase_item.hidden_field :image_id,:value  => "#{cart_item.product.pro_image_id}" %>
+			<%= purchase_item.hidden_field :product_id,:value  => "#{cart_item.product_id}" %>
+			<%= purchase_item.hidden_field :review_id,:value  => "#{}" %>
+
+
+
+		<% end %>
+	
+	<% end %>
+ -->
 
 <%= f.submit "注文確定", class: "btn btn-primary"%>
 
@@ -37,4 +73,52 @@
 <% end %>
 
 <!-- <script src="jquery-3.3.1.min.js"></script> -->
-<script src="purchase_pay_points.js"></script>
+<script >
+$(function(){
+  $('.pay_points_field_1').keyup(function(){
+    var numA = $('.pay_points_field_0').val();
+    var numB = $('.pay_points_field_1').val();
+
+    //parseIntで文字列を数値に
+    numA = parseInt(numA);
+    numB = parseInt(numB);
+
+    if(numB > numA){
+    	$('.pay_points_field_1').val(numA);
+    	$('.pay_points_field_2').text(0);
+    	return false;
+    };
+
+    if(!numB){
+      $('.pay_points_field_1').val();
+      $('.pay_points_field_2').text(numA);
+      return false;
+    };
+
+    $('.pay_points_field_2').text(numA-numB);
+  });
+
+
+
+  $('.pay_points_field_1').focus(function(){
+  	var numA = $('.pay_points_field_0').val();
+  	numA = parseInt(numA);
+  	$('.pay_points_field_1').val('');
+  	$('.pay_points_field_2').text(numA);
+  });
+
+  $('.pay_points_field_1').blur(function(){
+	  	var numA = $('.pay_points_field_0').val();
+	  	var numB = $('.pay_points_field_1').val();
+	  	numA = parseInt(numA);
+	  	numB = parseInt(numB);
+	  	if (!numB){
+	  		$('.pay_points_field_1').val(0);
+	  		$('.pay_points_field_2').text(numA);
+		};
+
+	});
+
+  });
+
+</script>

@@ -18,7 +18,7 @@
 							<% if user.deleted_at.blank? %>
 								<p>公開中</p>
 							<% else %>
-								<p>非公開</p>
+								<p>非公開（退会済み）</p>
 							<% end %>
 						</td>
 						<td><%= user.memo %></td>

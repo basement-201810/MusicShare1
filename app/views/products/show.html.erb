@@ -168,7 +168,7 @@
 						<% elsif user_signed_in? && current_user.manager == false %>
 						<%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>
 						<p>
-							注文数<%= f.number_field :amount,min:"1",max:"100" %>個  :
+							注文数<%= f.number_field :amount, value:"1", min:"1",max:"#{@product.pro_amount}" %>個  :
 							<%= f.submit "カートへ入れる" , class: "btn btn-warning btn-xs" %>    /
 							<%= link_to "  他の商品を見る",root_path, class: "btn btn-info btn-xs" %>
 						</p>

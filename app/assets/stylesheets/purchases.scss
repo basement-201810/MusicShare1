@@ -14,3 +14,20 @@
 .rating span:hover, .rating span:hover ~ span{
     color: red;
 }
+
+.report {
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 4px;
+	border-left: solid 10px red;
+	background-color: #fcc;
+	padding: 15px 0;
+	margin: 30px auto;
+
+}
+
+#tab-menu .active {
+  background: #ddd;
+  color: #000;
+}

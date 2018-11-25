@@ -1,4 +1,7 @@
 class PurchasesController < ApplicationController
+
+	before_action :authenticate_user!
+	# before_action :correct_user
 	before_action :hoge
 
 	def hoge
@@ -52,13 +55,16 @@ class PurchasesController < ApplicationController
 				flash[:alert] = "failed to order."
 				redirect_to new_purchase_path
 			end
-		end
 	end
 
 	def index
 		@user_all = User.all.count
 		@pur_total_sum = Purchase.sum(:pur_total)
-		@purchases = Purchase.order(:status)
+		@purchases = Purchase.all
+		# starus別表示のための変数
+		@purchases_0 = Purchase.where(status: 0)
+		@purchases_1 = Purchase.where(status: 1)
+		@purchases_2 = Purchase.where(status: 2)
 	end
 
 	#------     purchase_item#index から移動↓    ------------>
@@ -96,6 +102,12 @@ class PurchasesController < ApplicationController
 
 	def arigatou
 	end
+
+	# def correct_user
+	# 	@user = current_user
+	# 	@purchase = Purchase.find(params[:id])
+	# 	redirect_to root_path unless @user == current_user || @user.manager == true
+ #    end
 
 	private
 	def purchase_params

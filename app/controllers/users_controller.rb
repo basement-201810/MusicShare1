@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+
 	before_action :authenticate_user!
+	before_action :correct_user, only:[:show,:edit]
 
 	def index
 		@users = User.with_deleted
@@ -12,24 +14,26 @@ class UsersController < ApplicationController
 		@purchases = User.with_deleted.find(params[:id]).purchases.all.order('created_at DESC')
 	end
 
+	def edit
+		@user = User.with_deleted.find(params[:id])
+	end
+
 	def update
-		@user = User.find(params[:id])
-		if @user.update!(user_params)
-			redirect_to user_path, notice: 'Profile was successfully updated!!'
+
+		@user = User.with_deleted.find(params[:id])
+		if @user.update(user_params)
+			redirect_to user_path, notice: 'ユーザー情報を編集しました！'
+
+
 		else
 			render :edit
 		end
 	end
 
-
-	def edit
-		@user = User.with_deleted.find(params[:id])
-	end
-
 	def destroy
 		user = User.find(params[:id])
 		user.destroy
-		redirect_to root_path
+		redirect_to users_path
 	end
 
 	# def release
@@ -43,6 +47,13 @@ class UsersController < ApplicationController
 	# 	user.nonrelease! unless user.release? # => nonreleaseがfalse
 	# 	redirect_to users_path
 	# end
+	
+	def correct_user
+		@user = User.with_deleted.find(params[:id])
+		@admin = User.find(1)
+        redirect_to root_path unless @user == current_user || @admin == current_user
+    end
+
 
 
 	def passchange
