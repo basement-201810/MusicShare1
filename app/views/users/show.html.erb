@@ -1,4 +1,13 @@
 <div class="container">
+
+	<!-- フラッシュメッセージ -->
+
+	<% if flash[:notice] %>
+	<div class="alert alert-info">
+		<%= flash.notice %>
+	</div>
+	<% end %>
+
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
@@ -47,10 +56,11 @@
 					<% end %>
 				</tbody>
 			</table>
-			<%= link_to "編集", edit_user_path, class: "btn btn-success" %><br><br>
+			<%= link_to "編集する", edit_user_path, class: "btn btn-success" %>
+			<%= link_to "User一覧へ戻る", users_path, class: "btn btn-primary" %>
 
 			<% if current_user.manager == false %>
-			<%= link_to "退会", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger" %>
+			<%= link_to "退会する", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger" %>
 			<% else %>
 			<% end %>
 
@@ -85,29 +95,29 @@
 
 				<tbody>
 					
-						 <tr>
-						 	<% @purchases.each do |purchase| %>
-							<td>
-								<%= purchase.date.year %> 年
-								<%= purchase.date.month %> 月
-								<%= purchase.date.day %> 日
-							</td>
-							<td><%= purchase.pur_total%></td>
-							<td>
-								<% if current_user.manager %>
-									<% if purchase.status == 0 %>
-										未処理
-									<% elsif purchase.status == 1 %>
-										準備中
-									<% elsif purchase.status == 2 %>
-										発送済み
-									<% end %>
-								<% end %>
-							</td>
-							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
+					<tr>
+						<% @purchases.each do |purchase| %>
+						<td>
+							<%= purchase.date.year %> 年
+							<%= purchase.date.month %> 月
+							<%= purchase.date.day %> 日
+						</td>
+						<td><%= purchase.pur_total%></td>
+						<td>
+							<% if current_user.manager %>
+							<% if purchase.status == 0 %>
+							未処理
+							<% elsif purchase.status == 1 %>
+							準備中
+							<% elsif purchase.status == 2 %>
+							発送済み
 							<% end %>
-							<td><%= @reviews %></td>
-						</tr>
+							<% end %>
+						</td>
+						<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
+						<% end %>
+						<td><%= @reviews %></td>
+					</tr>
 					
 					
 				</tbody>

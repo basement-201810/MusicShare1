@@ -16,24 +16,26 @@ class UsersController < ApplicationController
 		@review = Review.new
 	end
 
+	def edit
+		@user = User.with_deleted.find(params[:id])
+	end
+
 	def update
-		@user = User.find(params[:id])
+
+		@user = User.with_deleted.find(params[:id])
 		if @user.update(user_params)
-			redirect_to user_path, notice: 'Profile was successfully updated!!'
+			redirect_to user_path, notice: 'ユーザー情報を編集しました！'
+
+
 		else
 			render :edit
 		end
 	end
 
-
-	def edit
-		@user = User.with_deleted.find(params[:id])
-	end
-
 	def destroy
 		user = User.find(params[:id])
 		user.destroy
-		redirect_to root_path
+		redirect_to users_path
 	end
 
 	# def release

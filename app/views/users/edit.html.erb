@@ -2,7 +2,9 @@
 	<div class="row">
 		<% if current_user.manager == false %>
 
-		    <!----- エラーメッセージ ----->
+
+		    <!-- エラーメッセージ -->
+
 			<% if @user.errors.any? %>
 			<h4>
 				<%= @user.errors.count %> error prohibited this obj from being saved:
@@ -14,7 +16,9 @@
 			</div>
 			<% end %>
 
-			<!----- ユーザー用の表示 ----->
+
+			<!-- ユーザー用の表示 --->
+
 			<h2>編集</h2>
 			<div class="edit_user">
 				<%= form_for(@user) do |f| %>
@@ -65,9 +69,13 @@
 				<% end %>
 			</div>
 
-		<!----- 管理者用の表示 ----->
+
+		<!-- 管理者用の表示 -->
+
 		<% else %>
 			<h2> ユーザの強制編集</h2>
+
+			<%= form_for(@user) do |f| %>
 			<div class="edit_user">
 				<table class="table">
 					<tbody>
@@ -91,7 +99,6 @@
 							<td>住所</td>
 							<td><%= @user.post_code %><br><%= @user.address %></td>
 						</tr>
-						<%= form_for(@user) do |f| %>
 							<tr class="form_group">
 								<td><%= f.label :point, "保有ポイント" %></td>
 								<td><%= f.text_field :point, class: "point" %></td>
@@ -108,10 +115,11 @@
 								<td><%= f.submit "編集保存", class: "btn btn-success" %></td>
 								<td></td>
 							</tr>
-						<% end %>
 					</tbody>
 				</table>
 			</div>
+			<% end %>
+
 			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger" %><br><br>
 			<%= link_to 'back', user_path, class: "btn btn-info" %>
 		<% end %>
