@@ -1,68 +1,90 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>MusicShare1</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>MusicShare1</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <header class="header">
-      <div class="container">
-        <div class="nav navbar-left">
-          <p class="music-share">
-            <%= link_to "Music Share1", root_path %>
-          </p>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-
-          <% if user_signed_in? && current_user.manager == false %>
-            <li>
-            <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %>
-            </li>
-            <li>
-            <%= link_to "cart", cart_path(current_user.carts.last), class: "glyphicon glyphicon-shopping-cart carts" %>
-            </li>
-            <li>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
-            </li>
-
-          <% elsif user_signed_in? && current_user.manager == true %>
-          <li>
-            <%= link_to "受注管理", purchases_path, class: "glyphicon" %>
-          </li>
-          <li>
-            <%= link_to "商品管理", products_path, class: "glyphicon" %>
-          </li>
-          <li>
-            <%= link_to "会員管理", users_path, class: "glyphicon" %>
-          </li>
-          <li>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
-          </li>
-
-          <% else %>
-          <li>
-            <%= link_to "ゲストさん", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %>
-          </li>
-          <li>
-            <%= link_to "cart", new_user_session_path, class: "glyphicon glyphicon-shopping-cart carts" %>
-          </li>
-          <% end %>
-        </ul>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="nav navbar-left">
+        <p class="music-share">
+          <%= link_to "Music Share1", root_path %>
+        </p>
       </div>
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if user_signed_in? && current_user.manager == false %>
+        <li>
+          <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %>
+        </li>
+        <li>
+          <%= link_to "cart", cart_path(current_user.carts.last), class: "glyphicon glyphicon-shopping-cart carts" %>
+        </li>
+        <li>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
+        </li>
+
+        <% elsif user_signed_in? && current_user.manager == true %>
+        <li>
+          <%= link_to "Top画面", pro_genres_path, class: "glyphicon" %>
+        </li>
+        <li>
+          <%= link_to "受注管理", purchases_path, class: "glyphicon" %>
+        </li>
+        <li>
+          <%= link_to "商品管理", products_path, class: "glyphicon" %>
+        </li>
+        <li>
+          <%= link_to "会員管理", users_path, class: "glyphicon" %>
+        </li>
+        <li>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %>
+        </li>
+
+        <% else %>
+        <li>
+          <%= link_to "ゲストさん", new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %>
+        </li>
+        <li>
+          <%= link_to "cart", new_user_session_path, class: "glyphicon glyphicon-shopping-cart carts" %>
+        </li>
+        <% end %>
+      </ul>
     </div>
-  </header>
-      <%= yield %>
-    </div>
-    <footer>
-    </footer>
-  </body>
+  </div>
+</header>
+<div class="main-contents">
+  <%= yield %>
+</div>
+<span id="back">
+  <a href="#">
+    <%= image_tag('arrow.png') %>
+  </a>
+</span>
+<footer>
+</footer>
+</body>
 </html>
+
+
+
+<script>
+  $('#back a').on('click',function(){
+    $('body, html').animate({
+     scrollTop:0
+   }, 500);
+    return false;
+  });
+</script>
+
+
