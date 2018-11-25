@@ -107,21 +107,15 @@
 								<td><%= f.label :memo, "備考" %></td>
 								<td><%= f.text_area :memo, class: "memo" %></td>
 							</tr>
-							<tr class="form_group">
-								<td><%= f.label :user_status, "ユーザ公開非公開" %></td>
-								<td><%= f.select :user_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
-							</tr>
-							<tr class="form_group">
-								<td><%= f.submit "編集保存", class: "btn btn-success" %></td>
-								<td></td>
-							</tr>
 					</tbody>
 				</table>
 			</div>
-			<% end %>
 
-			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger" %><br><br>
-			<%= link_to 'back', user_path, class: "btn btn-info" %>
+
+			<%= f.submit "編集保存", class: "btn btn-success user-button" %>
+			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger user-button" %>
+			<%= link_to 'back', user_path, class: "btn btn-info user-button" %>
+		<% end %>
 		<% end %>
 	</div>
 </div>
