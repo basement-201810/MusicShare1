@@ -35,26 +35,27 @@ class PurchasesController < ApplicationController
 
 
 			if @purchase.save
-				@purchase_item.save
+				@purchase_item.save!
 					@review = Review.new
 					@review.user_id = current_user.id
 					@review.purchase_item_id = @purchase_item.id
 					@review.product_id = @purchase_item.product_id
 					@review.review_body = ""
 					@review.review_status = true
-				@review.save
+				@review.save!
 				@cart = Cart.new
 				@cart.user_id = current_user.id
 				@cart.save
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
-				@user.save
+				@user.save!
 
 				redirect_to arigatou_path
 			else
 				flash[:alert] = "failed to order."
 				redirect_to new_purchase_path
 			end
+		end
 	end
 
 	def index
