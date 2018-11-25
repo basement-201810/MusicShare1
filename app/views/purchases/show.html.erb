@@ -33,17 +33,17 @@
 							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary" %></td>
 							<td>
 								<% if current_user.manager == false %>
-									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id), remote: true do |f| %>
-										<div class="form_group has_icon">
-											<label for="inputEmail">評価</label>
-											<div class="rating">
-											    <span id="5" class="glyphicon glyphicon-star"></span>
-											    <span id="4" class="glyphicon glyphicon-star"></span>
-											    <span id="3" class="glyphicon glyphicon-star"></span>
-											    <span id="2" class="glyphicon glyphicon-star"></span>
-											    <span id="1" class="glyphicon glyphicon-star"></span>
-											</div>
+									<div class="form_group has_icon">
+										<label for="inputEmail">評価</label>
+										<div class="rating">
+										    <span id="5" class="glyphicon glyphicon-star"></span>
+										    <span id="4" class="glyphicon glyphicon-star"></span>
+										    <span id="3" class="glyphicon glyphicon-star"></span>
+										    <span id="2" class="glyphicon glyphicon-star"></span>
+										    <span id="1" class="glyphicon glyphicon-star"></span>
 										</div>
+									</div>
+									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
 										<div class="form_group has-icon">
 											<label for="inputEmail">レビュー</label>
 											<%= f.text_area :review_body, autofocus: true, class: "review_body", id: "inputEmail" %>
@@ -55,7 +55,7 @@
 								<% else %>
 									<%= @review_star %>
 									<%= @review_body %>
-									<%= form_for @review, url: purchase_item_review_path(purchase_item.id, @review) do |f| %>
+									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
 										<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
 									<% end %>
 								<% end %>
@@ -78,6 +78,19 @@
  	</div>
 </div>
 
+<script>
+	$('.glyphicon-star').on('click', function(){
+		id = $(this).find('span').attr('id');
+		$.ajax({
+			url: '/review/'+id,
+			type: 'PATCH',
+			data: {
+				id: id
+			},
+	    	dataType: 'script',
+		});
+	});
+</script>
 
 
 
