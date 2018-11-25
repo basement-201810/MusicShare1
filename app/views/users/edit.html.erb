@@ -1,78 +1,92 @@
 <div class="container">
 	<div class="row">
+
+
+		<!-- エラーメッセージ -->
+
+		<% if @user.errors.any? %>
+		<h4>
+			<%= @user.errors.count %> error prohibited this obj from being saved:
+		</h4>
+		<div id="error_explanation" class="alert alert-danger">
+			<% @user.errors.full_messages.each do |message| %>
+			<p><%= message %></p>
+			<% end %>
+		</div>
+		<% end %>
+
+
+
 		<% if current_user.manager == false %>
 
 
-		    <!-- エラーメッセージ -->
+		<!-- ユーザー用の表示 --->
 
-			<% if @user.errors.any? %>
-			<h4>
-				<%= @user.errors.count %> error prohibited this obj from being saved:
-			</h4>
-			<div id="error_explanation" class="alert alert-danger">
-				<% @user.errors.full_messages.each do |message| %>
-					<p><%= message %></p>
-				<% end %>
-			</div>
-			<% end %>
+		<div class="edit_user">
 
-
-			<!-- ユーザー用の表示 --->
-
-			<h2>編集</h2>
-			<div class="edit_user">
-				<%= form_for(@user) do |f| %>
-
-					<div class="form_group has_icon">
-						<label for="name"> Name </label>
-						<%= f.text_field :name, autofocus: true, placeholder:"山田太郎",class: "name", id: "name" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+				<div class="row">
+					<div class="col-md-3">
 					</div>
+					<div class="col-md-6 form-group">
+						<h2 class="page-title-1">ユーザー情報の編集</h2>
 
-					<div class="form_group has_icon">
-						<label for="nameKana"> Name_kana </label>
-						<%= f.text_field :name_kana, autofocus: true,placeholder:"ヤマダタロウ", class: "name_kana", id: "nameKana" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+						<%= form_for(@user) do |f| %>
+
+						<div class="field">
+							<%= f.label :name %><br />
+							<%= f.text_field :name, autofocus: true, autocomplete: "name",placeholder:"山田太郎",class: "form-control" %>
+						</div>
+
+						<div class="field">
+							<%= f.label :name_kana %><br />
+							<%= f.text_field :name_kana, autofucus: true, autocomplete: "name_kana",placeholder:"ヤマダタロウ",class: "form-control" %>
+						</div>
+
+						<div class="field">
+							<%= f.label :email %><br />
+							<%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"xxxxxxx@xxxxxxx",class: "form-control" %>
+						</div><br>
+
+						<div class="field form_group has_icon">
+							<label for="password"> Password </label>
+							&emsp;&emsp;＊＊＊＊＊＊<%= link_to "パスワード編集", passchange_path(current_user), class: "user_passchange btn btn-secondary" %>
+							<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+						</div><br>
+
+
+						<div class="field">
+							<%= f.label :tell %><br />
+							<%= f.text_field :tell, autofocus: true, autocomplete: "tell" ,placeholder:"00000000000 ※ハイフン無しで入力",class: "form-control" %>
+						</div>
+
+						<div class="field">
+							<%= f.label :post_code %><br />
+							<%= f.text_field :post_code, autofocus: true, autocomplete: "post_code",placeholder:"0000000 ※ハイフン無しで入力",class: "form-control" %>
+						</div>
+
+						<div class="field">
+							<%= f.label :address %><br />
+							<%= f.text_area :address, autofocus: true, autocomplete: "address",placeholder:"東京都xx区xxx0丁目000-00 xxxxxxx00号",class: "form-control"  %>
+						</div>
+
+						<p></p>
+
+						<div class="actions">
+							<%= f.submit "編集を保存する", class: "btn btn-success btn-block" %>
+						</div>
+						<% end %>
+
 					</div>
-
-					<div class="form_group has_icon">
-						<label for="inputEmail"> Email </label>
-						<%= f.text_field :email, autofocus: true, placeholder:"xxxxxxx@xxxxxxx",class: "email", id: "inputEmail" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+					<div class="col-md-3">
 					</div>
-
-					<div class="form_group has_icon">
-						<label for="password"> Password </label>
-						******** <%= link_to "パスワード編集", passchange_path(current_user), class: "user_passchange btn btn-secondary" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
-					</div>
-
-					<div class="form_group has_icon">
-						<label for="tell"> Tell </label>
-						<%= f.text_field :tell, autofocus: true,placeholder:"0000000 ※ハイフン無しで入力", class: "tell", id: "tell" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
-					</div>
-
-					<div class="form_group has_icon">
-						<label for="postCode"> Post_code </label>
-						<%= f.text_field :post_code, autofocus: true, class: "post_code",placeholder:"0000000 ※ハイフン無しで入力", id: "postCode" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
-					</div>
-
-					<div class="form_group has_icon">
-						<label for="address"> Address </label>
-						<%= f.text_area :address, autofocus: true, class: "address", id: "address" %>
-						<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
-					</div>
-
-					<%= f.submit "保存", class: "btn btn-danger" %>
-				<% end %>
 			</div>
 
 
-		<!-- 管理者用の表示 -->
 
-		<% else %>
+
+			<!-- 管理者用の表示 -->
+
+			<% else %>
 			<h2> ユーザの強制編集</h2>
 
 			<%= form_for(@user) do |f| %>
@@ -99,23 +113,26 @@
 							<td>住所</td>
 							<td><%= @user.post_code %><br><%= @user.address %></td>
 						</tr>
-							<tr class="form_group">
-								<td><%= f.label :point, "保有ポイント" %></td>
-								<td><%= f.text_field :point, class: "point" %></td>
-							</tr>
-							<tr class="form_group">
-								<td><%= f.label :memo, "備考" %></td>
-								<td><%= f.text_area :memo, class: "memo" %></td>
-							</tr>
+						<tr class="form_group">
+							<td><%= f.label :point, "保有ポイント" %></td>
+							<td><%= f.text_field :point, class: "point" %></td>
+						</tr>
+						<tr class="form_group">
+							<td><%= f.label :memo, "備考" %></td>
+							<td><%= f.text_area :memo, class: "memo" %></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
 
 
 			<%= f.submit "編集保存", class: "btn btn-success user-button" %>
+			<% if @user.id == 1 || @user.deleted_at != nil %>
+			<% else %>
 			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger user-button" %>
+			<% end %>
 			<%= link_to 'back', user_path, class: "btn btn-info user-button" %>
-		<% end %>
-		<% end %>
+			<% end %>
+			<% end %>
+		</div>
 	</div>
-</div>
