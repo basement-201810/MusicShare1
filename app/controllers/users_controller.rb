@@ -10,8 +10,6 @@ class UsersController < ApplicationController
 	def show
 		@user = User.with_deleted.find(params[:id])
 		@purchases = User.with_deleted.find(params[:id]).purchases.all.order('created_at DESC')
-		@reviews = @user.reviews
-		@review = Review.new
 	end
 
 	def update

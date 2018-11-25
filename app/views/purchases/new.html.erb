@@ -29,21 +29,6 @@
 	<p>支払い方法：<%= f.select :pay, [["銀行振込","0"],["クレジットカード","1"],["代金引換","2"]] %></p>
 	
 
-	<% @cart_items.each do |cart_item| %>
-
-		<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
-
-			<%= purchase_item.hidden_field :cart_item_id,:value  => "#{cart_item.id}" %>
-			<%= purchase_item.hidden_field :sub_total,:value  => "#{cart_item.sub_total}" %>
-			<%= purchase_item.hidden_field :amount,:value  => "#{cart_item.amount}" %>
-			<%= purchase_item.hidden_field :title,:value  => "#{cart_item.product.pro_title}" %>
-			<%= purchase_item.hidden_field :artist,:value  => "#{cart_item.product.pro_artist}" %>
-			<%= purchase_item.hidden_field :image_id,:value  => "#{cart_item.product.pro_image_id}" %>
-			<%= purchase_item.hidden_field :product_id,:value  => "#{cart_item.product_id}" %>
-
-		<% end %>
-	
-	<% end %>
 
 
 <%= f.submit "注文確定", class: "btn btn-primary"%>

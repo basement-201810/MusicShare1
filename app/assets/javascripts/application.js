@@ -27,15 +27,4 @@
 
 
 
-$('.glyphicon-star').on('click', function(){
-	id = $(this).find('span').attr('id');
-	$.ajax({
-		url: '/purchases/:purchase_id/review/'+id,
-		type: 'PATCH',
-		data: {
-			id: id
-		},
-    	dataType: 'script',
-	});
-});
 

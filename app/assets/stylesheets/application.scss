@@ -62,17 +62,17 @@ a:hover{
     position: relative;
 }
 
-.page-title-1:after, 
+.page-title-1:after,
 .page-title-1:before {
     background-color: #777;
     content: "";
     height: 1px;
     position: absolute;
     top: 15px;
-    width: 160px;   
+    width: 160px;
 }
 
-.page-title-1:after {      
+.page-title-1:after {
     right: 0;
 }
 
