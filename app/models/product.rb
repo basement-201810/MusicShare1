@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 	attachment :pro_image
-	has_many :musics, dependent: :destroy
+	has_many :musics
 	accepts_nested_attributes_for :musics, allow_destroy: true
 	# has_many :carts
 	has_many :reviews
@@ -9,7 +9,7 @@ class Product < ApplicationRecord
 	has_many :cart_items
 	enum pro_status: {release: true, nonrelease: false}
 
-	accepts_nested_attributes_for :musics
+
 
     validates :pro_artist, presence: true
     validates :pro_title, presence: true
@@ -22,6 +22,7 @@ class Product < ApplicationRecord
 		else
 			#(reviews.to_a.sum { |review| review.review_star }  / reviews.all.count.to_f ).round(2)
 			return 0
+
 		end
 	end
 

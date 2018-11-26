@@ -23,12 +23,13 @@
     box-sizing:  border-box;
 }
 
+
+
 .clearfix::after {
     content: "";
     display: block;
     clear: both;
 }
-
 
 
 .header {
@@ -62,7 +63,6 @@ a:hover{
 }
 
 
-
 .log-in-button, .log-out-button {
     width: 50%;
 }
@@ -74,7 +74,7 @@ footer {
 }
 
 /*-------------11/22追記------------------*/
-.page-title-1
+.page-title-1, .page-title-2
  {
     text-shadow: 0 1px 0 rgba(255, 255, 255, .7), 0px 2px 0 rgba(0, 0, 0, .5);
     text-transform: uppercase;
@@ -93,7 +93,7 @@ footer {
     height: 1px;
     position: absolute;
     top: 15px;
-    width: 160px;
+    width: 80px;
 }
 
 .page-title-1:after {
@@ -113,4 +113,8 @@ footer {
 
 #back img {
     width: 50px;
+}
+
+.shouhin-title {
+    margin-top: 40px;
 }

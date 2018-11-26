@@ -39,10 +39,10 @@ class ProGenresController < ApplicationController
 
 	def average_calc
 		@products = Product.all
-		@products.each do |product|
-			product.average_score = product.star_average.round(2)
-			product.save
-		end
+		# @products.each do |product|
+		# 	product.average_score = product.star_average.round(2)
+		# 	product.save
+		# end
 	end
 
 

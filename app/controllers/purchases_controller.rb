@@ -48,6 +48,7 @@ class PurchasesController < ApplicationController
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
 				@user.save
+
 		end
 		# else
 		# 		flash[:alert] = "failed to order."

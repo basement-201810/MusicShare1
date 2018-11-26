@@ -11,848 +11,151 @@
 				<%= link_to "全ての商品を表示", products_path, class:"btn btn-default active" %>
 			</div>
 			<div class="product-index-title-right-box1">
-					<div class="form-inline">
-						<%= search_form_for @search, url: products_path do |f| %>
-						<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-						<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
-						<% end %>
-					</div>
+				<div class="form-inline">
+					<%= search_form_for @search, url: products_path do |f| %>
+					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
-	<!-- 公開商品 -->
-
-	<% if @product_cnt != @result_cnt %>
-	<% else %>
-
-	<h4> ■登録商品一覧（公開商品）</h4>
-
-	<table class="table table-atriped">
-		<tr>
-			<th> 商品名</th>
-			<th> ジャンル</th>
-			<th> 登録日</th>
-			<th> 在庫数</th>
-			<th></th>
-		</tr>
-
-
-		<% @products.each do |product| %>
-		<% if product.pro_status == "release" %>
-
-
-		<!-- 部分テンプレート予定 -->
-
-
-		<!-- J-POP -->
-
-		<% if product.pro_genre_id == 1 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-		<!-- K-POP -->
-
-		<% elsif product.pro_genre_id == 2 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アイドル -->
-
-		<% elsif product.pro_genre_id == 3 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- 童謡 -->
-
-		<% elsif product.pro_genre_id == 4 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- Rock -->
-
-		<% elsif product.pro_genre_id == 5 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- EDM -->
-
-		<% elsif product.pro_genre_id == 6 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Dance -->
-
-		<% elsif product.pro_genre_id == 7 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Alternative -->
-
-		<% elsif product.pro_genre_id == 8 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- RAP/HIP-HOP -->
-
-		<% elsif product.pro_genre_id == 9 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アニソン -->
-
-		<% elsif product.pro_genre_id == 10 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Jazz -->
-
-		<% elsif product.pro_genre_id == 11 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- その他 -->
-
-		<% else %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-		<% end %>
-		<% end %>
-		<% end %>
-	</table>
-
-
-
-
-
-
-	<!-- 非公開商品一覧 -->
-
-	<h4> ■非公開商品</h4>
-
-	<table class="table table-atriped">
-		<tr>
-			<th> 商品名</th>
-			<th> ジャンル</th>
-			<th> 登録日</th>
-			<th> 在庫数</th>
-			<th></th>
-		</tr>
-
-		<% @products.each do |product| %>
-		<% if product.pro_status == "nonrelease" %>
-
-
-
-
-		<!-- 部分テンプレート予定 -->
-
-
-		<!-- J-POP -->
-
-		<% if product.pro_genre_id == 1 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-		<!-- K-POP -->
-
-		<% elsif product.pro_genre_id == 2 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アイドル -->
-
-		<% elsif product.pro_genre_id == 3 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- 童謡 -->
-
-		<% elsif product.pro_genre_id == 4 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- Rock -->
-
-		<% elsif product.pro_genre_id == 5 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- EDM -->
-
-		<% elsif product.pro_genre_id == 6 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Dance -->
-
-		<% elsif product.pro_genre_id == 7 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Alternative -->
-
-		<% elsif product.pro_genre_id == 8 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- RAP/HIP-HOP -->
-
-		<% elsif product.pro_genre_id == 9 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アニソン -->
-
-		<% elsif product.pro_genre_id == 10 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Jazz -->
-
-		<% elsif product.pro_genre_id == 11 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- その他 -->
-
-		<% else %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-		<% end %>
-		<% end %>
-		<% end %>
-
-	</table>
-
-
-	<% end %>
-
-
-
-
-	<!-- 検索結果 -->
+	<!-- 一覧商品 -->
 
 	<% if @product_cnt == @result_cnt %>
+
+	<!-- 公開商品（一覧） -->
+
+	<h4> ■登録商品一覧（公開商品）</h4>
+
+	<table class="table table-atriped">
+		<tr>
+			<th> 商品名</th>
+			<th> ジャンル</th>
+			<th> 登録日</th>
+			<th> 在庫数</th>
+			<th></th>
+		</tr>
+
+		<% @products.each do |product| %>
+		<% if product.pro_status == "release" %>
+
+
+		<% if product.pro_amount == 0 %>
+		<tr style="background-color:orangered;">
+			<% elsif product.pro_amount <= 48 %>
+			<tr style="background-color:yellow;">
+				<% else %>
+				<tr>
+					<% end %>
+					<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
+					<% if product.pro_genre_id == 1 %>
+					<td>J-POP</td>
+					<% elsif product.pro_genre_id == 2 %>
+					<td>K-POP</td>
+					<% elsif product.pro_genre_id == 3 %>
+					<td>アイドル</td>
+					<% elsif product.pro_genre_id == 4 %>
+					<td>童謡</td>
+					<% elsif product.pro_genre_id == 5 %>
+					<td>Rock</td>
+					<% elsif product.pro_genre_id == 6 %>
+					<td>EDM</td>
+					<% elsif product.pro_genre_id == 7 %>
+					<td>Dance</td>
+					<% elsif product.pro_genre_id == 8 %>
+					<td>Alternative</td>
+					<% elsif product.pro_genre_id == 9 %>
+					<td>RAP/HIP-HOP</td>
+					<% elsif product.pro_genre_id == 10 %>
+					<td>アニソン</td>
+					<% elsif product.pro_genre_id == 11 %>
+					<td>Jazz</td>
+					<% else %>
+					<td> その他</td>
+					<% end %>
+					<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
+					<td><%= product.pro_amount %>個</td>
+					<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+				</tr>
+			</tr>
+		</tr>
+
+
+		<% end %>
+		<% end %>
+	</table>
+
+
+	<!-- 非公開商品（一覧） -->
+
+	<h4> ■非公開商品</h4>
+
+	<table class="table table-atriped">
+		<tr>
+			<th> 商品名</th>
+			<th> ジャンル</th>
+			<th> 登録日</th>
+			<th> 在庫数</th>
+			<th></th>
+		</tr>
+
+		<% @products.each do |product| %>
+		<% if product.pro_status == "nonrelease" %>
+
+
+		<% if product.pro_amount == 0 %>
+		<tr style="background-color:orangered;">
+			<% elsif product.pro_amount <= 48 %>
+			<tr style="background-color:yellow;">
+				<% else %>
+				<tr>
+					<% end %>
+					<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
+					<% if product.pro_genre_id == 1 %>
+					<td>J-POP</td>
+					<% elsif product.pro_genre_id == 2 %>
+					<td>K-POP</td>
+					<% elsif product.pro_genre_id == 3 %>
+					<td>アイドル</td>
+					<% elsif product.pro_genre_id == 4 %>
+					<td>童謡</td>
+					<% elsif product.pro_genre_id == 5 %>
+					<td>Rock</td>
+					<% elsif product.pro_genre_id == 6 %>
+					<td>EDM</td>
+					<% elsif product.pro_genre_id == 7 %>
+					<td>Dance</td>
+					<% elsif product.pro_genre_id == 8 %>
+					<td>Alternative</td>
+					<% elsif product.pro_genre_id == 9 %>
+					<td>RAP/HIP-HOP</td>
+					<% elsif product.pro_genre_id == 10 %>
+					<td>アニソン</td>
+					<% elsif product.pro_genre_id == 11 %>
+					<td>Jazz</td>
+					<% else %>
+					<td> その他</td>
+					<% end %>
+					<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
+					<td><%= product.pro_amount %>個</td>
+					<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+				</tr>
+			</tr>
+		</tr>
+
+		<% end %>
+		<% end %>
+	</table>
+
+
 	<% else %>
 
+    <!-- 検索結果 -->
 
-	<!-- 公開商品 -->
+	<!-- 公開商品（検索） -->
 
 
 	<h4> ■登録商品一覧（公開商品）</h4>
@@ -871,399 +174,52 @@
 		<% if product.pro_status == "release" %>
 
 
-
-
-		<!-- 部分テンプレート予定 -->
-
-
-		<!-- J-POP -->
-
-		<% if product.pro_genre_id == 1 %>
 		<% if product.pro_amount == 0 %>
 		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+			<% elsif product.pro_amount <= 48 %>
+			<tr style="background-color:yellow;">
+				<% else %>
+				<tr>
+					<% end %>
+					<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
+					<% if product.pro_genre_id == 1 %>
+					<td>J-POP</td>
+					<% elsif product.pro_genre_id == 2 %>
+					<td>K-POP</td>
+					<% elsif product.pro_genre_id == 3 %>
+					<td>アイドル</td>
+					<% elsif product.pro_genre_id == 4 %>
+					<td>童謡</td>
+					<% elsif product.pro_genre_id == 5 %>
+					<td>Rock</td>
+					<% elsif product.pro_genre_id == 6 %>
+					<td>EDM</td>
+					<% elsif product.pro_genre_id == 7 %>
+					<td>Dance</td>
+					<% elsif product.pro_genre_id == 8 %>
+					<td>Alternative</td>
+					<% elsif product.pro_genre_id == 9 %>
+					<td>RAP/HIP-HOP</td>
+					<% elsif product.pro_genre_id == 10 %>
+					<td>アニソン</td>
+					<% elsif product.pro_genre_id == 11 %>
+					<td>Jazz</td>
+					<% else %>
+					<td> その他</td>
+					<% end %>
+					<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
+					<td><%= product.pro_amount %>個</td>
+					<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+				</tr>
+			</tr>
 		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
 
-
-		<!-- K-POP -->
-
-		<% elsif product.pro_genre_id == 2 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アイドル -->
-
-		<% elsif product.pro_genre_id == 3 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- 童謡 -->
-
-		<% elsif product.pro_genre_id == 4 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- Rock -->
-
-		<% elsif product.pro_genre_id == 5 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- EDM -->
-
-		<% elsif product.pro_genre_id == 6 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Dance -->
-
-		<% elsif product.pro_genre_id == 7 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Alternative -->
-
-		<% elsif product.pro_genre_id == 8 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- RAP/HIP-HOP -->
-
-		<% elsif product.pro_genre_id == 9 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アニソン -->
-
-		<% elsif product.pro_genre_id == 10 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Jazz -->
-
-		<% elsif product.pro_genre_id == 11 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- その他 -->
-
-		<% else %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-		<% end %>
 		<% end %>
 		<% end %>
 	</table>
 
 
-
-
-
-	<!-- 非公開商品一覧 -->
+	<!-- 非公開商品（検索） -->
 
 	<h4> ■非公開商品</h4>
 
@@ -1281,393 +237,48 @@
 		<% if product.pro_status == "nonrelease" %>
 
 
-
-
-		<!-- 部分テンプレート予定 -->
-
-
-		<!-- J-POP -->
-
-		<% if product.pro_genre_id == 1 %>
 		<% if product.pro_amount == 0 %>
 		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+			<% elsif product.pro_amount <= 48 %>
+			<tr style="background-color:yellow;">
+				<% else %>
+				<tr>
+					<% end %>
+					<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
+					<% if product.pro_genre_id == 1 %>
+					<td>J-POP</td>
+					<% elsif product.pro_genre_id == 2 %>
+					<td>K-POP</td>
+					<% elsif product.pro_genre_id == 3 %>
+					<td>アイドル</td>
+					<% elsif product.pro_genre_id == 4 %>
+					<td>童謡</td>
+					<% elsif product.pro_genre_id == 5 %>
+					<td>Rock</td>
+					<% elsif product.pro_genre_id == 6 %>
+					<td>EDM</td>
+					<% elsif product.pro_genre_id == 7 %>
+					<td>Dance</td>
+					<% elsif product.pro_genre_id == 8 %>
+					<td>Alternative</td>
+					<% elsif product.pro_genre_id == 9 %>
+					<td>RAP/HIP-HOP</td>
+					<% elsif product.pro_genre_id == 10 %>
+					<td>アニソン</td>
+					<% elsif product.pro_genre_id == 11 %>
+					<td>Jazz</td>
+					<% else %>
+					<td> その他</td>
+					<% end %>
+					<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
+					<td><%= product.pro_amount %>個</td>
+					<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+				</tr>
+			</tr>
 		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>J-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-		<!-- K-POP -->
-
-		<% elsif product.pro_genre_id == 2 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>K-POP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アイドル -->
-
-		<% elsif product.pro_genre_id == 3 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アイドル</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- 童謡 -->
-
-		<% elsif product.pro_genre_id == 4 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>童謡</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-		<!-- Rock -->
-
-		<% elsif product.pro_genre_id == 5 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Rock</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- EDM -->
-
-		<% elsif product.pro_genre_id == 6 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>EDM</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Dance -->
-
-		<% elsif product.pro_genre_id == 7 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Dance</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Alternative -->
-
-		<% elsif product.pro_genre_id == 8 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Alternative</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- RAP/HIP-HOP -->
-
-		<% elsif product.pro_genre_id == 9 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>RAP/HIP-HOP</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- アニソン -->
-
-		<% elsif product.pro_genre_id == 10 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>アニソン</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- Jazz -->
-
-		<% elsif product.pro_genre_id == 11 %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>Jazz</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
-
-
-
-		<!-- その他 -->
-
-		<% else %>
-		<% if product.pro_amount == 0 %>
-		<tr style="background-color:orangered;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% elsif product.pro_amount <= 48 %>
-		<tr style="background-color:yellow;">
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% else %>
-		<tr>
-			<td><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id) %></td>
-			<td>その他</td>
-			<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
-			<td><%= product.pro_amount %>個</td>
-			<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
-		</tr>
-		<% end %>
-
 
 		<% end %>
 		<% end %>
-		<% end %>
-
 	</table>
 
 

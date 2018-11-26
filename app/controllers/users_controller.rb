@@ -19,15 +19,14 @@ class UsersController < ApplicationController
 	end
 
 	def update
-
 		@user = User.with_deleted.find(params[:id])
 		if @user.update(user_params)
 			redirect_to user_path, notice: 'ユーザー情報を編集しました！'
 
-
 		else
 			render :edit
 		end
+
 	end
 
 	def destroy
@@ -51,8 +50,8 @@ class UsersController < ApplicationController
 	def correct_user
 		@user = User.with_deleted.find(params[:id])
 		@admin = User.find(1)
-        redirect_to root_path unless @user == current_user || @admin == current_user
-    end
+		redirect_to root_path unless @user == current_user || @admin == current_user
+	end
 
 
 
