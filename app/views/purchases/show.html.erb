@@ -3,6 +3,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-10">
+			<input class="test">
 			<h1>
 				<%= @purchase.date.year %> 年
 				<%= @purchase.date.month %> 月
@@ -80,15 +81,18 @@
 
 <script>
 	$('.glyphicon-star').on('click', function(){
-		id = $(this).find('span').attr('id');
-		$.ajax({
-			url: '/review/'+id,
-			type: 'PATCH',
-			data: {
-				id: id
-			},
-	    	dataType: 'script',
-		});
+		var id = $(this).attr('id');
+		if (id > 0){$("#1").css("color","red")};
+		if (id > 1){$("#2").css("color","red")};
+		if (id > 2){$("#3").css("color","red")};
+		if (id > 3){$("#4").css("color","red")};
+		if (id > 4){$("#5").css("color","red")};
+		if (id < 1){$("#1").css("color","black")};
+		if (id < 2){$("#2").css("color","black")};
+		if (id < 3){$("#3").css("color","black")};
+		if (id < 4){$("#4").css("color","black")};
+		if (id < 5){$("#5").css("color","black")};
+		$(".test").val(id)
 	});
 </script>
 
