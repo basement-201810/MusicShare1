@@ -1,7 +1,4 @@
 class PurchasesController < ApplicationController
-
-	before_action :authenticate_user!
-	# before_action :correct_user
 	before_action :hoge
 
 	def hoge
@@ -35,20 +32,20 @@ class PurchasesController < ApplicationController
 
 
 			if @purchase.save
-				@purchase_item.save!
+				@purchase_item.save
 					@review = Review.new
 					@review.user_id = current_user.id
 					@review.purchase_item_id = @purchase_item.id
 					@review.product_id = @purchase_item.product_id
 					@review.review_body = ""
 					@review.review_status = true
-				@review.save!
+				@review.save
 				@cart = Cart.new
 				@cart.user_id = current_user.id
 				@cart.save
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
-				@user.save!
+				@user.save
 
 				redirect_to arigatou_path
 			else
@@ -61,11 +58,7 @@ class PurchasesController < ApplicationController
 	def index
 		@user_all = User.all.count
 		@pur_total_sum = Purchase.sum(:pur_total)
-		@purchases = Purchase.all
-		# starus別表示のための変数
-		@purchases_0 = Purchase.where(status: 0)
-		@purchases_1 = Purchase.where(status: 1)
-		@purchases_2 = Purchase.where(status: 2)
+		@purchases = Purchase.order(:status)
 	end
 
 	#------     purchase_item#index から移動↓    ------------>
@@ -103,12 +96,6 @@ class PurchasesController < ApplicationController
 
 	def arigatou
 	end
-
-	# def correct_user
-	# 	@user = current_user
-	# 	@purchase = Purchase.find(params[:id])
-	# 	redirect_to root_path unless @user == current_user || @user.manager == true
- #    end
 
 	private
 	def purchase_params
