@@ -34,8 +34,10 @@
 							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary" %></td>
 							<td>
 								<% if current_user.manager == false %>
+									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
 									<div class="form_group has_icon">
 										<label for="inputEmail">評価</label>
+										<%= f.select :review_star, [["1"],["2"],["3"],["4"],["5"]] %>
 										<div class="rating">
 										    <span id="5" class="glyphicon glyphicon-star"></span>
 										    <span id="4" class="glyphicon glyphicon-star"></span>
@@ -44,7 +46,6 @@
 										    <span id="1" class="glyphicon glyphicon-star"></span>
 										</div>
 									</div>
-									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
 										<div class="form_group has-icon">
 											<label for="inputEmail">レビュー</label>
 											<%= f.text_area :review_body, autofocus: true, class: "review_body", id: "inputEmail" %>
@@ -78,25 +79,6 @@
   		</div>
  	</div>
 </div>
-
-<script>
-	$('.glyphicon-star').on('click', function(){
-		var id = $(this).attr('id');
-		if (id > 0){$("#1").css("color","red")};
-		if (id > 1){$("#2").css("color","red")};
-		if (id > 2){$("#3").css("color","red")};
-		if (id > 3){$("#4").css("color","red")};
-		if (id > 4){$("#5").css("color","red")};
-		if (id < 1){$("#1").css("color","black")};
-		if (id < 2){$("#2").css("color","black")};
-		if (id < 3){$("#3").css("color","black")};
-		if (id < 4){$("#4").css("color","black")};
-		if (id < 5){$("#5").css("color","black")};
-		$(".test").val(id)
-	});
-</script>
-
-
 
 
 
