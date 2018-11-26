@@ -24,10 +24,9 @@
 }
 
 
-/*-----------購入過程-----------*/
+/*-----------購入プロセス表示-----------*/
 .purchase-processes {
-	width:60%;
-	margin: 10px auto;
+	margin: 20px auto;
 	display: flex;
 	justify-content: space-around;
 }
@@ -38,8 +37,8 @@
 	list-style: none;
 	position: relative;
 	font-weight: bold;
-	padding-left: 25px;
-	background-color: #aedfc6;
+	padding-left: 40px;
+	background-color: silver;
 }
 .purchase-process:after{
     content: "";
@@ -48,8 +47,14 @@
     left: 100%;
     border-style: solid;
     border-color: transparent;
-    border-left-color: #aedfc6;
+    border-left-color: silver;
     border-width: 14px 12px;
     width: 0;
     height: 0;
+}
+.now {
+	background-color: lightpink;
+}
+.now:after {
+	border-left-color: lightpink;
 }

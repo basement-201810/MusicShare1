@@ -55,6 +55,7 @@ class PurchasesController < ApplicationController
 				flash[:alert] = "failed to order."
 				redirect_to new_purchase_path
 			end
+		end
 	end
 
 	def index
@@ -101,6 +102,7 @@ class PurchasesController < ApplicationController
 	end
 
 	def arigatou
+		@user = current_user
 	end
 
 	# def correct_user

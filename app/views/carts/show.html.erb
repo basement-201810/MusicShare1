@@ -1,22 +1,26 @@
-<ul class="purchase-processes">
-	<li class="purchase-process">
-		ログイン
-	</li>
-	<li class="purchase-process">
-		注文商品の選択
-	</li>
-	<li class="purchase-process">
-		支払い方法選択
-	</li>
-	<li class="purchase-process">
-		注文確定
-	</li>
-</ul>
-
-
-
 
 <div class="container">
+
+	<!----- 購入プロセス表示 ----->
+	<% if @cart_items.empty? %>
+	    <p></p>
+	<% else %>
+		<ul class="purchase-processes">
+			<li class="purchase-process">
+				ログイン
+			</li>
+			<li class="purchase-process now">
+				注文商品の選択
+			</li>
+			<li class="purchase-process">
+				配送先・支払い方法選択
+			</li>
+			<li class="purchase-process">
+				注文完了
+			</li>
+		</ul>
+	<% end %>
+
 	<h3 class="glyphicon glyphicon-shopping-cart">ショッピングカート</h3>
 
 
@@ -28,7 +32,6 @@
 	<% if @cart_items.empty? %>
 	    <p>※ 現在カート内に商品はありません ※</p>
 	<% end %>
-
 
 	<!-- カート内の商品一覧 -->
 	<% @cart_items.each do |cart_item| %>

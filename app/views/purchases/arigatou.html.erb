@@ -1,3 +1,39 @@
-<h1>あざす</h1>
+<div class="container">
 
-<%= link_to "  買い物に戻る",root_path, class: "btn btn-info" %>
+	<!----- 購入プロセス表示 ----->
+	<ul class="purchase-processes">
+		<li class="purchase-process">
+			ログイン
+		</li>
+		<li class="purchase-process">
+			注文商品の選択
+		</li>
+		<li class="purchase-process">
+			配送先・支払い方法選択
+		</li>
+		<li class="purchase-process now">
+			注文完了
+		</li>
+	</ul>
+
+	<!----- TAHNK YOUメッセージ表示 ----->
+	<session class="row ">
+		<div class="thanks col-md-12">
+			<h1>Thank you!</h1>
+			<p>
+				ご購入ありがとうございました。<br>
+				商品到着までしばらくお待ち下さい.
+			</p>
+		</div>
+	</session>
+
+	<div class="row">
+		<span class="col-md-10"></span>
+		<%= link_to "購入内容を確認",user_path(@user), class: "btn btn-warning btn-sm col-md-2" %>
+	</div>
+	<P></P>
+	<div class="row">
+		<span class="col-md-10"></span>
+		<%= link_to "買い物に戻る",root_path, class: "btn btn-info btn-sm col-md-2" %>
+	</div>
+</div>
