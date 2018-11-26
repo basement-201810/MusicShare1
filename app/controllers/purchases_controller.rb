@@ -1,4 +1,7 @@
 class PurchasesController < ApplicationController
+
+	before_action :authenticate_user!
+	# before_action :correct_user, except: [:new,:create,:arigatou]
 	before_action :hoge
 
 	def hoge
@@ -45,14 +48,11 @@ class PurchasesController < ApplicationController
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
 				@user.save
-			end
-
-
-			else
-				flash[:alert] = "failed to order."
-				redirect_to new_purchase_path
-			end
 		end
+		# else
+		# 		flash[:alert] = "failed to order."
+		# 		redirect_to new_purchase_path
+		# 	end
 		redirect_to arigatou_path
 	end
 
@@ -99,7 +99,17 @@ class PurchasesController < ApplicationController
 	end
 
 	def arigatou
+		@user = current_user
 	end
+
+
+	# def correct_user
+	# 	@admin = User.find(1)
+	# 	@purchase = Purchase.find(params[:id])
+	# 	@user = @purchase.user_id
+	# 	redirect_to root_path unless @user == current_user || @admin == current_user
+ #    end
+
 
 	private
 	def purchase_params

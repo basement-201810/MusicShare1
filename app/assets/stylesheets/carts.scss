@@ -22,3 +22,39 @@
 	color: black;
 	text-decoration: none;
 }
+
+
+/*-----------購入プロセス表示-----------*/
+.purchase-processes {
+	margin: 20px auto;
+	display: flex;
+	justify-content: space-around;
+}
+.purchase-process {
+	width:22%;
+	height: 27px;
+	line-height: 27px;
+	list-style: none;
+	position: relative;
+	font-weight: bold;
+	padding-left: 40px;
+	background-color: silver;
+}
+.purchase-process:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    border-style: solid;
+    border-color: transparent;
+    border-left-color: silver;
+    border-width: 14px 12px;
+    width: 0;
+    height: 0;
+}
+.now {
+	background-color: lightpink;
+}
+.now:after {
+	border-left-color: lightpink;
+}

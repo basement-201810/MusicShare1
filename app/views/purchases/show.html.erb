@@ -1,6 +1,5 @@
-<h1>購入履歴詳細画面</h1>
-
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-10">
 			<input class="test">
@@ -73,11 +72,23 @@
 							<p>ステータス　<%= f.select :status, [["未処理","0"],["準備中","1"], ["発送済み","2"]] %></p>
 
 						<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
+
 					<% end %>
-				<% end %>
-			</div>
-  		</div>
- 	</div>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<div align="right">
+		<% if current_user.manager %>
+		<%= form_for @purchase, url: purchase_path do |f| %>
+
+		<p>ステータス　<%= f.select :status, [["未処理","0"],["準備中","1"], ["発送済み","2"]] %></p>
+
+		<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
+		<% end %>
+		<% end %>
+	</div>
 </div>
 
 
