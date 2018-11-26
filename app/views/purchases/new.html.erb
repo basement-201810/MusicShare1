@@ -35,7 +35,7 @@
 
 
 	<p>注文商品合計価格：<%= @cart.total %>円</p>
-	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field_1" ,:size => "3", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>pt</p>
+	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field_1" , :size => "150", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>pt</p>
 
 	<p>(利用可能ポイント：<%= current_user.point %>pt)</p>
 	<div>
