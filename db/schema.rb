@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2018_11_25_104210) do
     t.integer "user_id", null: false
     t.integer "product_id", null: false
     t.integer "purchase_item_id", null: false
-    t.integer "review_star", null: false
+    t.integer "review_star"
     t.boolean "review_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

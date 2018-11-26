@@ -120,8 +120,39 @@
 				<tr>
 					<th>レビュー :</th>
 					<td>
-						<p>平均 星<%= @review %>: レビュー数<%= @count_reviews %></p>
-<!--  -->					</td>
+						<p>平均 星<%= @product.average_score %>: レビュー数<%= @count_reviews %></p>
+						<% if @product.average_score >= 0 && @product.average_score <= 1 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @product.average_score> 1 && @product.average_score <= 2 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @product.average_score > 2 && @product.average_score <= 3 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @product.average_score > 3 && @product.average_score <= 4 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @product.average_score > 4 && @product.average_score <= 5 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+						<% end %>
+					</td>
 				</tr>
 
 
@@ -168,7 +199,7 @@
 		<tbody>
 			<% @reviews.each do |review| %>
 				<tr>
-					<td><%= review.user.name %></td>
+					<td></td>
 					<td><%= review.review_body %></td>
 					<% if user_signed_in? && current_user.manager == true %>
 						<td>

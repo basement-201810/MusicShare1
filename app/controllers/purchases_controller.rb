@@ -19,7 +19,7 @@ class PurchasesController < ApplicationController
 		
 		@cart = current_user.carts.last
 		@cart_items = @cart.cart_items
-	    @cart_items.each do |cart_item|
+	    if @cart_items.each do |cart_item|
 	    	
 	    	@purchase_item.product_id = cart_item.product_id
 	    	@purchase_item.image_id = cart_item.product.pro_image_id
@@ -28,10 +28,10 @@ class PurchasesController < ApplicationController
 	    	@purchase_item.amount = cart_item.amount
 	    	@purchase_item.sub_total = cart_item.sub_total
 	    	@purchase_item.cart_item_id = cart_item.id
-	    	@purchase_item.purchase_id = cart_item.cart.purchase_id
+	    	@purchase_item.purchase_id = cart_item.cart_id
 
 
-			if @purchase.save
+				@purchase.save
 				@purchase_item.save
 					@review = Review.new
 					@review.user_id = current_user.id
@@ -47,13 +47,13 @@ class PurchasesController < ApplicationController
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
 				@user.save
+			end
 
 				redirect_to arigatou_path
 			else
 				flash[:alert] = "failed to order."
 				redirect_to new_purchase_path
 			end
-		end
 	end
 
 	def index
@@ -71,7 +71,6 @@ class PurchasesController < ApplicationController
 	  	@purchase = Purchase.find(params[:id])
 #	  	@purchase_items = Purchase.find(params[:purchase_id]).purchase_items.all
 	  	@purchase_items = PurchaseItem.where(purchase_id: params[:id])
-	  	@cart_items = CartItem.where(cart_id: @purchase.cart_id)
 	end
 	#------------------------------------------------------------
 
