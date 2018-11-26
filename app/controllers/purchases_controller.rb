@@ -38,6 +38,7 @@ class PurchasesController < ApplicationController
 					@review.purchase_item_id = @purchase_item.id
 					@review.product_id = @purchase_item.product_id
 					@review.review_body = ""
+					@review.review_star = 0
 					@review.review_status = true
 				@review.save
 				@cart = Cart.new
@@ -58,7 +59,11 @@ class PurchasesController < ApplicationController
 	def index
 		@user_all = User.all.count
 		@pur_total_sum = Purchase.sum(:pur_total)
-		@purchases = Purchase.order(:status)
+		@purchases = Purchase.all
+		# starus別表示のための変数
+ 		@purchases_0 = Purchase.where(status: 0)
+		@purchases_1 = Purchase.where(status: 1)
+		@purchases_2 = Purchase.where(status: 2)
 	end
 
 	#------     purchase_item#index から移動↓    ------------>

@@ -81,13 +81,15 @@
 <script>
 	$('.glyphicon-star').on('click', function(){
 		id = $(this).find('span').attr('id');
+		$(this).css({
+			"color": "red"
+		});
 		$.ajax({
 			url: '/review/'+id,
 			type: 'PATCH',
 			data: {
 				id: id
 			},
-	    	dataType: 'script',
 		});
 	});
 </script>
