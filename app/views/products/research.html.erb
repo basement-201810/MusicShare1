@@ -44,7 +44,7 @@
 			    </div>
 			<% end %>
 			<div class="cd-image">
-				<%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
+				<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(product.pro_genre_id, product.id) %>
 				<div class="cd-image-overlay">
 					<p>★★★★★
 					<%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %></p>

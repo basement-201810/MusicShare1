@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # 	resources :cart_items, except: [:show,:create,:update,:index,:action]
   # end
 
-  resources :pro_genres, only: [:show] do
+  resources :pro_genres, only: [:index, :show] do
   	resources :products, only: [:show, :edit, :update]do
   		resources :reviews, only: [:show]
   	end
@@ -37,12 +37,13 @@ Rails.application.routes.draw do
     end
   end
 
-  
+
 #    root 'purchases#index'
 #    root 'pro_genres#index'
 
   get '/' => 'purchases#index', :constraints => ManagerChecker, as: 'admin_root'
   get '/' => 'pro_genres#index', as: 'root'
+
 
   # get  '/products/index' => 'products#index' #管理者用のindex
 

@@ -197,24 +197,25 @@
 			<% end %>
 		</thead>
 		<tbody>
-			<tr>
-				<% @reviews.each do |review| %>
-					<%= review.review_body %>
-				<% if user_signed_in? && current_user.manager == true %>
-				<td>
-					<% if review.review_status == true %>
-					<p>公開中</p>
-					<% else %>
-					<p>非公開中</p>
+			<% @reviews.each do |review| %>
+				<tr>
+					<td><%= review.user.name %></td>
+					<td><%= review.review_body %></td>
+					<% if user_signed_in? && current_user.manager == true %>
+						<td>
+							<% if review.review_status == true %>
+							<p>公開中</p>
+							<% else %>
+							<p>非公開中</p>
+							<% end %>
+						</td>
+						<%= form_for (review) do |f| %>
+						<td><%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
+						<% end %>
+						<td><%= link_to '会員情報確認', user_path(review.user_id)%></td>
 					<% end %>
-				</td>
-				<%= form_for (@review) do |f| %>
-				<td><% f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
-				<% end %>
-				<td><% link_to '会員情報確認', user_path(review.user_id)%></td>
-				<% end %>
-				<% end %>
-			</tr>
+				</tr>
+			<% end %>
 		</tbody>
 	</table>
 </div>
