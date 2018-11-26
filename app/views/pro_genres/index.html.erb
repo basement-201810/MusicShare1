@@ -56,8 +56,9 @@
 					    <div class="cd-image">
 						    <%= attachment_image_tag product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"%>
 						    <div class="cd-image-overlay">
-					            <p>★★★★★
-							    <%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %></p>
+						    	<span><%= product.average_score %></span>
+					            <span>★★★★★
+							    <%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %></span>
 							    <p><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id),class: "cd_title" %>
 							    </p>
 							    <p><%= product.pro_artist %></p>

@@ -121,31 +121,31 @@
 					<th>レビュー :</th>
 					<td>
 						<p>平均 星<%= @review %>: レビュー数<%= @count_reviews %></p>
-						<% if @reveiws.to_i >= 0 && @reveiws.to_i <= 1 then %>
+						<% if @review >= 0 && @review <= 1 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif @reveiws.to_i > 1 && @reveiws.to_i <= 2 then %>
+						<% elsif @review> 1 && @review <= 2 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif @reveiws.to_i > 2 && @reveiws.to_i <= 3 then %>
+						<% elsif @review > 2 && @review <= 3 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif @reveiws.to_i > 3 && @reveiws.to_i <= 4 then %>
+						<% elsif @review > 3 && @review <= 4 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif @reveiws.to_i > 4 && @reveiws.to_i <= 5 then %>
+						<% elsif @review > 4 && @review <= 5 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
