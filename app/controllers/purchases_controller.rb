@@ -55,6 +55,7 @@ class PurchasesController < ApplicationController
 				flash[:alert] = "failed to order."
 				redirect_to new_purchase_path
 			end
+		end
 	end
 
 	def index
@@ -115,5 +116,4 @@ class PurchasesController < ApplicationController
 			:pur_name_kana, :pur_email, :pur_address, :pur_post_code, :pur_tell)
 	end
 
-end
 end

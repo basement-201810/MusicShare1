@@ -3,7 +3,7 @@
 	<!------ 会員数・売上高報告 ------>
 	<div class="row">
 		<div class="col-md-6">
-
+			<p class="report">MEMBERS : <%= @user_all -1 %> </p>
 		</div>
 		<div class="col-md-6">
 			<p class="report">SALES : 
@@ -195,7 +195,6 @@
 <script>
 	$(function(){
 		$('#tab-contents .tab[id != "tab-all"]').hide();
-
 		$('#tab-menu a').on('click', function() {
 			$("#tab-contents .tab").hide();
 			$("#tab-menu .active").removeClass("active");
