@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
 
 	before_action :authenticate_user!
-	# before_action :correct_user
+	# before_action :correct_user, except: [:new,:create,:arigatou]
 	before_action :hoge
 
 	def hoge
@@ -106,9 +106,10 @@ class PurchasesController < ApplicationController
 	end
 
 	# def correct_user
-	# 	@user = current_user
+	# 	@admin = User.find(1)
 	# 	@purchase = Purchase.find(params[:id])
-	# 	redirect_to root_path unless @user == current_user || @user.manager == true
+	# 	@user = @purchase.user_id
+	# 	redirect_to root_path unless @user == current_user || @admin == current_user
  #    end
 
 	private

@@ -32,74 +32,87 @@
 	<% end %>
 
 
-
-	<div class="row">
 	<%= form_for(@purchase) do |f| %>
-
-		<!----- 配送先情報入力欄 ----->
-		<session class="col-md-6 form-group">
-
-			<h4><strong>◆ 配送先情報入力欄 ◆</strong></h4>
-			<p> <%= f.label :pur_name, "＊お名前"%><br>
+	<!----- 配送先情報入力欄 ----->
+	<div class="row purchase-user-info">
+		<h4 class="pur-new-sub">配送先情報入力欄</h4>
+		<div class="col-md-3"></div>
+		<div class="col-md-6 form-group">
+			<p> <%= f.label :pur_name, "◇ お名前"%><br>
 				<%= f.text_field :pur_name,:required => "required", :value => "#{current_user.name}", placeholder:"山田太郎",class: "form-control"%> </p>
-			<p> <%= f.label :pur_name_kana, "＊フリガナ"%><br>
-				<%= f.text_field :pur_name_kana,:required => "required", :value => "#{current_user.name_kana}", placeholder:"ヤマダタロウ",class: "form-control"%> </p>
-			<p> <%= f.label :pur_post_code, "＊郵便番号"%><br>
+			<p> <%= f.label :pur_name_kana, "◇ フリガナ"%><br>
+				<%= f.text_field :pur_name_kana,:required => "required", :value => "#{current_user.name_kana}", placeholder:"ヤマダタロウ",class: "form-control"%></p>
+			<p> <%= f.label :pur_post_code, "◇ 郵便番号"%><br>
 				<%= f.text_field :pur_post_code,:required => "required", :value => "#{current_user.post_code}",placeholder:"0000000 ※ハイフン無しで入力",class: "form-control" %> </p>
-			<p> <%= f.label :pur_address, "＊住所"%><br>
+			<p> <%= f.label :pur_address, "◇ 住所"%><br>
 				<%= f.text_area :pur_address,:required => "required", :value => "#{current_user.address}",placeholder:"東京都xx区xxx0丁目000-00 xxxxxxx00号",class: "form-control" %> </p>
-			<p> <%= f.label :pur_tell, "＊電話番号"%><br>
+			<p> <%= f.label :pur_tell, "◇ 電話番号"%><br>
 				<%= f.text_field :pur_tell,:required => "required", :value => "#{current_user.tell}",placeholder:"00000000000 ※ハイフン無しで入力",class: "form-control" %> </p>
 
-		<!-- 	<%= f.hidden_field :pur_name_kana, :value => "#{current_user.name_kana}" %> -->
+
 			<%= f.hidden_field :pur_email, :value => "#{current_user.email}" %>
 			<%= f.hidden_field :date, :value => "#{Time.now}" %>
 			<%= f.hidden_field :cart_id, :value => "#{@cart.id}" %>
 			<%= f.hidden_field :pur_total, :class => "pay_points_field_0", :value => "#{@cart.total}" %>
 			<%= f.hidden_field :get_points, :value => "#{(@cart.total * 0.01).floor}" %>
-		</session>
-
-		<div class="col-md-1"></div>
-
-		<!----- 支払い方法選択欄 ----->
-		<session class="col-md-5 form-group">
-			<h4><strong>◆ 支払い方法選択欄 ◆</strong></h4>
-
-			<p><strong>＊注文商品合計価格：<%= @cart.total %>円<strong></p>
-			<p><strong>＊ポイント使用：</strong><%= f.number_field :pay_points, :class => "pay_points_field_1" , :size => "150", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>pt<br>
-				( 利用可能ポイント：<%= current_user.point %>pt )</p>
-			<div>
-				<span>＊お支払い合計金額：</span>
-				<span class="pay_points_field_2"><%= @cart.total %> </span>
-				<span>円</span>
-			</div>
-			<p>この購入での獲得ポイント：<%= (@cart.total * 0.01).floor %>pt</p>
-			<p> <%= f.label :pay, "＊支払い方法："%>
-				<%= f.select :pay, [["銀行振込","0"],["クレジットカード","1"],["代金引換","2"]] %></p>
-
-	<!-- 	<% @cart_items.each do |cart_item| %>
-
-			<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
-
-				<%= purchase_item.hidden_field :cart_item_id,:value  => "#{cart_item.id}" %>
-				<%= purchase_item.hidden_field :sub_total,:value  => "#{cart_item.sub_total}" %>
-				<%= purchase_item.hidden_field :amount,:value  => "#{cart_item.amount}" %>
-				<%= purchase_item.hidden_field :title,:value  => "#{cart_item.product.pro_title}" %>
-				<%= purchase_item.hidden_field :artist,:value  => "#{cart_item.product.pro_artist}" %>
-				<%= purchase_item.hidden_field :image_id,:value  => "#{cart_item.product.pro_image_id}" %>
-				<%= purchase_item.hidden_field :product_id,:value  => "#{cart_item.product_id}" %>
-				<%= purchase_item.hidden_field :review_id,:value  => "#{}" %>
-
-			<% end %>
-
-		<% end %> -->
-
-		</session>
-		<span class="row">
-		<%= f.submit "注文確定", class: "btn btn-warning btn-sm col-md-12 "%>
-		</span>
-	<% end %>
+		</div>
+		<div class="col-md-3"></div>
 	</div>
+
+	<!----- 支払い方法選択欄 ----->
+	<div class="row  purchase-pay-info">
+		<h4 class="pur-new-sub">支払い方法選択欄</h4>
+		<div class="col-md-3"></div>
+		<div class="col-md-6 form-group">
+			<p>
+				<strong>◇ 注文商品合計価格：<%= @cart.total %>円</strong>
+			</p>
+			<p>
+				<strong>◇ ポイント使用：</strong>
+				<%= f.number_field :pay_points, :class => "pay_points_field_1" , :size => "150", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>
+					pt<br>
+				( 利用可能ポイント：<%= current_user.point %>pt )
+			</p>
+			<div>
+				<strong>
+					<span>◇ お支払い合計金額：</span>
+					<span class="pay_points_field_2"><%= @cart.total %> </span>
+					<span>円</span>
+				</strong>
+			</div>
+			<p>
+				この購入での獲得ポイント：<%= (@cart.total * 0.01).floor %>pt
+			</p>
+			<p> 
+				<%= f.label :pay, "＊支払い方法："%>
+				<%= f.select :pay, [["銀行振込","0"],["クレジットカード","1"],["代金引換","2"]] %>
+			</p>
+
+		<!-- 	<% @cart_items.each do |cart_item| %>
+
+				<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
+
+					<%= purchase_item.hidden_field :cart_item_id,:value  => "#{cart_item.id}" %>
+					<%= purchase_item.hidden_field :sub_total,:value  => "#{cart_item.sub_total}" %>
+					<%= purchase_item.hidden_field :amount,:value  => "#{cart_item.amount}" %>
+					<%= purchase_item.hidden_field :title,:value  => "#{cart_item.product.pro_title}" %>
+					<%= purchase_item.hidden_field :artist,:value  => "#{cart_item.product.pro_artist}" %>
+					<%= purchase_item.hidden_field :image_id,:value  => "#{cart_item.product.pro_image_id}" %>
+					<%= purchase_item.hidden_field :product_id,:value  => "#{cart_item.product_id}" %>
+					<%= purchase_item.hidden_field :review_id,:value  => "#{}" %>
+
+				<% end %>
+
+				<% end %> -->
+		</div>
+	</div>
+
+	<div class="row comfirm">
+		<div class="col-md-2"></div>
+		<%= f.submit "注文確定", class: "btn btn-warning btn-sm col-md-8"%>
+		<div class="col-md-2"></div>
+	</div>
+	<% end %>
 </div>
 
 
