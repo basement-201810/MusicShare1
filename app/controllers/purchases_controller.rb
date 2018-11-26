@@ -14,13 +14,11 @@ class PurchasesController < ApplicationController
 
 	def create
 		@purchase = Purchase.new(purchase_params)
-		@purchase_item = @purchase.purchase_items.build
-		@purchase.user_id = current_user.id
-		
 		@cart = current_user.carts.last
 		@cart_items = @cart.cart_items
-	    if @cart_items.each do |cart_item|
-	    	
+	    @cart_items.each do |cart_item|
+	    	@purchase_item = @purchase.purchase_items.build
+			@purchase.user_id = current_user.id
 	    	@purchase_item.product_id = cart_item.product_id
 	    	@purchase_item.image_id = cart_item.product.pro_image_id
 	    	@purchase_item.artist = cart_item.product.pro_artist
@@ -49,11 +47,13 @@ class PurchasesController < ApplicationController
 				@user.save
 			end
 
-				redirect_to arigatou_path
+
 			else
 				flash[:alert] = "failed to order."
 				redirect_to new_purchase_path
 			end
+		end
+		redirect_to arigatou_path
 	end
 
 	def index
