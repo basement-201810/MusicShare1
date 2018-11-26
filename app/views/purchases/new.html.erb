@@ -35,7 +35,7 @@
 
 
 	<p>注文商品合計価格：<%= @cart.total %>円</p>
-	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field_1" ,:size => "3", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>pt</p>
+	<p>ポイント使用：<%= f.number_field :pay_points, :class => "pay_points_field_1" , :size => "150", :maxlength => "6", :value => "0",:min => "0", :max => "#{current_user.point}" %>pt</p>
 
 	<p>(利用可能ポイント：<%= current_user.point %>pt)</p>
 	<div>
@@ -47,7 +47,7 @@
 	<p>支払い方法：<%= f.select :pay, [["銀行振込","0"],["クレジットカード","1"],["代金引換","2"]] %></p>
 	
 
-	<% @cart_items.each do |cart_item| %>
+<!-- 	<% @cart_items.each do |cart_item| %>
 
 		<%= f.fields_for :purchase_items, cart_item do |purchase_item| %>
 
@@ -65,7 +65,7 @@
 		<% end %>
 	
 	<% end %>
-
+ -->
 
 <%= f.submit "注文確定", class: "btn btn-primary"%>
 

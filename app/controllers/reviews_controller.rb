@@ -39,11 +39,9 @@ class ReviewsController < ApplicationController
 	end
 
 	def update
-		@review = Review.find_or_create_by(purchase_item_id: params[:id])
-		# @review.product_id = params[:product_id]
-		# @review.user_id = current_user.id
-		# @review.purchase_item_id = params[:purchase_item_id]
+		@review = Review.find(params[:id])
 		if @review.update!(review_params)
+			# @review.point += 10
 			redirect_to user_path(current_user), notice: 'Review was successfully updated.'
 		else
 			redirect_to request.referrer

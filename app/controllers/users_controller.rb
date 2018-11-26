@@ -12,28 +12,28 @@ class UsersController < ApplicationController
 	def show
 		@user = User.with_deleted.find(params[:id])
 		@purchases = User.with_deleted.find(params[:id]).purchases.all.order('created_at DESC')
-		@reviews = @user.reviews
-		@review = Review.new
 	end
-
-	def update
-		@user = User.find(params[:id])
-		if @user.update(user_params)
-			redirect_to user_path, notice: 'Profile was successfully updated!!'
-		else
-			render :edit
-		end
-	end
-
 
 	def edit
 		@user = User.with_deleted.find(params[:id])
 	end
 
+	def update
+
+		@user = User.with_deleted.find(params[:id])
+		if @user.update(user_params)
+			redirect_to user_path, notice: 'ユーザー情報を編集しました！'
+
+
+		else
+			render :edit
+		end
+	end
+
 	def destroy
 		user = User.find(params[:id])
 		user.destroy
-		redirect_to root_path
+		redirect_to users_path
 	end
 
 	# def release
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 	# 	user.nonrelease! unless user.release? # => nonreleaseがfalse
 	# 	redirect_to users_path
 	# end
-	
+
 	def correct_user
 		@user = User.with_deleted.find(params[:id])
 		@admin = User.find(1)
@@ -65,5 +65,5 @@ end
 
 private
 def user_params
-	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo)
+	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo, :password, :password_confirmation)
 end
