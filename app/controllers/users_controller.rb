@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 	# 	user.nonrelease! unless user.release? # => nonreleaseがfalse
 	# 	redirect_to users_path
 	# end
-
+	
 	def correct_user
 		@user = User.with_deleted.find(params[:id])
 		@admin = User.find(1)
@@ -64,5 +64,5 @@ end
 
 private
 def user_params
-	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo, :password, :password_confirmation)
+	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo)
 end

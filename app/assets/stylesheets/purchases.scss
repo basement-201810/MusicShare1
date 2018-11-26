@@ -15,6 +15,7 @@
     color: red;
 }
 
+
 .report {
 	font-size: 30px;
 	font-weight: bold;
@@ -30,4 +31,44 @@
 #tab-menu .active {
   background: #ddd;
   color: #000;
+}
+
+/*---------- purchase#new ページ----------*/
+.purchase-pay-info,
+.purchase-user-info,
+.confirm {
+	position: relative;
+	margin-bottom: 40px
+}
+.pur-new-sub {
+	margin: 20px auto;
+	font-weight: bold;
+	text-align: center;
+}
+.pur-new-sub:after,
+.pur-new-sub:before {
+    background-color: #777;
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 30px;
+    width: 170px;
+}
+
+.pur-new-sub:after {
+    right: 200px;
+}
+
+.pur-new-sub:before {
+    left: 200px;
+}
+
+/*---------- thank you ページ----------*/
+.thanks {
+	padding: 80px;
+	margin: 0 20px;
+    background: #FFF0F5;
+    box-shadow: 0px 0px 0px 10px #FFF0F5;
+    border: dashed 2px salmon;
+    text-align: center;
 }
