@@ -20,8 +20,7 @@ class Product < ApplicationRecord
 		if reviews.empty?
 			return 0
 		else
-			#(reviews.to_a.sum { |review| review.review_star }  / reviews.all.count.to_f ).round(2)
-			return 0
+			(reviews.to_a.sum { |review| review.review_star }  / reviews.all.count.to_f ).round(2)
 		end
 	end
 
