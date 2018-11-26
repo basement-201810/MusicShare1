@@ -1,10 +1,11 @@
 class ProGenresController < ApplicationController
+	before_action :average_calc
 
 	def index
 		if user_signed_in?
 			@user = User.find(current_user.id)
 		end
-		@products = Product.where(pro_status: "release").order("pro_date DESC").limit(4)
+		@products = Product.where(pro_status: "release").order("average_score DESC").limit(4)
 		@genres = ProGenre.all
 		@genres_jpop = Product.where(pro_genre_id:1).where(pro_status: "release").order("pro_date DESC").limit(4)
 		@genres_kpop = Product.where(pro_genre_id:2).where(pro_status: "release").order("pro_date DESC").limit(4)
@@ -34,6 +35,14 @@ class ProGenresController < ApplicationController
 	end
 
 	def search
+	end
+
+	def average_calc
+		@products = Product.all
+		@products.each do |product|
+			product.average_score = product.star_average.round(2)
+			product.save
+		end
 	end
 
 
