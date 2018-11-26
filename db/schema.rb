@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_104210) do
+ActiveRecord::Schema.define(version: 2018_11_26_090324) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "amount", null: false
@@ -100,10 +100,10 @@ ActiveRecord::Schema.define(version: 2018_11_25_104210) do
     t.integer "user_id", null: false
     t.integer "product_id", null: false
     t.integer "purchase_item_id", null: false
-    t.integer "review_star"
     t.boolean "review_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "review_star", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|

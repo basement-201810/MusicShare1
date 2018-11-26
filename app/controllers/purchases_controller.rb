@@ -17,13 +17,11 @@ class PurchasesController < ApplicationController
 
 	def create
 		@purchase = Purchase.new(purchase_params)
-		@purchase_item = @purchase.purchase_items.build
-		@purchase.user_id = current_user.id
-		
 		@cart = current_user.carts.last
 		@cart_items = @cart.cart_items
 	    @cart_items.each do |cart_item|
-	    	
+	    	@purchase_item = @purchase.purchase_items.build
+			@purchase.user_id = current_user.id
 	    	@purchase_item.product_id = cart_item.product_id
 	    	@purchase_item.image_id = cart_item.product.pro_image_id
 	    	@purchase_item.artist = cart_item.product.pro_artist
@@ -31,16 +29,17 @@ class PurchasesController < ApplicationController
 	    	@purchase_item.amount = cart_item.amount
 	    	@purchase_item.sub_total = cart_item.sub_total
 	    	@purchase_item.cart_item_id = cart_item.id
-	    	@purchase_item.purchase_id = cart_item.cart.purchase_id
+	    	@purchase_item.purchase_id = cart_item.cart_id
 
 
-			if @purchase.save
+				@purchase.save
 				@purchase_item.save
 					@review = Review.new
 					@review.user_id = current_user.id
 					@review.purchase_item_id = @purchase_item.id
 					@review.product_id = @purchase_item.product_id
 					@review.review_body = ""
+					@review.review_star = 0
 					@review.review_status = true
 				@review.save
 				@cart = Cart.new
@@ -49,13 +48,12 @@ class PurchasesController < ApplicationController
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
 				@user.save
-
-				redirect_to arigatou_path
-			else
-				flash[:alert] = "failed to order."
-				redirect_to new_purchase_path
-			end
 		end
+		# else
+		# 		flash[:alert] = "failed to order."
+		# 		redirect_to new_purchase_path
+		# 	end
+		redirect_to arigatou_path
 	end
 
 	def index
@@ -63,7 +61,7 @@ class PurchasesController < ApplicationController
 		@pur_total_sum = Purchase.sum(:pur_total)
 		@purchases = Purchase.all
 		# starus別表示のための変数
-		@purchases_0 = Purchase.where(status: 0)
+ 		@purchases_0 = Purchase.where(status: 0)
 		@purchases_1 = Purchase.where(status: 1)
 		@purchases_2 = Purchase.where(status: 2)
 	end
@@ -73,7 +71,6 @@ class PurchasesController < ApplicationController
 	  	@purchase = Purchase.find(params[:id])
 #	  	@purchase_items = Purchase.find(params[:purchase_id]).purchase_items.all
 	  	@purchase_items = PurchaseItem.where(purchase_id: params[:id])
-	  	@cart_items = CartItem.where(cart_id: @purchase.cart_id)
 	end
 	#------------------------------------------------------------
 
@@ -105,12 +102,14 @@ class PurchasesController < ApplicationController
 		@user = current_user
 	end
 
+
 	# def correct_user
 	# 	@admin = User.find(1)
 	# 	@purchase = Purchase.find(params[:id])
 	# 	@user = @purchase.user_id
 	# 	redirect_to root_path unless @user == current_user || @admin == current_user
  #    end
+
 
 	private
 	def purchase_params
