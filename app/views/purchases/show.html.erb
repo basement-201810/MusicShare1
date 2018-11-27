@@ -1,4 +1,9 @@
 <div class="container">
+		<% if flash[:notice] %>
+			<div class="alert alert-info">
+				<%= flash.notice %>
+			</div>
+		<% end %>
 	<h3><%= @purchase.date.strftime('%Y年%m月%d日') %>購入分</h3>
 	<div class="row">
 		<div class="col-md-12">
@@ -66,35 +71,6 @@
  	</div>
 
 </div>
-
-<script>
-	$('.glyphicon-star').on('click', function(){
-		var id = $(this).attr('id');
-		if (id > 0){$("#1").css("color","red")};
-		if (id > 1){$("#2").css("color","red")};
-		if (id > 2){$("#3").css("color","red")};
-		if (id > 3){$("#4").css("color","red")};
-		if (id > 4){$("#5").css("color","red")};
-		if (id < 1){$("#1").css("color","black")};
-		if (id < 2){$("#2").css("color","black")};
-		if (id < 3){$("#3").css("color","black")};
-		if (id < 4){$("#4").css("color","black")};
-		if (id < 5){$("#5").css("color","black")};
-		$(".test").val(id)
-
-		$.ajax({
-      		type: 'PATCH',
-      		url: `/reviews/${task.id}`,
-      		data: { task: { done: !task.done } }
-    		}).done(data => {
-      		if (data === 'OK') {
-        	task.done = !task.done;
-        	this.refresh();
-      		}
-    	});
-	});
-</script>
-
 
 
 

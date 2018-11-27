@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
 		if @review.update!(review_params)
 			if current_user.manager
 
-
+				redirect_to request.referrer, notice: 'Review was successfully edited by administrator!'  #一応管理者は編集したらそのページにとどまる形になってます
 
 			else
 				if  @review.first_review
