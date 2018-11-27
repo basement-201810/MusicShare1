@@ -60,11 +60,11 @@ class PurchasesController < ApplicationController
 	def index
 		@user_all = User.all.count
 		@pur_total_sum = Purchase.sum(:pur_total)
-		@purchases = Purchase.all
+		@purchases = Purchase.all.reverse_order
 		# starus別表示のための変数
- 		@purchases_0 = Purchase.where(status: 0)
-		@purchases_1 = Purchase.where(status: 1)
-		@purchases_2 = Purchase.where(status: 2)
+ 		@purchases_0 = Purchase.where(status: 0).reverse_order
+		@purchases_1 = Purchase.where(status: 1).reverse_order
+		@purchases_2 = Purchase.where(status: 2).reverse_order
 	end
 
 	#------     purchase_item#index から移動↓    ------------>
