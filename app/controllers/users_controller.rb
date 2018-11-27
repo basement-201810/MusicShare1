@@ -7,6 +7,9 @@ class UsersController < ApplicationController
 		@users = User.with_deleted
 		@users_k = User.order(:user_id).page(params[:page]) #userのkaminari gem 適応箇所
 		@user = User.find(current_user.id)
+		if @user.manager != true
+			redirect_to root_path
+		end
 	end
 
 	def show
@@ -46,7 +49,7 @@ class UsersController < ApplicationController
 	# 	user.nonrelease! unless user.release? # => nonreleaseがfalse
 	# 	redirect_to users_path
 	# end
-	
+
 	def correct_user
 		@user = User.with_deleted.find(params[:id])
 		@admin = User.find(1)
@@ -64,5 +67,5 @@ end
 
 private
 def user_params
-	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo)
+	params.require(:user).permit(:name, :name_kana, :email, :tell, :post_code, :address, :point, :user_status, :manager, :memo, :password, :encrypted_password)
 end

@@ -92,18 +92,13 @@
 .genre-title:after,
 .new-info:before ,
 .genre-title:before {
-    border-top:double 1px #777;
-    border-bottom:double 1px #777;
+    border-top:double 1px red;
+    border-bottom:double 1px red;
     content: "";
     height: 3px;
     width: 200px;
     position: absolute;
     top: 30px;
-}
-.new-info:before ,
-.new-info:after{
-    border-top:double 1px red;
-    border-bottom:double 1px red;
 }
 
 .new-info:after,
