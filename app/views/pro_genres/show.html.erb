@@ -9,7 +9,6 @@
 
 
 <div class="container">
-<h2><%= @genre.pro_genre_name %></h2>
 
 <div class="row">
 
@@ -31,8 +30,8 @@
 
     <!-- - - - メインー - - - -->
 
-    <section class="main col-md-10 clearfix">
-		<h3 class="genre-title"> ◇ <%= @genre.pro_genre_name %></h3>
+    <section class="main col-md-10 clearfix genre-show">
+		<h3 class="genre-title">  <%= @genre.pro_genre_name %></h3>
 		<% @products.each do |product| %>
 
 		<div class="col-md-3">

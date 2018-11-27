@@ -23,7 +23,7 @@
 
 		<p><%= flash.notice %></p>
 
-		<h2>商品一覧ページ</h2>
+		<h2 class="big-ribbon">WELCOME TO MUSIC SHARE!!</h2>
 
 
 		<div class="row">
@@ -48,8 +48,8 @@
 			<div class="main col-md-10 clearfix">
 
 				<!-- おすすめ -->
-				<div class="clearfix">
-					<h4 class="new-info"> ■おすすめ</h4>
+				<div class="clearfix genre-show">
+					<h4 class="new-info"> Recommended</h4>
 					<% @products.each do |product| %>
 
 					<div class="col-md-3">
@@ -106,6 +106,7 @@
 								</p>
 								<p><%= product.pro_artist %></p>
 							</div>
+
 						</div>
 					</div>
 					<% end %>
@@ -113,9 +114,10 @@
 
 
 				<!-- J-POP -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■J-POP</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> J-POP</h4>
 					<% @genres_jpop.each do |product| %>
+
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
 						<div class="newsign">
@@ -125,6 +127,7 @@
 						<div class="cd-image">
 							<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(product.pro_genre_id, product.id) %>
 							<div class="cd-image-overlay">
+
 								<span><%= product.average_score %></span>
 								<span>
 									<% if product.average_score == 0 %>
@@ -177,8 +180,8 @@
 
 
 				<!-- K-POP -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■K-POP</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> K-POP</h4>
 					<% @genres_kpop.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -241,8 +244,8 @@
 
 
 				<!-- アイドル -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■アイドル</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> アイドル</h4>
 					<% @genres_idle.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -305,8 +308,8 @@
 
 
 				<!-- 童謡 -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■童謡</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> 童謡</h4>
 					<% @genres_douyou.each do |product| %>
 
 					<div class="col-md-3">
@@ -369,9 +372,10 @@
 				</div>
 
 
+
 				<!-- Rock -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■Rock</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> Rock</h4>
 					<% @genres_rock.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -434,8 +438,8 @@
 
 
 				<!-- EDM -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■EDM</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> EDM</h4>
 					<% @genres_edm.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -498,8 +502,8 @@
 
 
 				<!-- Dance -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■Dance</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> Dance</h4>
 					<% @genres_dance.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -561,9 +565,10 @@
 				</div>
 
 
+
 				<!-- Alternative -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■Alternative</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> Alternative</h4>
 					<% @genres_alternative.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -626,8 +631,8 @@
 
 
 				<!-- RAP/HIP-HOP -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■RAP/HIP-HOP</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> RAP/HIP-HOP</h4>
 					<% @genres_rap.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -689,9 +694,10 @@
 				</div>
 
 
+
 				<!-- アニソン -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■アニソン</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> アニソン</h4>
 					<% @genres_anime.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -753,9 +759,10 @@
 				</div>
 
 
+
 				<!-- Jazz -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■Jazz</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> Jazz</h4>
 					<% @genres_jazz.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -818,8 +825,8 @@
 
 
 				<!-- その他 -->
-				<div class="clearfix">
-					<h4 class="genre-title"> ■その他</h4>
+				<div class="clearfix genre-show">
+					<h4 class="genre-title"> その他</h4>
 					<% @genres_otherwise.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -882,10 +889,14 @@
 
 			</div>
 
+
+			</div>
 		</div>
 	</div>
 
 </div>
+
+	</div>
 
 
 <!-- bxSlider -->
@@ -898,3 +909,4 @@
 		});
 	});
 </script>
+
