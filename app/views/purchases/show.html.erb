@@ -1,11 +1,9 @@
 <div class="container">
 	<h3><%= @purchase.date.strftime('%Y年%m月%d日') %>購入分</h3>
-
-	<% @purchase_items.each do |purchase_item| %>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-12">
 			<table class="table table-hover">
-				<!-- <thead>
+				<thead>
 					<th></th>
 					<th>タイトル</th>
 					<th>アーティスト</th>
@@ -14,79 +12,88 @@
 					<th>小計</th>
 					<th></th>
 					<th></th>
-				</thead> -->
+				</thead>
 				<tbody>
-					<tr>
-						<td rowspan="2">
-							<%= attachment_image_tag purchase_item, :image, size: "90x90", fallback: "no-image_rocket.png" %>
-						</td>
-						<td colspan="2">
-							<span class="item-title"><%= purchase_item.title %></span>
-							/ <%= purchase_item.artist %>
-						</td>
-						<td>
-							<%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-info btn-xs" %>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							単価：<%= number_to_currency(purchase_item.sub_total / purchase_item.amount, :unit => "￥",:precision => 0)  %>
-						</td>
-						<td>
-							数量：<%= purchase_item.amount %>個
-						</td>
-						<td>
-							<strong>小計：<%= number_to_currency(purchase_item.sub_total, :unit => "￥",:precision => 0)  %></strong>
-						</td>
-					</tr>
+
+					<% @purchase_items.each do |purchase_item| %>
+						<tr>
+							<td><%= attachment_image_tag purchase_item, :image, size: "100x100", fallback: "no-image_rocket.png" %></td>
+							<td><strong><%= purchase_item.title %></strong></td>
+							<td><%= purchase_item.artist %></td>
+							<td><%= purchase_item.amount %></td>
+							<td><%= number_to_currency(purchase_item.sub_total / purchase_item.amount, :unit => "￥",:precision => 0)  %></td>
+							<td><strong><%= number_to_currency(purchase_item.sub_total, :unit => "￥",:precision => 0)  %></strong></td>
+							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary btn-xs" %></td>
+							<td>
+								<% if current_user.manager == false %>
+									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
+										<div class="form_group has_icon">
+											<label for="inputEmail">評価</label>
+											<%= f.select :review_star, [["☆☆☆☆☆", "0"],["★☆☆☆☆", "1"],["★★☆☆☆", "2"],["★★★☆☆", "3"],["★★★★☆", "4"],["★★★★★", "5"]] %>
+										</div>
+										<div class="form_group has-icon">
+											<label for="inputEmail">レビュー</label>
+											<%= f.text_area :review_body, autofocus: true, class: "review_body ", id: "inputEmail" %>
+										</div>
+										<div class="form_group has-icon">
+											<%= f.submit "投稿", class: "btn btn-warning btn-xs" %>
+										</div>
+									<% end %>
+								<% else %>
+									<%= purchase_item.review.review_star %>
+									<%= purchase_item.review.review_body %>
+									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
+										<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
+										<%= f.submit "変更",class:"btn btn-success btn-xs"%>
+									<% end %>
+								<% end %>
+							</td>
+						</tr>
+					<% end %>
 				</tbody>
 			</table>
-		</div>
-		<div class="col-md-4 review-comment">
-			<div class="form_group has_icon">
-			<% if current_user.manager == false %>
-				<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
-					<label for="inputEmail"> 評価</label>
-					<%= f.select :review_star, [["1"],["2"],["3"],["4"],["5"]] %>
-					<div class="rating">
-						<span id="5" class="glyphicon glyphicon-star"></span>
-						<span id="4" class="glyphicon glyphicon-star"></span>
-						<span id="3" class="glyphicon glyphicon-star"></span>
-						<span id="2" class="glyphicon glyphicon-star"></span>
-						<span id="1" class="glyphicon glyphicon-star"></span>
-					</div>
-					<div class="form_group has-icon">
-						<label for="inputEmail">レビュー</label><%= f.submit "投稿", class: "btn btn-warning btn-xs" %>
-						<%= f.text_area :review_body, autofocus: true, class: "review_body form-control", id: "inputEmail" %>
-					</div>
+			<div align="right">
+				<% if current_user.manager %>
+						<%= form_for @purchase, url: purchase_path do |f| %>
+
+							<p>ステータス　<%= f.select :status, [["未処理","0"],["準備中","1"], ["発送済み","2"]] %></p>
+
+						<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
+					<% end %>
 				<% end %>
-			<% else %>
-				<p>
-					・評価　　：<%= purchase_item.review.review_star %><br>
-					・レビュー：
-					<%= purchase_item.review.review_body %>
-				</p>
-				<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
-					<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
-					<%= f.submit "変更",class:"btn btn-success btn-xs"%>
-				<% end %>
-			<% end %>
-		</div>
-	</div>
-	<% end %>
-	<div class="row">
-		<div class="col-md-10"></div>
-		<div class="col-md-2" align="right">
-	    	<% if current_user.manager %>
-				<%= form_for @purchase, url: purchase_path do |f| %>
-				<p>ステータス　<%= f.select :status, [["未処理","0"],["準備中","1"], ["発送済","2"]] %></p>
-				<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
-		   		<% end %>
-			<% end %>
-		</div>
-	</div>
+			</div>
+  		</div>
+ 	</div>
+
 </div>
 
+<script>
+	$('.glyphicon-star').on('click', function(){
+		var id = $(this).attr('id');
+		if (id > 0){$("#1").css("color","red")};
+		if (id > 1){$("#2").css("color","red")};
+		if (id > 2){$("#3").css("color","red")};
+		if (id > 3){$("#4").css("color","red")};
+		if (id > 4){$("#5").css("color","red")};
+		if (id < 1){$("#1").css("color","black")};
+		if (id < 2){$("#2").css("color","black")};
+		if (id < 3){$("#3").css("color","black")};
+		if (id < 4){$("#4").css("color","black")};
+		if (id < 5){$("#5").css("color","black")};
+		$(".test").val(id)
+
+		$.ajax({
+      		type: 'PATCH',
+      		url: `/reviews/${task.id}`,
+      		data: { task: { done: !task.done } }
+    		}).done(data => {
+      		if (data === 'OK') {
+        	task.done = !task.done;
+        	this.refresh();
+      		}
+    	});
+	});
+</script>
 
 
 

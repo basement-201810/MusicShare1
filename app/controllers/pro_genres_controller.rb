@@ -1,5 +1,4 @@
 class ProGenresController < ApplicationController
-	before_action :average_calc
 
 	def index
 		if user_signed_in?
@@ -35,14 +34,6 @@ class ProGenresController < ApplicationController
 	end
 
 	def search
-	end
-
-	def average_calc
-		@products = Product.all
-		# @products.each do |product|
-		# 	product.average_score = product.star_average.round(2)
-		# 	product.save
-		# end
 	end
 
 

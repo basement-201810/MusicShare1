@@ -41,22 +41,35 @@ class ReviewsController < ApplicationController
 	def update
 		@review = Review.find(params[:id])
 		if @review.update!(review_params)
-			# @review.point += 10
-			redirect_to user_path(current_user), notice: 'Review was successfully updated.'
+			if current_user.manager
+
+
+
+			else
+				if  @review.first_review
+					@review.user.point += 10
+					@review.user.save
+					@review.first_review = false
+					@review.save
+					redirect_to user_path(current_user), notice: 'Review has successfully created.Got 10 points !!'
+				else
+					redirect_to user_path(current_user), notice: 'Review has successfully updated.'
+				end
+			end
 		else
 			redirect_to request.referrer
 		end
 	end
 
 	def release
-		review = Review.find(params[:id])
-		review.release! unless review.release?
+		@review = Review.find(params[:id])
+		@review.release! unless review.release?
 		redirct_to product_path(@product.id)
 	end
 
 	def nonrelease
-		review = Review.find(parmas[:id])
-		review.nonrelease! unless review.nonrelease?
+		@review = Review.find(parmas[:id])
+		@review.nonrelease! unless review.nonrelease?
 		redirect_to product_path(@product.id)
 	end
 end
