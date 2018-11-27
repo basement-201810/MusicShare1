@@ -8,12 +8,12 @@
 
 			<div class="form_group">
 				<label for="inputEmail"> Password </label>
-				<%= f.text_field :password, autofocus: :true, class: "form-control password", id: "inputEmail" %>
+				<%= f.password_field :password, autofocus: :false, class: "form-control password", id: "inputEmail" %>
 			</div><br>
 
 			<div class="form_group">
 				<label for="inputEmail"> Password_confirm </label>
-				<%= f.text_field :password_confirmation, autofocus: true, class: "form-control password_confirm", id: "inputEmail" %>
+				<%= f.password_field :password_confirmation, autofocus: true, class: "form-control password_confirm", id: "inputEmail" %>
 			</div><br>
 
 			<%= f.submit "変更を保存", class: "btn btn-danger pass-button" %>

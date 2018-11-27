@@ -93,6 +93,17 @@
 		if (id < 4){$("#4").css("color","black")};
 		if (id < 5){$("#5").css("color","black")};
 		$(".test").val(id)
+
+		$.ajax({
+      		type: 'PATCH',
+      		url: `/reviews/${task.id}`,
+      		data: { task: { done: !task.done } }
+    		}).done(data => {
+      		if (data === 'OK') {
+        	task.done = !task.done;
+        	this.refresh();
+      		}
+    	});
 	});
 </script>
 
