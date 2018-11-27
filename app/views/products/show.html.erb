@@ -121,13 +121,19 @@
 					<th>レビュー :</th>
 					<td>
 						<p>平均 星<%= @product.average_score %>: レビュー数<%= @count_reviews %></p>
-						<% if @product.average_score >= 0 && @product.average_score <= 1 then %>
+						<% if @product.average_score == 0 %>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif @product.average_score > 0 && @product.average_score <= 1 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif @product.average_score> 1 && @product.average_score <= 2 then %>
+						<% elsif @product.average_score > 1 && @product.average_score <= 2 then %>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
@@ -187,32 +193,121 @@
 	<div class="reviews">
 		<h3 class="glyphicon glyphicon-comment"> 商品レビュー</h3>
 	</div>
-	<table class="table table-hover">
+	<table class="table">
 		<thead>
 			<th></th>
+			<th>ユーザ名</th>
+			<th>レビュー</th>
+			<th></th>
 			<%if user_signed_in? && current_user.manager == true %>
-			<th></th>
-			<th></th>
-			<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 			<% end %>
 		</thead>
 		<tbody>
 			<% @reviews.each do |review| %>
 				<tr>
-					<td></td>
-					<td><%= review.review_body %></td>
-					<% if user_signed_in? && current_user.manager == true %>
+					<% if review.review_status == "release" && current_user.manager == false %>
+						<td></td>
+						<td><%= review.user.name %></td>
 						<td>
-							<% if review.review_status == true %>
-							<p>公開中</p>
+							<% if review.review_star == 0 %>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 0 && review.review_star <= 1 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 1 && review.review_star <= 2 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 2 && review.review_star <= 3 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 3 && review.review_star <= 4 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 4 && review.review_star <= 5 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+							<% end %>
+						</td>
+						<td><%= review.review_body %></td>
+					<% elsif current_user.manager == true %>
+						<td></td>
+						<td><%= review.user.name %></td>
+						<td>
+							<% if review.review_star == 0 %>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 0 && review.review_star <= 1 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 1 && review.review_star <= 2 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 2 && review.review_star <= 3 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 3 && review.review_star <= 4 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif review.review_star > 4 && review.review_star <= 5 then %>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+								<p class="glyphicon glyphicon-star"></p>
+							<% end %>
+						</td>
+						<td><%= review.review_body %></td>
+						<td>
+							<% if review.review_status == "release" %>
+								<p>公開中</p>
 							<% else %>
-							<p>非公開中</p>
+								<p>非公開中</p>
 							<% end %>
 						</td>
 						<%= form_for (review) do |f| %>
-						<td><%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %></td>
+							<td>
+								<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
+								<%= f.submit 'ステータス変更', class: "btn btn-danger btn-xs" %>
+							</td>
 						<% end %>
-						<td><%= link_to '会員情報確認', user_path(review.user_id)%></td>
+						<td><%= link_to '会員情報確認', user_path(review.user_id), class: "btn btn-primary" %></td>
 					<% end %>
 				</tr>
 			<% end %>

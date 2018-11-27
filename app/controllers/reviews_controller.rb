@@ -62,14 +62,14 @@ class ReviewsController < ApplicationController
 	end
 
 	def release
-		review = Review.find(params[:id])
-		review.release! unless review.release?
+		@review = Review.find(params[:id])
+		@review.release! unless review.release?
 		redirct_to product_path(@product.id)
 	end
 
 	def nonrelease
-		review = Review.find(parmas[:id])
-		review.nonrelease! unless review.nonrelease?
+		@review = Review.find(parmas[:id])
+		@review.nonrelease! unless review.nonrelease?
 		redirect_to product_path(@product.id)
 	end
 end

@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
 	def show
 		@product = Product.find(params[:id])
 		@user = current_user
-		@reviews = Review.where(product_id: params[:id])
+		@reviews = Review.where(product_id: params[:id]).where.not(review_body: "")
 	#	@review = @product.reviews.average(:review_star).round(2)    ←徳本変更　@review = Review.group(:product_id).average(:review_star)
 		@count_reviews = @product.reviews.where.not(review_star: 0).count
 		@music = Music.where(product_id:@product.id)
