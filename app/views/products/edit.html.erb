@@ -5,21 +5,21 @@
         <!----- エラーメッセージ ----->
         <% if @product.errors.any? %>
         <h4>
-           <%= @product.errors.count %> error prohibited this obj from being saved:
-       </h4>
-       <div id="error_explanation" class="alert alert-danger">
-           <% @product.errors.full_messages.each do |message| %>
-           <p><%= message %></p>
-           <% end %>
-       </div>
-       <% end %>
+            <%= @product.errors.count %> error prohibited this obj from being saved:
+        </h4>
+        <div id="error_explanation" class="alert alert-danger">
+         <% @product.errors.full_messages.each do |message| %>
+         <p><%= message %></p>
+         <% end %>
+     </div>
+     <% end %>
 
 
 
-       <%= form_for @product, url: pro_genre_product_path do |f| %>
+     <%= form_for @product, url: pro_genre_product_path do |f| %>
 
-       <!----- PRODUCT（商品）情報編集欄 ----->
-       <table class="table table-striped">
+     <!----- PRODUCT（商品）情報編集欄 ----->
+     <table class="table table-striped">
         <tr>
             <th> アーティスト</th>
             <td><%= f.text_field :pro_artist %></td>
@@ -63,19 +63,19 @@
     <!----- MUSIC（曲目）追加欄 ----->
     <table class="table table-striped table-bordered table-hover table-condensed">
       <tbody>
-         <tr>
-            <th class="col-xs-2">ディスクナンバー</th>
-            <th class="col-xs-2">ミュージックナンバー</th>
-            <th class="col-xs-7">曲名</th>
-            <th class="col-xs-1"></th>
-        </tr>
-        <%= f.nested_fields_for :musics, wrapper_tag: :tr do |b| %>
-        <td><%= b.text_field :music_disk_number, class:"form-control", value:"1" %></td>
-        <td><%= b.text_field :music_number, class:"form-control" %></td>
-        <td><%= b.text_field :music_name, class:"form-control" %></td>
-        <td><%= b.remove_nested_fields_link "Delete", class:"btn btn-danger", role:"button" %></td>
-        <% end %>
-    </tbody>
+       <tr>
+        <th class="col-xs-2">ディスクナンバー</th>
+        <th class="col-xs-2">ミュージックナンバー</th>
+        <th class="col-xs-7">曲名</th>
+        <th class="col-xs-1"></th>
+    </tr>
+    <%= f.nested_fields_for :musics, wrapper_tag: :tr do |b| %>
+    <td><%= b.text_field :music_disk_number, class:"form-control", value:"1" %></td>
+    <td><%= b.text_field :music_number, class:"form-control" %></td>
+    <td><%= b.text_field :music_name, class:"form-control" %></td>
+    <td><%= b.remove_nested_fields_link "Delete", class:"btn btn-danger", role:"button" %></td>
+    <% end %>
+</tbody>
 </table>
 <%= f.add_nested_fields_link :musics, "Add new", class:"btn btn-primary", role:"button" %>
 
