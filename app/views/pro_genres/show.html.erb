@@ -14,15 +14,16 @@
 
 	<!-- - - - サイドバー(テンプレ？？) - - - -->
 	<div class="side-ber col-md-2">
-		<section class="form-inline">
+		<section class="form-inline  search-area">
 			<%= search_form_for @search, url: research_products_path do |f| %>
 			    <%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-			    <%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+			    <p></p>
+				<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
 			<% end %>
 		</section>
 		<div class="genre-list">
 			<% @genres.each do |genre| %>
-			    <p><%= link_to genre.pro_genre_name, pro_genre_path(genre.id) %>
+			    <p><%= link_to genre.pro_genre_name, pro_genre_path(genre.id),class: "genre-show-btn" %>
 			    </p>
 			<% end %>
 		</div>
