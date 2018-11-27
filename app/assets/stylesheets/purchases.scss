@@ -2,18 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.rating {
-    float: left;
-}
-.rating span {
-    font-size: 25px;
-    cursor: pointer;
-    float: right;
-}
-
-.rating span:hover, .rating span:hover ~ span{
-    color: red;
-}
 
 
 .report {
