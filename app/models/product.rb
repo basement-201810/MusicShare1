@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
 	attachment :pro_image
-	has_many :musics
+	has_many :musics,inverse_of: :product
 	accepts_nested_attributes_for :musics, allow_destroy: true
 	# has_many :carts
 	has_many :reviews
@@ -17,12 +17,10 @@ class Product < ApplicationRecord
 	validates :pro_amount, presence: true, numericality: true
 
 	def star_average
-		if reviews.empty?
+		if reviews.where.not(review_star: 0).count == 0
 			return 0
 		else
-			#(reviews.to_a.sum { |review| review.review_star }  / reviews.all.count.to_f ).round(2)
-			return 0
-
+			(reviews.to_a.sum { |review| review.review_star }  / reviews.where.not(review_star: 0).all.count.to_f ).round(2)
 		end
 	end
 

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
+	before_action :average_calc
 
 
 	# Cartのuser_idが、ログインしたuserのidかを検索。
@@ -12,6 +13,15 @@ class ApplicationController < ActionController::Base
 			Cart.find_or_create_by(user_id: current_user.id)
 			root_path
 		# end
+	end
+
+	#商品のレビュー平均をaverage_scoreカラムに入れる
+	def average_calc
+		@products = Product.all
+		@products.each do |product|
+			product.average_score = product.star_average.round(2)
+			product.save
+		end
 	end
 
 	protected

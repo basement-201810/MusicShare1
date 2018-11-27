@@ -200,7 +200,6 @@
 			<% @reviews.each do |review| %>
 				<tr>
 					<td></td>
-					<td><%= review.user.name %></td>
 					<td><%= review.review_body %></td>
 					<% if user_signed_in? && current_user.manager == true %>
 						<td>
