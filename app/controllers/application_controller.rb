@@ -7,12 +7,8 @@ class ApplicationController < ActionController::Base
 	# Cartのuser_idが、ログインしたuserのidかを検索。
 	# ヒットすれば初めの一件を取得、1件もなければ新しくCartのレコードを作成
 	def after_sign_in_path_for(resource)
-		# if (current_user.manager == true)
-		# 	products_path
-		# else
 			Cart.find_or_create_by(user_id: current_user.id)
 			root_path
-		# end
 	end
 
 	#商品のレビュー平均をaverage_scoreカラムに入れる

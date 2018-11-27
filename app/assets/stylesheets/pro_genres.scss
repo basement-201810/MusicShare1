@@ -44,31 +44,62 @@
 
  /*=======*/
 
-.genre-list p {
-    padding: 5px;
-    color: #494949;
-    background: #f4f4f4;
-    border-left: solid 5px #AE9890;
-    font-family:Verdana, Helvetica;
-    letter-spacing: 1px;
-}
-.genre-list p :hover {
-    color: orangered;
-    transition: 0.3s ;
+/*----------11/27追加----------*/
+.search-area {
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
+.genre-show-btn {
+    width:150px;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 11px 5px 15px;
+    text-decoration: none;
+    color: #555555;
+    transition: .3s;
+    font-family:Verdana, Helvetica;
+}
+
+.genre-show-btn:before {
+   position: absolute;
+   display: inline-block;
+   content: '';
+   width: 3px;
+   height: 100%;
+   top: 0;
+   left: 0;
+   border-radius: 3px;
+   background:#555555;
+}
+
+/*.genre-show-btn:after{
+   position: absolute;
+   display: inline-block;
+   content: '';
+   width: 3px;
+   height: 100%;
+   top:0;
+   left: 100%;
+   border-radius: 3px;
+   background:#555555;
+}*/
+
+.genre-show-btn:hover:before/*,.genre-show-btn:hover:after*/{
+  -webkit-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  transform: rotate(10deg);
+  background: orangered;
+}
+
+/*----------------------------*/
+.genre-show-btn {
+    
+}
 .main {
     border-left: solid 1px #ddd;
 }
-
-/*
-.genre-title {
-    background: linear-gradient(transparent 50%, #F7D76B 80%);
-}
-
-.new-info {
-    background: linear-gradient(transparent 50%, #FB7D79 80%);
-}*/
 
 .genre-show {
     position: relative;
@@ -81,8 +112,6 @@
     text-align: center;
     font: normal 26px/1 Verdana, Helvetica;
     letter-spacing: 3px;
-  /*  color: #666;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, .7), 0px 2px 0 rgba(0, 0, 0, .5);*/
 }
 .new-info{
     color:red;
@@ -92,13 +121,18 @@
 .genre-title:after,
 .new-info:before ,
 .genre-title:before {
-    border-top:double 1px red;
-    border-bottom:double 1px red;
+    border-top:double 1px #777;
+    border-bottom:double 1px #777;
     content: "";
     height: 3px;
     width: 200px;
     position: absolute;
     top: 30px;
+}
+.new-info:after,
+.new-info:before {
+    border-top:double 1px red;
+    border-bottom:double 1px red;
 }
 
 .new-info:after,
@@ -169,8 +203,6 @@
   background: none !important;
 }
 
-
-/*- - - - - - 11/20 追記- - - - - - -- */
 .cd-image {
     margin-bottom: 2px;
     position: relative;
