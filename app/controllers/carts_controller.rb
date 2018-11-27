@@ -4,7 +4,6 @@ class CartsController < ApplicationController
 	before_action :correct_user
 
 	def show
-		# @cart = Cart.find(params[:id])
 		@cart = current_user.carts.last
 		@cart_items = @cart.cart_items
 	end
