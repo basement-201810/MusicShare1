@@ -1,5 +1,12 @@
 <div class="container">
 
+		<% if flash[:notice] %>
+			<div class="alert alert-info">
+				<%= flash.notice %>
+			</div>
+		<% end %>
+
+
 	<h3 class="glyphicon glyphicon-headphones"> 商品詳細情報</h3>
 
 	<div class="pro_info">
@@ -208,7 +215,7 @@
 		<tbody>
 			<% @reviews.each do |review| %>
 				<tr>
-					<% if review.review_status == "release" && current_user.manager == false %>
+					<% if review.review_status == "release" && ( user_signed_in? == false || current_user.manager == false) %>
 						<td></td>
 						<td><%= review.user.name %></td>
 						<td>
@@ -251,7 +258,7 @@
 							<% end %>
 						</td>
 						<td><%= review.review_body %></td>
-					<% elsif current_user.manager == true %>
+					<% elsif user_signed_in? && current_user.manager == true %>
 						<td></td>
 						<td><%= review.user.name %></td>
 						<td>
@@ -301,7 +308,7 @@
 								<p>非公開中</p>
 							<% end %>
 						</td>
-						<%= form_for (review) do |f| %>
+						<%= form_for review do |f| %>
 							<td>
 								<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
 								<%= f.submit 'ステータス変更', class: "btn btn-danger btn-xs" %>
