@@ -1,7 +1,7 @@
 <div class="contain">
 	<div class="product-index-title clearfix">
 		<div class="product-index-title-left">
-			<h2> 登録商品一覧</h2>
+			<h3> 登録商品一覧</h3>
 		</div>
 		<div class="product-index-title-right">
 			<div class="product-index-title-right-box1">
@@ -78,7 +78,10 @@
 					<% end %>
 					<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
 					<td><%= product.pro_amount %>個</td>
-					<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+					<td>
+						<%=link_to "詳細", pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-info btn-xs" %>
+						<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %>
+					</td>
 				</tr>
 			</tr>
 		</tr>
@@ -141,7 +144,10 @@
 					<% end %>
 					<td><%= product.pro_date.strftime("%Y年 %m月 %d日") %></td>
 					<td><%= product.pro_amount %>個</td>
-					<td><%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %></td>
+					<td>
+						<%=link_to "詳細", pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-info btn-xs" %>
+						<%=link_to "編集", edit_pro_genre_product_path(product.pro_genre_id, product.id), class:"btn btn-success btn-xs" %>
+					</td>
 				</tr>
 			</tr>
 		</tr>

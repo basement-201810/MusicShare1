@@ -32,7 +32,7 @@
 					</td>
 					<th>価格 :</th>
 					<td colspan=" 3">
-						<%= number_to_currency(@product.pro_price, :unit => "￥",:precision => 0)  %>
+						￥<%= number_with_delimiter(@product.pro_price)  %>
 					</td>
 				</tr>
 
@@ -116,18 +116,18 @@
 						<% if @product.pro_amount >= 11 then%>
 						<span class="pro_amount_atatus">在庫あり</span>
 						<% elsif @product.pro_amount <= 10 && @product.pro_amount >= 1 then %>
-						<span class="pro_amount_atatus">＊残りわずか＊</span>
+						<span class="pro_amount_atatus"><font color="red">＊残りわずか＊</font></span>
 						<% elsif @product.pro_amount = 0 then  %>
-						<span class="pro_amount_atatus">＊＊SoldOut＊＊</span>
+						<strong class="pro_amount_atatus"><font color="red">＊＊SoldOut＊＊</font></strong>
 						<%end%>
 					</td>
 				</tr>
 
 				<!-- レビュー数/レビュースター数 -->
 				<tr>
-					<th>レビュー :</th>
+					<th>商品評価 :</th>
 					<td>
-						<p>平均 星<%= @product.average_score %>: レビュー数<%= @count_reviews %></p>
+						<p>平均スター数&ensp;<%= @product.average_score %>&ensp; |  レビュー数&ensp;<%= @count_reviews %></p>
 						<% if @product.average_score == 0 %>
 							<p class="glyphicon glyphicon-star-empty"></p>
 							<p class="glyphicon glyphicon-star-empty"></p>
@@ -175,8 +175,8 @@
 					<td colspan="3">
 						<!-- - - -  管理者 - - - -->
 						<%if user_signed_in? && current_user.manager == true %>
-						<%=link_to "商品情報を編集する", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class:"btn btn-success" %>
-						<%= link_to "登録商品一覧画面", products_path ,class: "btn btn-info"%>
+						<%=link_to "商品情報を編集", edit_pro_genre_product_path(@product.pro_genre_id, @product.id), class: "btn btn-success btn-sm" %>
+						<%= link_to "登録商品一覧", products_path ,class: "btn btn-default btn-sm"%>
 						<!-- - - - ログイン済会員 - - - -->
 						<% elsif user_signed_in? && current_user.manager == false %>
 						<%= form_for @cart_item ,url:product_cart_items_path(product_id: @product.id) do |f| %>
@@ -314,7 +314,7 @@
 								<%= f.submit 'ステータス変更', class: "btn btn-danger btn-xs" %>
 							</td>
 						<% end %>
-						<td><%= link_to '会員情報確認', user_path(review.user_id), class: "btn btn-primary" %></td>
+						<td><%= link_to '会員情報確認', user_path(review.user_id), class: "btn btn-info btn-xs" %></td>
 					<% end %>
 				</tr>
 			<% end %>

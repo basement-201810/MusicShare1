@@ -1,4 +1,5 @@
 <div class="container">
+	
 
 	<!-- フラッシュメッセージ -->
 
@@ -11,7 +12,8 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-6">
-			<h2>user info</h2>
+			<h3 class="glyphicon glyphicon-home"> <strong><%= @user.name %></strong>'sマイページ</h2>
+			<h4>◇ 登録情報</h4>
 			<table class="table tabel-hover">
 				<tbody>
 					<tr>
@@ -60,12 +62,12 @@
 					<% end %>
 				</tbody>
 			</table>
-			<%= link_to "編集する", edit_user_path, class: "btn btn-success user-button" %>
+			<%= link_to "編集する", edit_user_path, class: "btn btn-success user-button btn-sm" %>
 
 			<%if current_user.manager == true %>
-			<%= link_to "User一覧へ戻る", users_path, class: "btn btn-primary user-button" %>
+			<%= link_to "User一覧へ戻る", users_path, class: "btn btn-default btn-sm user-button" %>
 			<% else %>
-			<%= link_to "退会する", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger user-button" %>
+			<%= link_to "退会する", users_path, method: :delete, data: { confirm: '本当に退会しますか？'}, class: "btn btn-danger btn-sm user-button" %>
 			<% end %>
 
 
@@ -82,7 +84,7 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<h3>購入履歴一覧</h3>
+			<h4>◇ 購入履歴一覧</h4>
 			<table class="table table-hover">
 				<thead>
 					<th>購入日時</th>
@@ -104,7 +106,7 @@
 								<%= purchase.date.month %> 月
 								<%= purchase.date.day %> 日
 							</td>
-							<td><%= number_to_currency(purchase.pur_total, :unit => "￥",:precision => 0)  %></td>
+							<td>￥<%= number_with_delimiter(purchase.pur_total)  %></td>
 							<td>
 								<% if current_user.manager %>
 									<% if purchase.status == 0 %>
@@ -116,7 +118,7 @@
 									<% end %>
 								<% end %>
 							</td>
-							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info btn-xs" %></td>
+							<td><%= link_to "詳細を確認",purchase_path(purchase.id),class: "btn btn-info btn-xs" %></td>
 						</tr>
 					<% end %>
 				</tbody>
