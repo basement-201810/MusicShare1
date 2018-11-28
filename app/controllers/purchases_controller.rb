@@ -72,6 +72,8 @@ class PurchasesController < ApplicationController
 	  	@purchase = Purchase.find(params[:id])
 #	  	@purchase_items = Purchase.find(params[:purchase_id]).purchase_items.all
 	  	@purchase_items = PurchaseItem.where(purchase_id: params[:id])
+	  	@user = @purchase.user_id
+	  	@user_name = User.find_by(id: @user).name
 	end
 	#------------------------------------------------------------
 
