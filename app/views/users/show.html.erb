@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<td>郵便番号</td>
-						<td><%= @user.post_code %></td>
+						<td>〒<%= @user.post_code %></td>
 					</tr>
 					<tr>
 						<td>住所</td>
@@ -40,7 +40,7 @@
 					</tr>
 					<tr>
 						<td>ポイント</td>
-						<td><%= @user.point %></td>
+						<td><%= @user.point %> p</td>
 					</tr>
 					<% if current_user.manager == true %>
 					<tr>
@@ -104,7 +104,7 @@
 								<%= purchase.date.month %> 月
 								<%= purchase.date.day %> 日
 							</td>
-							<td><%= purchase.pur_total%></td>
+							<td><%= number_to_currency(purchase.pur_total, :unit => "￥",:precision => 0)  %></td>
 							<td>
 								<% if current_user.manager %>
 									<% if purchase.status == 0 %>
@@ -116,7 +116,7 @@
 									<% end %>
 								<% end %>
 							</td>
-							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info" %></td>
+							<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-info btn-xs" %></td>
 						</tr>
 					<% end %>
 				</tbody>
