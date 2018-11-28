@@ -19,7 +19,12 @@
 	<h3 class="glyphicon glyphicon-edit"> 注文情報入力ページ</h3>
 
 	<!----- エラーメッセージ ----->
-	<p id = "alert"><%= alert %></p>
+	<% if flash[:alert] %>
+	<div class="alert alert-danger">
+		<%= flash.alert %>
+	</div>
+	<% end %>
+
 	<% if @purchase.errors.any? %>
 	    <h4>
 		    <%= @purchase.errors.count %> error prohibited this obj from being saved:
@@ -45,9 +50,9 @@
 			<p> <%= f.label :pur_post_code, "◇ 郵便番号"%><br>
 				<%= f.text_field :pur_post_code,:required => "required", :value => "#{current_user.post_code}",placeholder:"0000000 ※ハイフン無しで入力",class: "form-control" %> </p>
 			<p> <%= f.label :pur_address, "◇ 住所"%><br>
-				<%= f.text_area :pur_address,:required => "required", :value => "#{current_user.address}",placeholder:"東京都xx区xxx0丁目000-00 xxxxxxx00号",class: "form-control" %> </p>
+				<%= f.text_area :pur_address,:required => "required",  :value => "#{current_user.address}",placeholder:"東京都xx区xxx0丁目000-00 xxxxxxx00号",class: "form-control" %> </p>
 			<p> <%= f.label :pur_tell, "◇ 電話番号"%><br>
-				<%= f.text_field :pur_tell,:required => "required", :value => "#{current_user.tell}",placeholder:"00000000000 ※ハイフン無しで入力",class: "form-control" %> </p>
+				<%= f.text_field :pur_tell, :type => "tel",:required => "required", :value => "#{current_user.tell}",placeholder:"00000000000 ※ハイフン無しで入力",class: "form-control" %> </p>
 
 
 			<%= f.hidden_field :pur_email, :value => "#{current_user.email}" %>
