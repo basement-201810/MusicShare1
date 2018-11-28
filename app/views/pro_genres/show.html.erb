@@ -1,57 +1,70 @@
 
 <div class="main-visual">
 	<div class="main-visual-content">
-      <h1 class="main-visual-text">
-        Music Share
-      </h1>
-  </div>
+		<h1 class="main-visual-text">
+			Music Share
+		</h1>
+	</div>
 </div>
 
 
-<div class="container">
+<div class="entire">
 
-<div class="row">
+	<div class="row">
 
-	<!-- - - - サイドバー(テンプレ？？) - - - -->
-	<div class="side-ber col-md-2">
-		<section class="form-inline  search-area">
-			<%= search_form_for @search, url: research_products_path do |f| %>
-			    <%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-			    <p></p>
-				<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
-			<% end %>
-		</section>
-		<div class="genre-list">
-			<% @genres.each do |genre| %>
-			    <p><%= link_to genre.pro_genre_name, pro_genre_path(genre.id),class: "genre-show-btn" %>
-			    </p>
-			<% end %>
-		</div>
-	</div>
-
-    <!-- - - - メインー - - - -->
-
-    <section class="main col-md-10 clearfix genre-show">
-		<h3 class="genre-title">  <%= @genre.pro_genre_name %></h3>
-		<% @products.each do |product| %>
-
-		<div class="col-md-3">
-			<% if product.pro_date >Time.now-(7.days) %>
-			    <div class="newsign">
-				<span class="ribbon">NEW</span>
-			    </div>
-			<% end %>
-			<div class="cd-image">
-				<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(@genre, product.id) %>
-				<div class="cd-image-overlay">
-					<p>★★★★★
-					<%= link_to "77", pro_genre_product_path(@genre, product.id),class: "far fa-comments review-amount" %></p>
-					<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
-					</p>
-					<p><%= product.pro_artist %></p>
-				</div>
+		<!-- - - - サイドバー(テンプレ？？) - - - -->
+		<div class="side-ber">
+			<section class="form-inline  search-area">
+				<%= search_form_for @search, url: research_products_path do |f| %>
+				<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2", size: 22 %>
+				<%= button_tag( class: "btn btn-outline-success my-2 my-sm-0") do %>
+				<%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
+				<% end %>
+				<% end %>
+			</section>
+			<div class="genre-list">
+				<% @genres.each do |genre| %>
+				<p><%= link_to genre.pro_genre_name, pro_genre_path(genre.id),class: "genre-show-btn" %>
+				</p>
+				<% end %>
 			</div>
 		</div>
+
+		<!-- - - - メインー - - - -->
+
+		<section class="main col-md-10 clearfix genre-show">
+			<h3 class="genre-title">  <%= @genre.pro_genre_name %></h3>
+			<% @products.each do |product| %>
+
+			<div class="col-md-3">
+				<% if product.pro_date >Time.now-(7.days) %>
+				<div class="newsign">
+					<span class="ribbon">NEW</span>
+				</div>
+				<% end %>
+				<div class="cd-image">
+					<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(@genre, product.id) %>
+					<div class="cd-image-overlay">
+						<p>★★★★★
+							<%= link_to "77", pro_genre_product_path(@genre, product.id),class: "far fa-comments review-amount" %></p>
+							<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
+							</p>
+							<p><%= product.pro_artist %></p>
+						</div>
+					</div>
+				</div>
+				<% end %>
+			</section>
+
+			<!-- - - - リンクボタン- - - -->
+			　　<div class="row">
+				<span class="col-md-11"></span>
+				<p class="col-md-1">
+					<%= link_to "  BACK",root_path, class: " btn-info btn-block btn-sm text-center" %>
+				</p>
+			</div>
+		</div>
+
 		<% end %>
 	</section>
 
@@ -63,6 +76,7 @@
 		</p>
 	</div>
 </div>
+
 
 
 

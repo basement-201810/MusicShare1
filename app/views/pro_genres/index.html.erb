@@ -19,20 +19,20 @@
 	</div>
 
 
-	<div class="container">
+        <div class="entire">
 
 		<p><%= flash.notice %></p>
 
 		<h2 class="big-ribbon">WELCOME TO MUSIC SHARE!!</h2>
 
 
-		<div class="row">
+		<div class="clearfix">
 
 			<!-- - - - サイドバー(テンプレ？？) - - - -->
-			<div class="side-ber col-md-2">
+			<div class="side-ber">
 				<section class="form-inline search-area">
 					<%= search_form_for @search, url: research_products_path do |f| %>
-					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
+					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2", size: 22 %>
 					<%= button_tag( class: "btn btn-outline-success my-2 my-sm-0") do %>
 					<%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
 					<% end %>
@@ -47,7 +47,7 @@
 			</div>
 
 			<!-- - - - メインー - - - -->
-			<div class="main col-md-10 clearfix">
+			<div class="main clearfix">
 
 				<!-- おすすめ -->
 				<div class="clearfix genre-show">
@@ -892,13 +892,13 @@
 			</div>
 
 
-			</div>
 		</div>
 	</div>
+</div>
 
 </div>
 
-	</div>
+</div>
 
 
 <!-- bxSlider -->
