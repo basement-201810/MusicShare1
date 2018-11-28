@@ -36,71 +36,71 @@
 			<h3 class="genre-title">  <%= @genre.pro_genre_name %></h3>
 			<% @products.each do |product| %>
 
-		<div class="col-md-3">
-			<% if product.pro_date >Time.now-(7.days) %>
-			    <div class="newsign">
-				<span class="ribbon">NEW</span>
-			    </div>
-			<% end %>
-			<div class="cd-image">
-				<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(@genre, product.id) %>
-				<div class="cd-image-overlay">
-					<span><%= product.average_score %></span>
-					<span>
-						<% if product.average_score == 0 %>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif product.average_score > 0 && product.average_score <= 1 then %>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif product.average_score > 1 && product.average_score <= 2 then %>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif product.average_score > 2 && product.average_score <= 3 then %>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif product.average_score > 3 && product.average_score <= 4 then %>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star-empty"></p>
-						<% elsif product.average_score > 4 && product.average_score <= 5 then %>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<p class="glyphicon glyphicon-star"></p>
-						<% end %>
-						<%= link_to product.reviews.where.not(review_star: 0).count, pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %>
-					</span>
-					<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
-					</p>
-					<p><%= product.pro_artist %></p>
+			<div class="col-md-3">
+				<% if product.pro_date >Time.now-(7.days) %>
+				<div class="newsign">
+					<span class="ribbon">NEW</span>
+				</div>
+				<% end %>
+				<div class="cd-image">
+					<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(@genre, product.id) %>
+					<div class="cd-image-overlay">
+						<span><%= product.average_score %></span>
+						<span>
+							<% if product.average_score == 0 %>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif product.average_score > 0 && product.average_score <= 1 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif product.average_score > 1 && product.average_score <= 2 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif product.average_score > 2 && product.average_score <= 3 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif product.average_score > 3 && product.average_score <= 4 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star-empty"></p>
+							<% elsif product.average_score > 4 && product.average_score <= 5 then %>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<p class="glyphicon glyphicon-star"></p>
+							<% end %>
+							<%= link_to product.reviews.where.not(review_star: 0).count, pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %>
+						</span>
+						<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
+						</p>
+						<p><%= product.pro_artist %></p>
+					</div>
 				</div>
 			</div>
 			<% end %>
+			<!-- - - - リンクボタン- - - -->
+		　　<div class="row back-btn">
+				<span class="col-md-10"></span>
+				<p class="col-md-2">
+					<%= link_to "商品一覧へ戻る",root_path, class: " btn-info btn-block btn-sm text-center" %>
+				</p>
+			</div>
 		</section>
-
-		<!-- - - - リンクボタン- - - -->
-		<div class="row">
-			<span class="col-md-11"></span>
-			<p class="col-md-1">
-				<%= link_to "  BACK",root_path, class: " btn-info btn-block btn-sm text-center" %>
-			</p>
-		</div>
 	</div>
 
 </div>

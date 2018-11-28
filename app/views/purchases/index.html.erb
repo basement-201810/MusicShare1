@@ -7,24 +7,20 @@
 		</div>
 		<div class="col-md-6">
 			<p class="report">SALES : 
-				<%= number_to_currency(@pur_total_sum.to_i , :unit => "¥",:precision => 0)  %></p>
+				￥<%= number_with_delimiter(@pur_total_sum.to_i)  %></p>
 		</div>
 	</div>
 
     <!------ purchase_status別ボタン ------>
 	<div class="row">
 		<div class="col-md-9">
-			<h2>受注一覧表</h2>
+			<h3>受注一覧表</h3>
 		</div>
-		<div class="col-md-3"></div>
-	</div>
-	<div class="row">
-	    <div class="col-md-8"></div>
-	    <div id="tab-menu" class="col-md-4 clearfix" >
-	        <a href="#tab-all" class="active btn btn-default">ALL</a>
-	        <a href="#tab-0" class="btn btn-danger">未処理</a>
-	        <a href="#tab-1" class="btn btn-warning">準備中</a>
-	        <a href="#tab-2" class="btn btn-info">発送済</a>
+	    <div id="tab-menu" class="col-md-3 clearfix" >
+	        <a href="#tab-all" class="active btn btn-sm btn-default">ALL</a>
+	        <a href="#tab-0" class="btn btn-sm btn-danger">未処理</a>
+	        <a href="#tab-1" class="btn btn-sm btn-warning">準備中</a>
+	        <a href="#tab-2" class="btn btn-sm btn-info">発送済</a>
         </div>
     </div>
 
@@ -50,9 +46,9 @@
 		        <tbody style="background-color:aliceblue;" >
 		    <%end%>
 				<tr>
-					<td><%= purchase.pur_name %></td>
+					<td><%= User.find_by(id: purchase.user_id).name %></td>
 					<td>
-						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+						￥<%= number_with_delimiter(purchase.pur_total.to_i )  %>
 					</td>
 					<td>
 						<%= purchase.date.year %> 年
@@ -69,7 +65,7 @@
 						<% end %>
 					</td>
 					<td>
-						<%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+						<%= link_to "詳細確認",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
 				</tr>
 				<% end %>
 			</tbody>
@@ -89,9 +85,9 @@
 			<tbody style="background-color:orangered;">
 				<% @purchases_0.each do |purchase| %>
 				<tr>
-					<td><%= purchase.pur_name %></td>
+					<td><%= User.find_by(id: purchase.user_id).name %></td>
 					<td>
-						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+						￥<%= number_with_delimiter(purchase.pur_total.to_i )  %>
 					</td>
 					<td>
 						<%= purchase.date.year %> 年
@@ -107,7 +103,7 @@
 						発送済
 						<% end %>
 					</td>
-					<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+					<td><%= link_to "詳細確認",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
 				</tr>
 				<% end %>
 			</tbody>
@@ -127,9 +123,9 @@
 			<tbody style="background-color:yellow;">
 				<% @purchases_1.each do |purchase| %>
 				<tr>
-					<td><%= purchase.pur_name %></td>
+					<td><%= User.find_by(id: purchase.user_id).name %></td>
 					<td>
-						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+						￥<%= number_with_delimiter(purchase.pur_total.to_i)  %>
 					</td>
 					<td>
 						<%= purchase.date.year %> 年
@@ -145,7 +141,7 @@
 						発送済
 						<% end %>
 					</td>
-					<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+					<td><%= link_to "詳細確認",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
 				</tr>
 				<% end %>
 			</tbody>
@@ -165,9 +161,9 @@
 			<tbody style="background-color:aliceblue;" >
 				<% @purchases_2.each do |purchase| %>
 				<tr>
-					<td><%= purchase.pur_name %></td>
+					<td><%= User.find_by(id: purchase.user_id).name %></td>
 					<td>
-						<%= number_to_currency(purchase.pur_total.to_i , :unit => "¥",:precision => 0)  %>
+						￥<%= number_with_delimiter(purchase.pur_total.to_i)  %>
 					</td>
 					<td>
 						<%= purchase.date.year %> 年
@@ -183,7 +179,7 @@
 						発送済
 						<% end %>
 					</td>
-					<td><%= link_to "show",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
+					<td><%= link_to "詳細確認",purchase_path(purchase.id),class: "btn btn-default btn-xs" %></td>
 				</tr>
 				<% end %>
 			</tbody>

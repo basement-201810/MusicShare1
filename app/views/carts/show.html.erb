@@ -54,7 +54,7 @@
 			<tr>
 				<td colspan="2">
 					単価 :
-					<%= number_to_currency(cart_item.product.pro_price, :unit => "￥",:precision => 0)  %>
+					￥<%= number_with_delimiter(cart_item.product.pro_price)  %>
 				</td>
 				<td>
 						注文数<%= f.number_field :amount, min:"1",max:"#{cart_item.product.pro_amount}" %>個
@@ -64,7 +64,7 @@
 				<td colspan="4">
 					/  小計 :
 					<strong>
-					<%= number_to_currency( (cart_item.sub_total).to_i , :unit => "￥",:precision => 0)  %>
+					￥<%= number_with_delimiter( (cart_item.sub_total).to_i)  %>
 					</strong>
 				</td>
 				<td colspan="2">
@@ -99,7 +99,7 @@
 	    	<p class="total-price col-md-4">
 			    注文合計金額：
 			    <span>
-			    	<%= number_to_currency((@cart.total).to_i , :unit => "￥",:precision => 0)  %>
+			    	￥<%= number_with_delimiter((@cart.total).to_i )  %>
 			    </span>
 			</p>
 		</div>

@@ -10,7 +10,7 @@
 	<!-- 住所表示欄 -->
 	<div class="row">
 		<div class="col-md-12">
-			<h3>配送先情報</h3>
+			<h4>◇ 配送先情報</h4>
 			<table class="table">
 				<tbody>
 					<tr>
@@ -51,7 +51,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<h3>ご購入商品一覧</h3>
+			<h4>◇ ご購入商品一覧</h4>
 			<table class="table table-hover">
 				<thead>
 					<th></th>
@@ -71,8 +71,8 @@
 							<td><strong><%= purchase_item.title %></strong></td>
 							<td><%= purchase_item.artist %></td>
 							<td><%= purchase_item.amount %></td>
-							<td><%= number_to_currency(purchase_item.sub_total / purchase_item.amount, :unit => "￥",:precision => 0)  %></td>
-							<td><strong><%= number_to_currency(purchase_item.sub_total, :unit => "￥",:precision => 0)  %></strong></td>
+							<td>￥<%= number_with_delimiter(purchase_item.sub_total / purchase_item.amount)  %></td>
+							<td><strong>￥<%= number_with_delimiter(purchase_item.sub_total)  %></strong></td>
 
 							<td><%= link_to "商品詳細へ",product_path(purchase_item.product_id), class: "btn btn-info btn-xs" %></td>
 							<td>
@@ -149,7 +149,7 @@
 
 							<p>ステータス　<%= f.select :status, [["未処理","0"],["準備中","1"], ["発送済み","2"]] %></p>
 
-						<%= f.submit "ステータスを変更", class:"btn btn-default active" %>
+						<%= f.submit "ステータスを変更", class:"btn btn-success active" %>
 					<% end %>
 				<% end %>
 			</div>
