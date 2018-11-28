@@ -17,10 +17,10 @@ class Product < ApplicationRecord
 	validates :pro_amount, presence: true, numericality: true
 
 	def star_average
-		if reviews.where.not(review_star: 0).count == 0
+		if reviews.where.not(review_star: 0, review_status: false).count == 0
 			return 0
 		else
-			(reviews.to_a.sum { |review| review.review_star }  / reviews.where.not(review_star: 0).all.count.to_f ).round(2)
+			(reviews.where.not(review_star: 0, review_status: false).to_a.sum { |review| review.review_star }  / reviews.where.not(review_star: 0, review_status: false).all.count.to_f ).round(2)
 		end
 	end
 
