@@ -4,9 +4,54 @@
 				<%= flash.notice %>
 			</div>
 		<% end %>
-	<h3><%= @purchase.date.strftime('%Y年%m月%d日') %>購入分</h3>
+
+	<h3><%=link_to @user_name,user_path(@purchase.user_id) %>様　<%= @purchase.date.strftime('%Y年%m月%d日') %>購入分</h3>
+
+	<!-- 住所表示欄 -->
 	<div class="row">
 		<div class="col-md-12">
+			<h3>配送先情報</h3>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>名前</td>
+						<td><%= @purchase.pur_name %></td>
+					</tr>
+					<tr>
+						<td>フリガナ</td>
+						<td><%= @purchase.pur_name_kana %></td>
+					</tr>
+					<tr>
+						<td>郵便番号</td>
+						<td><%= @purchase.pur_post_code %></td>
+					</tr>
+					<tr>
+						<td>住所</td>
+						<td><%= @purchase.pur_address %></td>
+					</tr>
+					<tr>
+						<td>電話番号</td>
+						<td><%= @purchase.pur_tell %></td>
+					</tr>
+					<tr>
+						<td>支払い方法</td>
+						<td>
+							<% if @purchase.pay == 0 %>
+							銀行振込
+							<% elsif @purchase.pay == 1 %>
+							クレジットカード
+							<% elsif @purchase.pay == 2 %>
+							代金引換
+							<% end %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3>ご購入商品一覧</h3>
 			<table class="table table-hover">
 				<thead>
 					<th></th>
@@ -16,7 +61,7 @@
 					<th>単価</th>
 					<th>小計</th>
 					<th></th>
-					<th></th>
+					<th>レビュー</th>
 				</thead>
 				<tbody>
 
@@ -28,7 +73,8 @@
 							<td><%= purchase_item.amount %></td>
 							<td><%= number_to_currency(purchase_item.sub_total / purchase_item.amount, :unit => "￥",:precision => 0)  %></td>
 							<td><strong><%= number_to_currency(purchase_item.sub_total, :unit => "￥",:precision => 0)  %></strong></td>
-							<td><%= link_to "show",product_path(purchase_item.product_id), class: "btn btn-primary btn-xs" %></td>
+
+							<td><%= link_to "商品詳細へ",product_path(purchase_item.product_id), class: "btn btn-info btn-xs" %></td>
 							<td>
 								<% if current_user.manager == false %>
 									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
@@ -45,12 +91,52 @@
 										</div>
 									<% end %>
 								<% else %>
-									<%= purchase_item.review.review_star %>
-									<%= purchase_item.review.review_body %>
-									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
-										<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
-										<%= f.submit "変更",class:"btn btn-success btn-xs"%>
-									<% end %>
+									<div>
+										<% if purchase_item.review.review_star == 0 %>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+										<% elsif purchase_item.review.review_star > 0 && purchase_item.review.review_star <= 1 then %>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+										<% elsif purchase_item.review.review_star > 1 && purchase_item.review.review_star <= 2 then %>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+										<% elsif purchase_item.review.review_star > 2 && purchase_item.review.review_star <= 3 then %>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+										<% elsif purchase_item.review.review_star > 3 && purchase_item.review.review_star <= 4 then %>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star-empty"></p>
+										<% elsif purchase_item.review.review_star > 4 && purchase_item.review.review_star <= 5 then %>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+											<p class="glyphicon glyphicon-star"></p>
+										<% end %>
+									</div>
+									<div><%= purchase_item.review.review_body %></div>
+									<div>
+										<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
+											<%= f.select :review_status, [["公開", "release"],["非公開", "nonrelease"]] %>
+											<%= f.submit "変更",class:"btn btn-success btn-xs"%>
+										<% end %>
+									</div>
 								<% end %>
 							</td>
 						</tr>
