@@ -13,7 +13,7 @@
 				<% @users.each do |user| %>
 					<tr>
 						<td><%= user.name %></td>
-						<td><%= user.point %></td>
+						<td><%= user.point %> p</td>
 						<td>
 							<% if user.deleted_at.blank? %>
 								<p>公開中</p>
@@ -22,7 +22,7 @@
 							<% end %>
 						</td>
 						<td><%= user.memo %></td>
-						<td><%= link_to "会員詳細へ", user, class: "btn btn-success" %></td>
+						<td><%= link_to "会員詳細へ", user, class: "btn btn-info btn-xs" %></td>
 					</tr>
 				<% end %>
 				<hr />

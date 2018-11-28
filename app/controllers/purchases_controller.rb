@@ -31,7 +31,6 @@ class PurchasesController < ApplicationController
 	    	@purchase_item.cart_item_id = cart_item.id
 	    	@purchase_item.purchase_id = cart_item.cart_id
 
-
 			if @purchase.save
 			    @purchase_item.save
 				@review = Review.new
@@ -59,6 +58,7 @@ class PurchasesController < ApplicationController
 				flash[:alert] = "注文に失敗しました。注文情報を正しく入力してください。"
 				redirect_to new_purchase_path
 		end
+
 	end
 
 	def index
@@ -76,6 +76,8 @@ class PurchasesController < ApplicationController
 	  	@purchase = Purchase.find(params[:id])
 #	  	@purchase_items = Purchase.find(params[:purchase_id]).purchase_items.all
 	  	@purchase_items = PurchaseItem.where(purchase_id: params[:id])
+	  	@user = @purchase.user_id
+	  	@user_name = User.find_by(id: @user).name
 	end
 	#------------------------------------------------------------
 

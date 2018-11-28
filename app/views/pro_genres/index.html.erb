@@ -19,22 +19,23 @@
 	</div>
 
 
-	<div class="container">
+        <div class="entire">
 
 		<p><%= flash.notice %></p>
 
 		<h2 class="big-ribbon">WELCOME TO MUSIC SHARE!!</h2>
 
 
-		<div class="row">
+		<div class="clearfix">
 
 			<!-- - - - サイドバー(テンプレ？？) - - - -->
-			<div class="side-ber col-md-2">
+			<div class="side-ber">
 				<section class="form-inline search-area">
 					<%= search_form_for @search, url: research_products_path do |f| %>
-					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-					<p></p>
-					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+					<%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2", size: 22, placeholder:"曲名　アーティスト名" %>
+					<%= button_tag( class: "btn btn-outline-success my-2 my-sm-0") do %>
+					<%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
+					<% end %>
 					<% end %>
 				</section>
 				<div class="genre-list">
@@ -46,7 +47,7 @@
 			</div>
 
 			<!-- - - - メインー - - - -->
-			<div class="main col-md-10 clearfix">
+			<div class="main clearfix">
 
 				<!-- おすすめ -->
 				<div class="clearfix genre-show">
@@ -116,7 +117,7 @@
 
 				<!-- J-POP -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> J-POP</h4>
+					<h4 class="genre-title"><%= link_to "J-POP", pro_genre_path(1) %></h4>
 					<% @genres_jpop.each do |product| %>
 
 					<div class="col-md-3">
@@ -182,7 +183,7 @@
 
 				<!-- K-POP -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> K-POP</h4>
+					<h4 class="genre-title"><%= link_to "K-POP", pro_genre_path(2) %></h4>
 					<% @genres_kpop.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -246,7 +247,7 @@
 
 				<!-- アイドル -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> アイドル</h4>
+					<h4 class="genre-title"> <%= link_to "アイドル", pro_genre_path(3) %></h4>
 					<% @genres_idle.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -310,7 +311,7 @@
 
 				<!-- 童謡 -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> 童謡</h4>
+					<h4 class="genre-title"><%= link_to "童謡", pro_genre_path(4) %></h4>
 					<% @genres_douyou.each do |product| %>
 
 					<div class="col-md-3">
@@ -376,7 +377,7 @@
 
 				<!-- Rock -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> Rock</h4>
+					<h4 class="genre-title"><%= link_to "Rock", pro_genre_path(5) %></h4>
 					<% @genres_rock.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -440,7 +441,7 @@
 
 				<!-- EDM -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> EDM</h4>
+					<h4 class="genre-title"><%= link_to "EDM", pro_genre_path(6) %></h4>
 					<% @genres_edm.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -504,7 +505,7 @@
 
 				<!-- Dance -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> Dance</h4>
+					<h4 class="genre-title"><%= link_to "Dance", pro_genre_path(7) %></h4>
 					<% @genres_dance.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -569,7 +570,7 @@
 
 				<!-- Alternative -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> Alternative</h4>
+					<h4 class="genre-title"><%= link_to "Alternative", pro_genre_path(8) %></h4>
 					<% @genres_alternative.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -633,7 +634,7 @@
 
 				<!-- RAP/HIP-HOP -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> RAP/HIP-HOP</h4>
+					<h4 class="genre-title"><%= link_to "RAP/HIP-HOP", pro_genre_path(9) %></h4>
 					<% @genres_rap.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -698,7 +699,7 @@
 
 				<!-- アニソン -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> アニソン</h4>
+					<h4 class="genre-title"><%= link_to "アニソン", pro_genre_path(10) %></h4>
 					<% @genres_anime.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -763,7 +764,7 @@
 
 				<!-- Jazz -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> Jazz</h4>
+					<h4 class="genre-title"><%= link_to "Jazz", pro_genre_path(11) %></h4>
 					<% @genres_jazz.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -827,7 +828,7 @@
 
 				<!-- その他 -->
 				<div class="clearfix genre-show">
-					<h4 class="genre-title"> その他</h4>
+					<h4 class="genre-title"><%= link_to "その他", pro_genre_path(12) %></h4>
 					<% @genres_otherwise.each do |product| %>
 					<div class="col-md-3">
 						<% if product.pro_date >Time.now-(7.days) %>
@@ -891,13 +892,13 @@
 			</div>
 
 
-			</div>
 		</div>
 	</div>
+</div>
 
 </div>
 
-	</div>
+</div>
 
 
 <!-- bxSlider -->
