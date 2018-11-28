@@ -80,7 +80,7 @@
 									<%= form_for purchase_item.review, url: review_path(purchase_item.review.id) do |f| %>
 										<div class="form_group has_icon">
 											<label for="inputEmail">評価</label>
-											<%= f.select :review_star, [["☆☆☆☆☆", "0"],["★☆☆☆☆", "1"],["★★☆☆☆", "2"],["★★★☆☆", "3"],["★★★★☆", "4"],["★★★★★", "5"]] %>
+											<%= f.select :review_star, [["★☆☆☆☆", "1"],["★★☆☆☆", "2"],["★★★☆☆", "3"],["★★★★☆", "4"],["★★★★★", "5"]] %>
 										</div>
 										<div class="form_group has-icon">
 											<label for="inputEmail">レビュー</label>
