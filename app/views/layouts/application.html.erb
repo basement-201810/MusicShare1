@@ -24,6 +24,9 @@
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? && current_user.manager == false %>
+        <li class="header-point">
+          <%= current_user.point %>&ensp;p
+        </li>
         <li>
           <%= link_to current_user.name, user_path(current_user), class: "glyphicon glyphicon-user" %>
         </li>
