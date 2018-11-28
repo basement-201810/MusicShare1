@@ -42,6 +42,7 @@ class PurchasesController < ApplicationController
 					@review.review_star = 0
 					@review.review_status = true
 				@review.save
+		end
 				@cart = Cart.new
 				@cart.user_id = current_user.id
 				@cart.save
@@ -49,7 +50,6 @@ class PurchasesController < ApplicationController
 				@user.point += (@purchase.get_points - @purchase.pay_points )
 				@user.save
 
-		end
 		# else
 		# 		flash[:alert] = "failed to order."
 		# 		redirect_to new_purchase_path
