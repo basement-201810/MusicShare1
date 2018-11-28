@@ -31,30 +31,34 @@ class PurchasesController < ApplicationController
 	    	@purchase_item.cart_item_id = cart_item.id
 	    	@purchase_item.purchase_id = cart_item.cart_id
 
+			if @purchase.save
+			    @purchase_item.save
+				@review = Review.new
+				@review.user_id = current_user.id
+				@review.purchase_item_id = @purchase_item.id
+				@review.product_id = @purchase_item.product_id
+				@review.review_body = ""
+				@review.review_star = 0
+				@review.review_status = true
+			    @review.save
+		    else
+		    	break
+		    end
+		end
 
-				@purchase.save
-				@purchase_item.save
-					@review = Review.new
-					@review.user_id = current_user.id
-					@review.purchase_item_id = @purchase_item.id
-					@review.product_id = @purchase_item.product_id
-					@review.review_body = ""
-					@review.review_star = 0
-					@review.review_status = true
-				@review.save
+		if  @purchase.save
 				@cart = Cart.new
 				@cart.user_id = current_user.id
 				@cart.save
 				@user = current_user
 				@user.point += (@purchase.get_points - @purchase.pay_points )
 				@user.save
-
+				redirect_to arigatou_path
+		else
+				flash[:alert] = "注文に失敗しました。注文情報を正しく入力してください。"
+				redirect_to new_purchase_path
 		end
-		# else
-		# 		flash[:alert] = "failed to order."
-		# 		redirect_to new_purchase_path
-		# 	end
-		redirect_to arigatou_path
+
 	end
 
 	def index
@@ -84,21 +88,6 @@ class PurchasesController < ApplicationController
 		else
 			redirect_to root_path
 		end
-	end
-
-	def untreat                          #----は?????????????????????????????????------
-		@switch = 0
-		render :index
-	end
-
-	def prepare
-		@switch = 1
-		render :index
-	end
-
-	def sent
-		@switch = 2
-		render :index
 	end
 
 	def arigatou

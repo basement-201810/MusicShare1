@@ -6,18 +6,19 @@
   </div>
 </div>
 
-<div class="container">
+<div class="entire">
 
-    
+
     <div class="row">
 
 	<!-- - - - サイドバー (テンプレ？？) - - - -->
-	<div class="side-ber col-md-2">
+	<div class="side-ber">
 		<section class="form-inline search-area">
 			<%= search_form_for @search, url: research_products_path do |f| %>
-			    <%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2" %>
-			    <p></p>
-					<%= f.submit "Search", class:"btn btn-outline-success my-2 my-sm-0" %>
+			    <%= f.search_field :pro_title_or_pro_artist_cont, class:"form-control mr-sm-2", size: 22, placeholder:"曲名　アーティスト名" %>
+				<%= button_tag( class: "btn btn-outline-success my-2 my-sm-0") do %>
+				<%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
+				<% end %>
 			<% end %>
 		</section>
 		<div class="genre-list">
@@ -47,8 +48,47 @@
 			<div class="cd-image">
 				<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(product.pro_genre_id, product.id) %>
 				<div class="cd-image-overlay">
-					<p>★★★★★
-					<%= link_to "77", pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %></p>
+					<span><%= product.average_score %></span>
+					<span>
+						<% if product.average_score == 0 %>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif product.average_score > 0 && product.average_score <= 1 then %>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif product.average_score > 1 && product.average_score <= 2 then %>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif product.average_score > 2 && product.average_score <= 3 then %>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif product.average_score > 3 && product.average_score <= 4 then %>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star-empty"></p>
+						<% elsif product.average_score > 4 && product.average_score <= 5 then %>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<p class="glyphicon glyphicon-star"></p>
+						<% end %>
+						<%= link_to product.reviews.where.not(review_star: 0).count, pro_genre_product_path(product.pro_genre_id, product.id),class: "far fa-comments review-amount" %>
+					</span>
 					<p><%= link_to product.pro_title, pro_genre_product_path(product.pro_genre_id, product.id),class: "cd_title" %>
 					</p>
 					<p><%= product.pro_artist %></p>

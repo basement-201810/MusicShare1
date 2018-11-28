@@ -84,7 +84,7 @@
 										</div>
 										<div class="form_group has-icon">
 											<label for="inputEmail">レビュー</label>
-											<%= f.text_area :review_body, autofocus: true, class: "review_body ", id: "inputEmail" %>
+											<%= f.text_area :review_body, autofocus: true, :required => 'required', class: "review_body ", id: "inputEmail" %>
 										</div>
 										<div class="form_group has-icon">
 											<%= f.submit "投稿", class: "btn btn-warning btn-xs" %>

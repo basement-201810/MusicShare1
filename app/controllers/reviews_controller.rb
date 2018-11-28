@@ -43,7 +43,7 @@ class ReviewsController < ApplicationController
 		if @review.update!(review_params)
 			if current_user.manager
 
-				redirect_to request.referrer, notice: 'Review was successfully edited by administrator!'  #一応管理者は編集したらそのページにとどまる形になってます
+				redirect_to request.referrer, notice: 'レビューの強制編集しました'  #一応管理者は編集したらそのページにとどまる形になってます
 
 			else
 				if  @review.first_review
@@ -51,13 +51,13 @@ class ReviewsController < ApplicationController
 					@review.user.save
 					@review.first_review = false
 					@review.save
-					redirect_to user_path(current_user), notice: 'Review has successfully created.Got 10 points !!'
+					redirect_to request.referrer, notice: 'レビュー投稿完了！　10 ポイントゲット!!'
 				else
-					redirect_to user_path(current_user), notice: 'Review has successfully updated.'
+					redirect_to request.referrer, notice: 'レビュー編集しました！'
 				end
 			end
 		else
-			redirect_to request.referrer
+			render request.referrer, notice: 'レビュー投稿に失敗しました'
 		end
 	end
 

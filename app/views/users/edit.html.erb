@@ -33,39 +33,39 @@
 						<%= form_for(@user) do |f| %>
 
 						<div class="field">
-							<%= f.label :name %><br />
+							<%= f.label :名前 %><br />
 							<%= f.text_field :name, autofocus: true, autocomplete: "name",placeholder:"山田太郎",class: "form-control" %>
 						</div>
 
 						<div class="field">
-							<%= f.label :name_kana %><br />
+							<%= f.label :名前（カナ） %><br />
 							<%= f.text_field :name_kana, autofucus: true, autocomplete: "name_kana",placeholder:"ヤマダタロウ",class: "form-control" %>
 						</div>
 
 						<div class="field">
-							<%= f.label :email %><br />
+							<%= f.label :メールアドレス %><br />
 							<%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"xxxxxxx@xxxxxxx",class: "form-control" %>
 						</div><br>
 
 						<div class="field form_group has_icon">
-							<label for="password"> Password </label>
+							<label for="password"> パスワード </label>
 							&emsp;&emsp;＊＊＊＊＊＊<%= link_to "パスワード編集", passchange_path(current_user), class: "user_passchange btn btn-secondary" %>
 							<span class="fa fa-user form-control-icon" aria-hidden="true"></span>
 						</div><br>
 
 
 						<div class="field">
-							<%= f.label :tell %><br />
+							<%= f.label :電話番号 %><br />
 							<%= f.text_field :tell, autofocus: true, autocomplete: "tell" ,placeholder:"00000000000 ※ハイフン無しで入力",class: "form-control" %>
 						</div>
 
 						<div class="field">
-							<%= f.label :post_code %><br />
+							<%= f.label :郵便番号 %><br />
 							<%= f.text_field :post_code, autofocus: true, autocomplete: "post_code",placeholder:"0000000 ※ハイフン無しで入力",class: "form-control" %>
 						</div>
 
 						<div class="field">
-							<%= f.label :address %><br />
+							<%= f.label :住所 %><br />
 							<%= f.text_area :address, autofocus: true, autocomplete: "address",placeholder:"東京都xx区xxx0丁目000-00 xxxxxxx00号",class: "form-control"  %>
 						</div>
 
