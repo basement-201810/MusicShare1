@@ -16,7 +16,7 @@
 
 
 <div class="product-new-title clearfix">
-	<h2 class="new-title-text">商品登録画面</h2>
+	<h3 class="new-title-text">商品登録画面</h3>
 	<div class="new-title-link"><%= link_to "登録商品一覧へ戻る", products_path, class:"btn btn-default active" %></div>
 </div>
 
@@ -76,17 +76,21 @@
             <td><%= b.text_field :music_disk_number, class:"form-control", value:"1" %></td>
             <td><%= b.text_field :music_number, class:"form-control" %></td>
             <td><%= b.text_field :music_name, class:"form-control" %></td>
-            <td><%= b.remove_nested_fields_link "Delete", class:"btn btn-danger", role:"button" %></td>
+            <td><%= b.remove_nested_fields_link "曲名を削除", class:"btn btn-sm btn-default", role:"button" %></td>
         <% end %>
     </tbody>
 </table>
-<%= f.add_nested_fields_link :musics, "Add new", class:"btn btn-primary", role:"button" %>
-
+<div class="row">
+    <div class="col-md-11"></div>
+    <div class="col-md-1">
+        <%= f.add_nested_fields_link :musics, "曲名を追加", class:"btn btn-primary btn-sm", role:"button" %>
+    </div>
+</div>
 
 <br><br>
 
 
-<%= f.submit "商品登録ボタン", class:"btn btn-default active" %>
+<%= f.submit "商品登録ボタン", class:"btn btn-success active" %>
 
 
 <% end %>

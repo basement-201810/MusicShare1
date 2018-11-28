@@ -72,7 +72,7 @@
 						<p></p>
 
 						<div class="actions">
-							<%= f.submit "編集を保存する", class: "btn btn-success btn-block" %>
+							<%= f.submit "編集を保存する", class: "btn btn-success btn-block btn-sm" %>
 						</div>
 						<% end %>
 
@@ -126,12 +126,12 @@
 			</div>
 
 
-			<%= f.submit "編集保存", class: "btn btn-success user-button" %>
+			<%= f.submit "編集保存", class: "btn btn-success btn-sm user-button" %>
 			<% if @user.id == 1 || @user.deleted_at != nil %>
 			<% else %>
-			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger user-button" %>
+			<%= link_to "退会させる", user_path(@user), method: :delete, data: { confirm: 'このユーザーを本当に退会させますか？'}, class: "btn btn-danger btn-sm user-button" %>
 			<% end %>
-			<%= link_to 'back', user_path, class: "btn btn-info user-button" %>
+			<%= link_to '戻る', user_path, class: "btn btn-info user-button btn-sm" %>
 			<% end %>
 			<% end %>
 		</div>
