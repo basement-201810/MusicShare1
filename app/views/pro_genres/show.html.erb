@@ -45,39 +45,26 @@
 				<div class="cd-image">
 					<%= link_to attachment_image_tag(product, :pro_image, fallback: "no-image_rocket.png" ,class: "img"), pro_genre_product_path(@genre, product.id) %>
 					<div class="cd-image-overlay">
-						<p>★★★★★
-							<%= link_to "77", pro_genre_product_path(@genre, product.id),class: "far fa-comments review-amount" %></p>
-							<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
-							</p>
-							<p><%= product.pro_artist %></p>
-						</div>
+						<p>★★★★★</p>
+						<%= link_to "77", pro_genre_product_path(@genre, product.id),class: "far fa-comments review-amount" %></p>
+						<p><%= link_to product.pro_title, pro_genre_product_path(@genre, product.id),class: "cd_title" %>
+						</p>
+						<p><%= product.pro_artist %></p>
 					</div>
 				</div>
-				<% end %>
-			</section>
-
-			<!-- - - - リンクボタン- - - -->
-			　　<div class="row">
-				<span class="col-md-11"></span>
-				<p class="col-md-1">
-					<%= link_to "  BACK",root_path, class: " btn-info btn-block btn-sm text-center" %>
-				</p>
 			</div>
+			<% end %>
+		</section>
+
+		<!-- - - - リンクボタン- - - -->
+		<div class="row">
+			<span class="col-md-11"></span>
+			<p class="col-md-1">
+				<%= link_to "  BACK",root_path, class: " btn-info btn-block btn-sm text-center" %>
+			</p>
 		</div>
-
-		<% end %>
-	</section>
-
-<!-- - - - リンクボタン- - - -->
-　　<div class="row back-btn">
-		<span class="col-md-11"></span>
-		<p class="col-md-1">
-			<%= link_to "  BACK",root_path, class: " btn-info btn-block btn-sm text-center" %>
-		</p>
 	</div>
+
 </div>
-
-
-
 
 
