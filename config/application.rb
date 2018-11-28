@@ -13,6 +13,8 @@ module MusicShare1
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    config.i18n.default_locale = :ja #deviseの日本語化
+
     # config.i18n.default_locale = :ja
     # ↑↑↑    enum が日本語化される　　　ただしログイン/アウトの時flash に変なエラーが出る（？）
 
