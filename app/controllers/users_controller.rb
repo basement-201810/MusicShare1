@@ -4,8 +4,7 @@ class UsersController < ApplicationController
 	before_action :correct_user, only:[:show,:edit]
 
 	def index
-		@users = User.with_deleted
-		@users_k = User.order(:user_id).page(params[:page]) #userのkaminari gem 適応箇所
+		@users = User.with_deleted.page(params[:page]).per(3)
 		@user = User.find(current_user.id)
 		if @user.manager != true
 			redirect_to root_path

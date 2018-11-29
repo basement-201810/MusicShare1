@@ -4,7 +4,7 @@ class ProGenresController < ApplicationController
 		if user_signed_in?
 			@user = User.find(current_user.id)
 		end
-		@products = Product.where(pro_status: "release").order("average_score DESC").limit(4)
+		@products = Product.where.not(pro_status: "nonrelease",pro_amount: 0).order("average_score DESC").limit(4)
 		@genres = ProGenre.all
 		@genres_jpop = Product.where(pro_genre_id:1).where(pro_status: "release").order("pro_date DESC").limit(4)
 		@genres_kpop = Product.where(pro_genre_id:2).where(pro_status: "release").order("pro_date DESC").limit(4)
