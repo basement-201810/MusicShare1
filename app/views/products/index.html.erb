@@ -90,6 +90,7 @@
 		<% end %>
 		<% end %>
 	</table>
+	<%= paginate @products %>
 
 
 	<!-- 非公開商品（一覧） -->
@@ -105,7 +106,7 @@
 			<th></th>
 		</tr>
 
-		<% @products.each do |product| %>
+		<% @products_non.each do |product| %>
 		<% if product.pro_status == "nonrelease" %>
 
 
@@ -151,10 +152,11 @@
 				</tr>
 			</tr>
 		</tr>
-
 		<% end %>
 		<% end %>
 	</table>
+
+	<%= paginate @products_non %>
 
 
 	<% else %>

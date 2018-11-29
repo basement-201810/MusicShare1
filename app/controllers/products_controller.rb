@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
 
 
 	def index
-		@products = Product.order('pro_amount')
+		@products = Product.where(pro_status:"release").page(params[:page]).per(10).order('pro_amount')
+		@products_non = Product.where(pro_status:"nonrelease").page(params[:page]).per(10).order('pro_amount')
 		@user = current_user
 		@genres = ProGenre.all
 		@search = Product.ransack(params[:q])
